@@ -8,8 +8,7 @@
 import type { ExifEditorStrings } from "../i18n"
 import { track } from "./analytics"
 import { buildExif, insertExif, redateJpeg } from "./exif"
-import { decodePhoto } from "./photo"
-import { redatedFileName, shiftDate, type Shift } from "./shift"
+import { decodePhoto, redatedFileName } from "./photo"
 import { SAFE_EXPORT_PIXELS, canvasToJpeg, fitPixels, formatDate, maxExportPixels, type DateFormat } from "./stamp"
 import { mountWorkbench, type Photo } from "./workbench"
 
@@ -19,8 +18,6 @@ export function mountExifEditor(root: HTMLElement) {
   const controls = root.querySelector<HTMLFieldSetElement>("[data-options]")!
   const allInput = controls.querySelector<HTMLInputElement>("input[name=all]")!
   const setAllButton = controls.querySelector<HTMLButtonElement>("[data-set-all]")!
-  const shiftButton = controls.querySelector<HTMLButtonElement>("[data-shift]")!
-  const unit = (name: keyof Shift) => controls.querySelector<HTMLInputElement>(`input[name=${name}]`)!
 
   // Whether each photo is a JPEG we can keep as it is (read from its first bytes).
   const jpegs = new WeakMap<File, boolean>()
@@ -52,34 +49,14 @@ export function mountExifEditor(root: HTMLElement) {
   function refreshButtons() {
     const any = photos().length > 0
     setAllButton.disabled = !any || !allInput.value
-    shiftButton.disabled = !any || readShift() === null
   }
   allInput.addEventListener("input", refreshButtons)
-  for (const name of ["days", "hours", "minutes"] as const) unit(name).addEventListener("input", refreshButtons)
 
   setAllButton.addEventListener("click", () => {
     const date = new Date(allInput.value)
     if (Number.isNaN(date.getTime())) return
     for (const photo of photos()) workbench!.changeDate(photo, date)
   })
-
-  shiftButton.addEventListener("click", () => {
-    const shift = readShift()
-    if (!shift) return
-    const direction = controls.querySelector<HTMLInputElement>("input[name=direction]:checked")?.value === "-1" ? -1 : 1
-    for (const photo of photos()) workbench!.changeDate(photo, shiftDate(photo.date, shift, direction))
-  })
-
-  /** The shift typed in, or null when it moves nothing (or is not a number). */
-  function readShift(): Shift | null {
-    const value = (name: keyof Shift) => {
-      const number = Number(unit(name).value || 0)
-      return Number.isFinite(number) && number >= 0 ? Math.floor(number) : NaN
-    }
-    const shift = { days: value("days"), hours: value("hours"), minutes: value("minutes") }
-    if (Object.values(shift).some(Number.isNaN)) return null
-    return shift.days || shift.hours || shift.minutes ? shift : null
-  }
 
   async function exportPhoto(photo: Photo): Promise<Blob> {
     const bytes = new Uint8Array(await photo.file.arrayBuffer())

@@ -36,8 +36,8 @@ Astro 7 runs one dev/preview server per project and refuses a second (`Dev serve
 
 ## Tests and CI
 
-- **Unit (Vitest, `tests/unit`)**: date formats, the date shift and the redated file name (`shift.ts`), `fitPixels` (the iOS pixel cap), file filtering and unique names (`src/lib/files.ts`), and the translations: every locale has every key of `en`, no empty strings, the same number of FAQ entries/features/steps, placeholders kept, URL-safe and distinct paths.
-- **End-to-end (Playwright, `tests/e2e`)**, on desktop Chrome and an emulated Pixel 7, against `astro preview` of the build: EXIF date and file-date fallback, the progress bar, dropping onto any part of the page, a non-photo file, remove/clear, saving every photo as its own full-size JPEG, the ZIP's contents, "done" going back to "ready" after an option change, per-language date formats and their memory, the change-date page (`exif.spec.ts`: a JPEG's picture untouched, the new date in its EXIF, set all and shift, HEIC → JPEG), every page in every locale answering, lang/title/hreflang/canonical, the language menu, the theme switch, no horizontal scroll, sitemap and ads.txt.
+- **Unit (Vitest, `tests/unit`)**: date formats, the saved file names (`photo.ts`), `fitPixels` (the iOS pixel cap), file filtering and unique names (`src/lib/files.ts`), and the translations: every locale has every key of `en`, no empty strings, the same number of FAQ entries/features/steps, placeholders kept, URL-safe and distinct paths.
+- **End-to-end (Playwright, `tests/e2e`)**, on desktop Chrome and an emulated Pixel 7, against `astro preview` of the build: EXIF date and file-date fallback, the progress bar, dropping onto any part of the page, a non-photo file, remove/clear, saving every photo as its own full-size JPEG, the ZIP's contents, "done" going back to "ready" after an option change, per-language date formats and their memory, the change-date page (`exif.spec.ts`: a JPEG's picture untouched, the new date in its EXIF, set all, HEIC → JPEG), every page in every locale answering, lang/title/hreflang/canonical, the language menu, the theme switch, no horizontal scroll, sitemap and ads.txt.
 - Fixtures in `tests/fixtures`: `exif-landscape.jpg` (EXIF date 1998-07-14 18:30, 1200×800), two photos without EXIF, and a text file.
 - The e2e build has fake AdSense and GA4 ids (`TEST_ADS_ENV` in playwright.config.ts, the same in ci.yml's build step), so ad slots and the cookie banner are tested as in production; `test` from helpers.ts blocks every request to Google's ad and analytics servers and pre-sets a rejected cookie choice (`test.use({ consent: null })` for the banner's own test).
 - `useFileDownloads(page)` (tests/e2e/helpers.ts) removes the folder picker and the share sheet, so saving falls back to plain downloads that Playwright can catch.
@@ -71,7 +71,7 @@ src/
     Home.astro            landing page: hero, editor, features, FAQ (+ FAQPage JSON-LD), guide links
     Guide.astro           how-to page for a long-tail search (+ HowTo JSON-LD), editor included
     Editor.astro          static markup of the date stamp editor; passes its strings in data-strings
-    ExifEditor.astro      the "change the date" editor: same columns, its own settings (one date for all, the shift)
+    ExifEditor.astro      the "change the date" editor: same columns, its own settings (one date for all)
     PhotoColumn.astro / SaveActions.astro   the parts both editors share: drop zone, progress, photo grid / save buttons
     ChangeDate.astro      the "change the date" page (`exif`): hero, ExifEditor, steps (+ HowTo), FAQ (+ FAQPage), a link to the stamp
     GuideLinks.astro      the list of guide links (home, every guide, the change-date page)
@@ -81,11 +81,10 @@ src/
   layouts/Base.astro      <head>: title, description, canonical, hreflang, OG, manifest, WebApplication JSON-LD; header with language menu
   lib/
     stamp.ts              pure drawing: formatDate, drawStamp, renderStamped, fitPixels, canvasToJpeg
-    photo.ts              photoDate (EXIF → file date fallback), decodePhoto, stampedFileName
+    photo.ts              photoDate (EXIF → file date fallback), decodePhoto, stampedFileName, redatedFileName
     workbench.ts          what both editors share: picking/dropping files, cards and their states, the queue, progress, saving (folder/gallery/files/ZIP)
     editor.ts             the date stamp editor on the workbench: its options, stamped previews, stamped export
-    exif-editor.ts        the "change the date" editor on the workbench: set all, shift, export with redateJpeg
-    shift.ts              pure: shiftDate (clock time, days/hours/minutes), redatedFileName
+    exif-editor.ts        the "change the date" editor on the workbench: one date for all, export with redateJpeg
     files.ts              pure helpers: droppedPhotos (the drop filter), uniqueName
     progress.ts           the progress bar (start/step/percent/finish/fail/hold)
     theme.ts              light/dark/system
@@ -162,9 +161,9 @@ The second tool (`/change-photo-date/`, `/pl/zmien-date-zdjecia/`...) prints not
 - **HEIC, PNG, WebP** have no JPEG to keep: decoded, drawn at full size (same caps as the stamp editor) and saved as a JPEG with a minimal EXIF.
 - **File names:** the same name for a JPEG (it is the same photo), `.jpg` for the rest (`redatedFileName`). In a folder `uniqueName` still never overwrites.
 - **The cards** have the date field open (`dateOpen`), the date with its time (the locale's `-time` format), and "Was: …" once changed; they are wider (`<PhotoColumn wide>`: one column on a narrow phone, at most two), or the datetime field is cut off.
-- **Every photo at once:** one date for all (`datetime-local` + button), and a shift: later/earlier radio tiles (no minus sign: iOS's numeric keypad has none) and days/hours/minutes. `shiftDate` moves the clock time, so "1 day later" keeps the hour across a DST change.
+- **Every photo at once:** one date for all (`datetime-local` + "Set for all"); each photo can still be changed on its own after. A shift of every date (later/earlier by days, hours, minutes) was built and removed at the owner's request: keep the settings to this one field.
 - Statistics: `dates_save` {count, method, changed} (counts only).
-- Tests: `tests/e2e/exif.spec.ts` (picture bytes identical outside the EXIF, the new date and the kept tags, set all and shift, a photo without EXIF and the ZIP, HEIC → JPEG, the navbar link).
+- Tests: `tests/e2e/exif.spec.ts` (picture bytes identical outside the EXIF, the new date and the kept tags, set all, a photo without EXIF and the ZIP, HEIC → JPEG, the navbar link).
 
 ### Date formats per language
 

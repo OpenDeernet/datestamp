@@ -48,11 +48,11 @@ describe("translations", () => {
     }
   })
 
-  // The steps and the FAQ quote the shift's label, so it must be the editor's own.
-  it.each(locales)("%s quotes the editor's own label for the date shift", (locale) => {
+  // The steps and the FAQ quote the "set for all" button, so it must be the editor's own label.
+  it.each(locales)("%s quotes the editor's own label for setting one date for all", (locale) => {
     const s = strings[locale].exif
-    expect(s.steps.join(" ")).toContain(s.editor.shift)
-    expect(s.faq.map(({ a }) => a).join(" ")).toContain(s.editor.shift)
+    expect(s.steps.join(" ")).toContain(s.editor.setAllButton)
+    expect(s.faq.map(({ a }) => a).join(" ")).toContain(s.editor.setAllButton)
   })
 
   it.each(locales)("%s offers date formats without duplicates", (locale) => {

@@ -35,3 +35,8 @@ export async function decodePhoto(file: File): Promise<ImageBitmap> {
 export function stampedFileName(name: string) {
   return name.replace(/\.[^.]+$/, "") + "-date.jpg"
 }
+
+/** The name of a photo saved with a new date: the same name, ".jpg" for a photo that had to become a JPEG. */
+export function redatedFileName(name: string, isJpeg: boolean): string {
+  return isJpeg ? name : name.replace(/\.[^.]+$/, "") + ".jpg"
+}

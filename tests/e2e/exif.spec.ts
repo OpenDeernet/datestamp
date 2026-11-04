@@ -1,6 +1,6 @@
 // "Change the date of a photo": the date is rewritten in the photo's EXIF,
 // a JPEG's picture is not touched, and the dates can be changed one by
-// one, set for all, or shifted.
+// one or set for all.
 import { expect } from "@playwright/test"
 import exifr from "exifr"
 import JSZip from "jszip"
@@ -58,29 +58,18 @@ test.describe("changing the date", () => {
     await expect(card).toHaveAttribute("data-state", "ready")
   })
 
-  test("sets one date for every photo, then shifts them all", async ({ page }) => {
+  test("sets one date for every photo", async ({ page }) => {
     const setAll = page.locator("[data-set-all]")
-    const shift = page.locator("[data-shift]")
-    await expect(setAll).toBeDisabled()
+    await expect(setAll).toBeDisabled() // no photos yet
     await addPhotos(page)
-    const fields = page.locator('.photo input[type="datetime-local"]')
-
     await expect(setAll).toBeDisabled() // no date picked yet
     await page.locator("input[name=all]").fill("2010-05-06T07:08")
     await setAll.click()
+    const fields = page.locator('.photo input[type="datetime-local"]')
     for (const field of await fields.all()) await expect(field).toHaveValue("2010-05-06T07:08")
-
-    await expect(shift).toBeDisabled() // nothing to shift by yet
-    await page.locator("label", { hasText: strings.pl.exif.editor.earlier }).click()
-    await page.locator("input[name=days]").fill("1")
-    await page.locator("input[name=hours]").fill("2")
-    await shift.click()
-    for (const field of await fields.all()) await expect(field).toHaveValue("2010-05-05T05:08")
-
-    await page.locator("label", { hasText: strings.pl.exif.editor.later }).click()
-    await page.locator("input[name=minutes]").fill("30")
-    await shift.click()
-    for (const field of await fields.all()) await expect(field).toHaveValue("2010-05-06T07:38")
+    // Each one can still be changed on its own.
+    await fields.nth(1).fill("2010-05-07T09:00")
+    await expect(fields.nth(0)).toHaveValue("2010-05-06T07:08")
   })
 
   test("gives a photo without EXIF the date, and saves the album as a ZIP", async ({ page }) => {
