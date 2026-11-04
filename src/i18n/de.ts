@@ -15,6 +15,7 @@ export default {
     screenshot: "datum-auf-screenshot",
     scanned: "datum-auf-alte-fotos",
     timestamp: "datum-und-uhrzeit-auf-foto",
+    guides: "anleitungen",
     privacy: "datenschutz",
     exif: "foto-datum-aendern",
     exifIphone: "foto-datum-aendern-iphone",
@@ -315,6 +316,14 @@ export default {
       cta: "Jetzt Daten setzen",
       tools: ["Scanner oder Handy", "Webbrowser"],
     },
+  },
+  // The page with every guide, in groups by tool (the navbar's "guides").
+  guidesPage: {
+    title: "Anleitungen: Datum auf Fotos setzen und ändern | DateStamp",
+    description:
+      "Schritt-für-Schritt-Anleitungen: das Datum aufs Foto bringen und das gespeicherte Datum korrigieren – auf iPhone, Android, Windows und Mac.",
+    h1: "Anleitungen",
+    intro: "Kurze Anleitungen für jede Situation: das Datum aufs Foto drucken oder das in der Datei gespeicherte Datum korrigieren, damit die Galerie richtig sortiert.",
   },
   exif: {
     title: "Foto-Datum ändern (EXIF) – kostenlos, online | DateStamp",

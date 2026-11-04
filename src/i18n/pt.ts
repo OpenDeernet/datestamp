@@ -15,6 +15,7 @@ export default {
     screenshot: "colocar-data-em-print-de-tela",
     scanned: "colocar-data-em-fotos-antigas",
     timestamp: "colocar-data-e-hora-na-foto",
+    guides: "guias",
     privacy: "politica-de-privacidade",
     exif: "alterar-data-da-foto",
     exifIphone: "mudar-data-foto-iphone",
@@ -315,6 +316,14 @@ export default {
       cta: "Definir as datas agora",
       tools: ["Scanner ou celular", "Navegador"],
     },
+  },
+  // The page with every guide, in groups by tool (the navbar's "guides").
+  guidesPage: {
+    title: "Guias: colocar e mudar a data das fotos | DateStamp",
+    description:
+      "Guias passo a passo para colocar a data na foto e corrigir a data salva nela: no iPhone, Android, Windows e Mac, para fotos digitalizadas e prints.",
+    h1: "Guias",
+    intro: "Instruções curtas para cada caso: imprimir a data na foto ou corrigir a data salva no arquivo, para a galeria organizar direito.",
   },
   exif: {
     title: "Alterar a data da foto (EXIF) – Grátis, online | DateStamp",

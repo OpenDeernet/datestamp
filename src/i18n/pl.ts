@@ -15,6 +15,7 @@ export default {
     screenshot: "data-na-zrzucie-ekranu",
     scanned: "data-na-starych-zdjeciach",
     timestamp: "data-i-godzina-na-zdjeciu",
+    guides: "poradniki",
     privacy: "polityka-prywatnosci",
     exif: "zmien-date-zdjecia",
     exifIphone: "jak-zmienic-date-zdjecia-na-iphonie",
@@ -315,6 +316,14 @@ export default {
       cta: "Ustaw daty teraz",
       tools: ["Skaner albo telefon", "Przeglądarka internetowa"],
     },
+  },
+  // The page with every guide, in groups by tool (the navbar's "guides").
+  guidesPage: {
+    title: "Poradniki: jak dodać i zmienić datę zdjęcia | DateStamp",
+    description:
+      "Poradniki krok po kroku: jak dodać datę na zdjęcie i jak poprawić datę zapisaną w pliku – na iPhonie, Androidzie, Windows i Macu, dla skanów i zrzutów.",
+    h1: "Poradniki",
+    intro: "Krótkie instrukcje na każdą sytuację: nadruk daty na zdjęciu albo poprawienie daty zapisanej w pliku, żeby galeria dobrze je ułożyła.",
   },
   exif: {
     title: "Zmień datę zdjęcia (EXIF) – online, za darmo | DateStamp",

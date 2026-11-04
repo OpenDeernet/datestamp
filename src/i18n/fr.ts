@@ -15,6 +15,7 @@ export default {
     screenshot: "ajouter-la-date-sur-une-capture-d-ecran",
     scanned: "ajouter-la-date-sur-de-vieilles-photos",
     timestamp: "ajouter-la-date-et-l-heure-sur-une-photo",
+    guides: "guides",
     privacy: "politique-de-confidentialite",
     exif: "modifier-date-photo",
     exifIphone: "modifier-date-photo-iphone",
@@ -315,6 +316,14 @@ export default {
       cta: "Définir les dates maintenant",
       tools: ["Scanner ou téléphone", "Navigateur web"],
     },
+  },
+  // The page with every guide, in groups by tool (the navbar's "guides").
+  guidesPage: {
+    title: "Guides : ajouter ou modifier la date des photos | DateStamp",
+    description:
+      "Des guides pas à pas pour mettre la date sur une photo et corriger celle enregistrée dedans : sur iPhone, Android, Windows et Mac, pour scans et captures.",
+    h1: "Guides",
+    intro: "De courts tutoriels pour chaque cas : imprimer la date sur la photo, ou corriger la date enregistrée dans le fichier pour que la galerie la classe bien.",
   },
   exif: {
     title: "Modifier la date d'une photo (EXIF) – Gratuit | DateStamp",

@@ -6,6 +6,7 @@ import type { GetStaticPaths } from "astro"
 import ChangeDate from "../components/ChangeDate.astro"
 import Home from "../components/Home.astro"
 import Guide from "../components/Guide.astro"
+import Guides from "../components/Guides.astro"
 import Privacy from "../components/Privacy.astro"
 import { isGuide, locales, pages, pathOf, type Locale, type Page } from "../i18n"
 
@@ -30,4 +31,5 @@ const { page, locale } = Astro.props
 {page === "home" && <Home locale={locale} />}
 {page === "exif" && <ChangeDate locale={locale} />}
 {isGuide(page) && <Guide locale={locale} guide={page} />}
+{page === "guides" && <Guides locale={locale} />}
 {page === "privacy" && <Privacy locale={locale} />}

@@ -15,6 +15,7 @@ export default {
     screenshot: "aggiungere-la-data-a-uno-screenshot",
     scanned: "aggiungere-la-data-a-vecchie-foto",
     timestamp: "aggiungere-data-e-ora-a-una-foto",
+    guides: "guide",
     privacy: "informativa-sulla-privacy",
     exif: "modificare-data-foto",
     exifIphone: "cambiare-data-foto-iphone",
@@ -315,6 +316,14 @@ export default {
       cta: "Imposta le date ora",
       tools: ["Scanner o telefono", "Browser web"],
     },
+  },
+  // The page with every guide, in groups by tool (the navbar's "guides").
+  guidesPage: {
+    title: "Guide: aggiungere e cambiare la data delle foto | DateStamp",
+    description:
+      "Guide passo passo per mettere la data su una foto e correggere quella salvata nel file: su iPhone, Android, Windows e Mac, per scansioni e screenshot.",
+    h1: "Guide",
+    intro: "Brevi istruzioni per ogni caso: stampare la data sulla foto oppure correggere la data salvata nel file, così la galleria la ordina bene.",
   },
   exif: {
     title: "Modificare la data di una foto (EXIF) – Gratis | DateStamp",

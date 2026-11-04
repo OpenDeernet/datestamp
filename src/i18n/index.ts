@@ -49,7 +49,7 @@ export const t = (locale: Locale) => strings[locale]
  * "exif" is the second tool: it changes the date saved in the photo (EXIF)
  * instead of printing it on the picture.
  */
-export const pages = ["home", "exif", "iphone", "android", "windows", "mac", "batch", "screenshot", "timestamp", "scanned", "retro", "exifIphone", "exifMessenger", "exifGoogle", "exifScanned", "privacy"] as const
+export const pages = ["home", "exif", "iphone", "android", "windows", "mac", "batch", "screenshot", "timestamp", "scanned", "retro", "exifIphone", "exifMessenger", "exifGoogle", "exifScanned", "guides", "privacy"] as const
 export type Page = (typeof pages)[number]
 
 /** The how-to pages (Guide.astro), each aimed at one search: "add date to photo on iPhone"... */

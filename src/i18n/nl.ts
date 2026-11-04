@@ -15,6 +15,7 @@ export default {
     screenshot: "datum-op-screenshot",
     scanned: "datum-op-oude-gescande-fotos",
     timestamp: "datum-en-tijd-op-foto",
+    guides: "handleidingen",
     privacy: "privacybeleid",
     exif: "datum-foto-wijzigen",
     exifIphone: "datum-foto-wijzigen-iphone",
@@ -315,6 +316,14 @@ export default {
       cta: "Stel de datums nu in",
       tools: ["Een scanner of telefoon", "Een webbrowser"],
     },
+  },
+  // The page with every guide, in groups by tool (the navbar's "guides").
+  guidesPage: {
+    title: "Handleidingen: datum op foto zetten en wijzigen | DateStamp",
+    description:
+      "Stap-voor-stap handleidingen om de datum op een foto te zetten en de opgeslagen datum te verbeteren: op iPhone, Android, Windows en Mac.",
+    h1: "Handleidingen",
+    intro: "Korte uitleg voor elke situatie: de datum op de foto zetten, of de datum in het bestand verbeteren zodat je galerij goed sorteert.",
   },
   exif: {
     title: "Datum van foto wijzigen (EXIF) – gratis | DateStamp",

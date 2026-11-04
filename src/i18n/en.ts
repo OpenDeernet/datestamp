@@ -18,6 +18,7 @@ export default {
     screenshot: "add-date-to-screenshot",
     scanned: "add-date-to-old-scanned-photos",
     timestamp: "add-date-and-time-to-photo",
+    guides: "guides",
     privacy: "privacy-policy",
     exif: "change-photo-date",
     exifIphone: "change-photo-date-on-iphone",
@@ -318,6 +319,14 @@ export default {
       cta: "Set the dates now",
       tools: ["A scanner or a phone", "A web browser"],
     },
+  },
+  // The page with every guide, in groups by tool (the navbar's "guides").
+  guidesPage: {
+    title: "Guides: Add or Change the Date on Photos | DateStamp",
+    description:
+      "Step-by-step guides for putting the date on photos and fixing the date saved in them – on iPhone, Android, Windows and Mac, for scans and screenshots.",
+    h1: "Guides",
+    intro: "Short how-tos for each situation: printing the date on a photo, or fixing the date saved in it so your gallery sorts it right.",
   },
   exif: {
     title: "Change Photo Date (EXIF) – Free, Online | DateStamp",

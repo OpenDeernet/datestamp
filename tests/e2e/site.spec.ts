@@ -1,5 +1,5 @@
 import { expect } from "@playwright/test"
-import { locales, pages, pathOf, strings } from "../../src/i18n"
+import { guidePages, locales, pages, pathOf, strings } from "../../src/i18n"
 import { test, visit } from "./helpers"
 
 for (const locale of locales) {
@@ -125,24 +125,26 @@ test("robots.txt welcomes crawlers and llms.txt describes the site", async ({ re
   for (const locale of locales) expect(llms).toContain(pathOf("home", locale))
 })
 
-test("the navbar links the page's sections; on a phone they are in a menu that closes itself", async ({ page, isMobile }) => {
+test("the navbar links the tools and the guides; on a phone they are in a menu that closes itself", async ({ page, isMobile }) => {
   await page.goto(pathOf("home", "pl"))
   if (!isMobile) {
     await expect(page.locator('header nav > ul a[aria-current="page"]')).toHaveText(strings.pl.nav.editor)
     await page.locator("header nav").getByRole("link", { name: strings.pl.nav.guides }).click()
-    // It only scrolls: the address gets no #guides.
-    await expect(page.locator("#guides")).toBeInViewport()
-    expect(new URL(page.url()).hash).toBe("")
-    // The heading it landed on lights up, and the underline has moved under "Guides".
-    await expect(page.locator("#guides")).toHaveClass(/is-target/)
+    // Its own page, and the underline under its item there.
+    await expect(page).toHaveURL(new RegExp(`${pathOf("guides", "pl")}$`))
+    await expect(page.locator("h1")).toHaveText(strings.pl.guidesPage.h1)
+    const current = page.locator('header nav > ul a[aria-current="page"]')
+    await expect(current).toHaveText(strings.pl.nav.guides)
     const underline = page.locator("[data-nav-indicator]")
-    const guidesLink = page.locator("header nav").getByRole("link", { name: strings.pl.nav.guides })
     await expect
       .poll(async () => {
-        const [line, link] = await Promise.all([underline.boundingBox(), guidesLink.boundingBox()])
-        return Math.round(line!.x + line!.width / 2) - Math.round(link!.x + link!.width / 2)
+        const [line, link] = await Promise.all([underline.boundingBox(), current.boundingBox()])
+        return Math.abs(Math.round(line!.x + line!.width / 2) - Math.round(link!.x + link!.width / 2))
       })
       .toBeLessThanOrEqual(1)
+    // A guide marks "guides" as the current item too.
+    await page.goto(pathOf("exifGoogle", "pl"))
+    await expect(current).toHaveText(strings.pl.nav.guides)
     return
   }
   await page.getByRole("button", { name: strings.pl.nav.menu }).click()
@@ -165,8 +167,7 @@ test("the navbar links the page's sections; on a phone they are in a menu that c
   await expect(page.locator('meta[name="theme-color"]')).toHaveCount(0)
   await expect(page.locator("body")).toHaveCSS("background-color", "rgb(176, 175, 174)")
   await guidesLink.click()
-  await expect(page.locator("#guides")).toBeInViewport()
-  expect(new URL(page.url()).hash).toBe("")
+  await expect(page).toHaveURL(new RegExp(`${pathOf("guides", "pl")}$`))
   await expect(guidesLink).toBeHidden()
   await expect(shade).not.toHaveAttribute("data-open")
   await expect(page.locator("html")).not.toHaveCSS("overflow", "hidden")
@@ -333,15 +334,23 @@ test("an ad AdSense could not fill is hidden, label and all", async ({ page, isM
   await expect(page.locator(".ad-rail-right")).toHaveCSS("opacity", "1")
 })
 
-test("a section link from a guide opens the home page at that section, with no # left in the address", async ({ page, isMobile }) => {
-  await page.goto(pathOf("iphone", "pl"))
-  if (isMobile) await page.getByRole("button", { name: strings.pl.nav.menu }).click()
-  const links = page.locator(isMobile ? "#mobile-menu" : "header nav")
-  await links.getByRole("link", { name: strings.pl.nav.guides }).click()
+test("an address with a section opens the page at that section, with no # left in the address", async ({ page }) => {
+  await page.goto(`${pathOf("home", "pl")}#faq`)
   await expect(page).toHaveTitle(strings.pl.home.title)
-  await expect(page.locator("#guides")).toBeInViewport()
-  await expect(page.locator("#guides")).toHaveClass(/is-target/)
+  await expect(page.locator("#faq")).toBeInViewport()
+  await expect(page.locator("#faq")).toHaveClass(/is-target/)
   expect(new URL(page.url()).hash).toBe("")
+})
+
+test("the guides page shows every guide, with its picture, in two groups", async ({ page }) => {
+  await page.goto(pathOf("guides", "pl"))
+  await expect(page.locator("#stamp-guides")).toHaveText(strings.pl.nav.editor)
+  await expect(page.locator("#exif-guides")).toHaveText(strings.pl.nav.exif)
+  const cards = page.locator("main li a")
+  await expect(cards).toHaveCount(guidePages.length)
+  for (const card of await cards.all()) await expect(card.locator("svg")).toHaveCount(1)
+  const graph = JSON.parse((await page.locator('script[type="application/ld+json"]').textContent())!)["@graph"]
+  expect(graph.find((node: { "@type": string }) => node["@type"] === "ItemList").itemListElement).toHaveLength(guidePages.length)
 })
 
 test("without ads (a build with no AdSense ids renders no rails) the content keeps its full width", async ({ page, isMobile }) => {

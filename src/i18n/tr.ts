@@ -15,6 +15,7 @@ export default {
     screenshot: "ekran-goruntusune-tarih-ekleme",
     scanned: "eski-ve-taranmis-fotograflara-tarih-ekleme",
     timestamp: "fotografa-tarih-ve-saat-ekleme",
+    guides: "rehberler",
     privacy: "gizlilik-politikasi",
     exif: "fotograf-tarihini-degistirme",
     exifIphone: "iphone-fotograf-tarihi-degistirme",
@@ -315,6 +316,14 @@ export default {
       cta: "Tarihleri şimdi ayarlayın",
       tools: ["Tarayıcı veya telefon", "Web tarayıcısı"],
     },
+  },
+  // The page with every guide, in groups by tool (the navbar's "guides").
+  guidesPage: {
+    title: "Rehberler: fotoğrafa tarih ekleme ve değiştirme | DateStamp",
+    description:
+      "Fotoğrafa tarih eklemek ve içine kayıtlı tarihi düzeltmek için adım adım rehberler: iPhone, Android, Windows ve Mac'te, taramalar ve ekran görüntüleri için.",
+    h1: "Rehberler",
+    intro: "Her durum için kısa anlatımlar: tarihi fotoğrafın üzerine basmak ya da galeri doğru sıralasın diye dosyadaki tarihi düzeltmek.",
   },
   exif: {
     title: "Fotoğraf tarihini değiştirme (EXIF) – Ücretsiz | DateStamp",

@@ -1,0 +1,72 @@
+---
+// Every guide on one page, in two groups by tool: putting the date on the
+// picture, and changing the date saved in the photo. Each guide is a card
+// with its illustration (GuideIcon), its h1 and its description. It is the
+// navbar's "guides", and an ItemList for search engines.
+import Base from "../layouts/Base.astro"
+import GuideIcon from "./GuideIcon.astro"
+import { exifGuidePages, href, pathOf, stampGuidePages, t, type Locale } from "../i18n"
+
+interface Props {
+  locale: Locale
+}
+
+const { locale } = Astro.props
+const strings = t(locale)
+const page = strings.guidesPage
+const groups = [
+  { id: "stamp-guides", title: strings.nav.editor, guides: stampGuidePages, tool: href(pathOf("home", locale)) },
+  { id: "exif-guides", title: strings.nav.exif, guides: exifGuidePages, tool: href(pathOf("exif", locale)) },
+]
+
+const absolute = (path: string) => new URL(href(path), Astro.site).href
+const itemListJsonLd = {
+  "@type": "ItemList",
+  name: page.h1,
+  itemListElement: [...stampGuidePages, ...exifGuidePages].map((guide, index) => ({
+    "@type": "ListItem",
+    position: index + 1,
+    name: strings.guides[guide].h1,
+    url: absolute(pathOf(guide, locale)),
+  })),
+}
+---
+
+<Base locale={locale} page="guides" title={page.title} description={page.description} schema={[itemListJsonLd]}>
+  <div class="pt-6 pb-2 sm:pt-8">
+    <h1 class="mb-1.5 text-[28px] leading-tight font-semibold tracking-tight sm:text-4xl">{page.h1}</h1>
+    <p class="max-w-150 text-[15px] text-muted sm:text-base">{page.intro}</p>
+  </div>
+
+  {
+    groups.map((group) => (
+      <section aria-labelledby={group.id} class="pt-8 sm:pt-10">
+        <div class="mb-4 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+          <h2 id={group.id} class="text-xl font-semibold tracking-tight sm:text-[22px]">
+            {group.title}
+          </h2>
+          <a class="text-sm font-medium text-muted underline-offset-4 hover:text-ink hover:underline" href={group.tool}>
+            {group.title} →
+          </a>
+        </div>
+        <ul class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {group.guides.map((guide) => (
+            <li class="flex">
+              <a
+                class="group flex w-full flex-col gap-3 rounded-xl border border-line bg-surface p-4 no-underline transition hover:border-line-strong hover:shadow-sm sm:p-5"
+                href={href(pathOf(guide, locale))}
+              >
+                <span class="flex h-28 items-center justify-center rounded-lg bg-subtle transition group-hover:bg-accent-soft">
+                  <GuideIcon guide={guide} class="size-20 transition duration-300 group-hover:scale-105 motion-reduce:transition-none" />
+                </span>
+                <span class="text-[15px] leading-snug font-semibold text-ink">{strings.guides[guide].h1}</span>
+                <span class="text-sm text-muted">{strings.guides[guide].description}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))
+  }
+  <div class="pb-4"></div>
+</Base>

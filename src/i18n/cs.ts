@@ -15,6 +15,7 @@ export default {
     screenshot: "datum-na-snimek-obrazovky",
     scanned: "datum-na-stare-fotky",
     timestamp: "datum-a-cas-na-fotce",
+    guides: "navody",
     privacy: "ochrana-osobnich-udaju",
     exif: "zmenit-datum-fotky",
     exifIphone: "zmenit-datum-fotky-iphone",
@@ -315,6 +316,14 @@ export default {
       cta: "Nastavit data teď",
       tools: ["Skener nebo telefon", "Webový prohlížeč"],
     },
+  },
+  // The page with every guide, in groups by tool (the navbar's "guides").
+  guidesPage: {
+    title: "Návody: jak přidat a změnit datum fotky | DateStamp",
+    description:
+      "Návody krok za krokem: jak přidat datum do fotky a jak opravit datum uložené v souboru – na iPhonu, Androidu, Windows i Macu, pro skeny a snímky obrazovky.",
+    h1: "Návody",
+    intro: "Krátké návody na každou situaci: vytisknout datum do fotky, nebo opravit datum uložené v souboru, aby ji galerie správně zařadila.",
   },
   exif: {
     title: "Změnit datum fotky (EXIF) – zdarma, online | DateStamp",

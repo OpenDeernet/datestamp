@@ -1,0 +1,109 @@
+---
+// One illustration per guide, in the style of the home page's step icons:
+// drawn with the theme's tokens (so they follow light and dark), a stand-in
+// photo, and orange only where the date is. The date stamp guides show the
+// date on the picture (an orange bar in its corner); the change-date guides
+// show it beside the picture (an EXIF tag, a calendar), because there the
+// date lives in the file.
+import type { GuidePage } from "../i18n"
+
+interface Props {
+  guide: GuidePage
+  class?: string
+}
+
+const { guide, class: className = "size-14" } = Astro.props
+const ink = 'stroke="var(--text)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"'
+
+/** A stand-in photo (sun and hills), clipped to its rounded frame. */
+const photo = (x: number, y: number, w: number, h: number, id: string, frame = true) => `
+  <clipPath id="${id}"><rect x="${x}" y="${y}" width="${w}" height="${h}" rx="2.5" /></clipPath>
+  <rect x="${x}" y="${y}" width="${w}" height="${h}" rx="2.5" fill="var(--photo)" />
+  <g clip-path="url(#${id})">
+    <circle cx="${x + w * 0.3}" cy="${y + h * 0.32}" r="${Math.min(w, h) * 0.11}" fill="#5f646a" />
+    <path d="M${x} ${y + h * 0.85} L${x + w * 0.32} ${y + h * 0.55} L${x + w * 0.52} ${y + h * 0.7} L${x + w * 0.74} ${y + h * 0.46} L${x + w} ${y + h * 0.74} V${y + h} H${x}Z" fill="#3c4045" />
+  </g>
+  ${frame ? `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="2.5" fill="none" ${ink} />` : ""}`
+/** The date on the picture: an orange bar in the photo's corner. */
+const stamp = (x: number, y: number, w = 11) => `<rect x="${x}" y="${y}" width="${w}" height="4.5" rx="1.5" fill="var(--accent)" />`
+/** The date in the file: an orange EXIF tag with two lines of data. */
+const tag = (x: number, y: number) => `
+  <rect x="${x}" y="${y}" width="24" height="17" rx="3.5" fill="var(--accent)" stroke="var(--surface)" stroke-width="2" />
+  <path d="M${x + 5} ${y + 6}h14M${x + 5} ${y + 11}h9" stroke="var(--on-accent)" stroke-width="2" stroke-linecap="round" />`
+/** A calendar page, orange: the real date set for a photo. */
+const calendar = (x: number, y: number) => `
+  <rect x="${x}" y="${y + 2}" width="22" height="20" rx="3.5" fill="var(--accent)" stroke="var(--surface)" stroke-width="2" />
+  <path d="M${x} ${y + 9}h22" stroke="var(--on-accent)" stroke-width="2" />
+  <path d="M${x + 6} ${y}v5M${x + 16} ${y}v5" stroke="var(--text)" stroke-width="2" stroke-linecap="round" />
+  <path d="M${x + 6} ${y + 15}h4M${x + 13} ${y + 15}h4" stroke="var(--on-accent)" stroke-width="2.5" stroke-linecap="round" />`
+/** A phone with a photo on its screen. */
+const phone = (id: string, rx = 7, top = "") => `
+  <rect x="17" y="5" width="30" height="54" rx="${rx}" fill="var(--surface)" ${ink} />
+  ${top}
+  ${photo(21, 15, 22, 30, id, false)}
+  <path d="M28 53h8" ${ink} />`
+
+const icons: Record<GuidePage, string> = {
+  iphone: phone("g-iphone", 8, `<rect x="27" y="9" width="10" height="3" rx="1.5" fill="var(--text)" />`) + stamp(29, 39, 11),
+  android: phone("g-android", 4, `<circle cx="32" cy="10.5" r="1.6" fill="var(--text)" />`) + stamp(29, 39, 11),
+  windows: `
+    <rect x="5" y="9" width="54" height="36" rx="3" fill="var(--surface)" ${ink} />
+    ${photo(10, 14, 44, 26, "g-windows", false)}
+    ${stamp(39, 33, 12)}
+    <path d="M32 45v7M23 53h18" ${ink} />`,
+  mac: `
+    <rect x="11" y="11" width="42" height="30" rx="3" fill="var(--surface)" ${ink} />
+    ${photo(15, 15, 34, 22, "g-mac", false)}
+    ${stamp(37, 30, 9)}
+    <path d="M5 47h54l-3 5H8Z" fill="var(--surface)" ${ink} />`,
+  batch: `
+    <rect x="16" y="7" width="38" height="28" rx="3" fill="var(--subtle)" stroke="var(--muted)" stroke-width="2" transform="rotate(8 35 21)" />
+    <rect x="12" y="13" width="38" height="28" rx="3" fill="var(--surface)" stroke="var(--muted)" stroke-width="2" transform="rotate(-5 31 27)" />
+    ${photo(8, 22, 40, 30, "g-batch")}
+    ${stamp(33, 44, 11)}
+    <circle cx="51" cy="49" r="8" fill="var(--accent)" stroke="var(--surface)" stroke-width="2" />
+    <path d="M47.5 49l2.5 2.5 4.5-5" stroke="var(--on-accent)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none" />`,
+  screenshot: phone("g-screenshot", 7) + `
+    <path d="M21 21v-6h6M43 21v-6h-6M21 39v6h6M43 39v6h-6" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round" fill="none" />
+    ${stamp(29, 39, 11)}`,
+  timestamp: `
+    ${photo(5, 10, 44, 34, "g-timestamp")}
+    ${stamp(9, 37, 14)}
+    <circle cx="48" cy="44" r="11" fill="var(--accent)" stroke="var(--surface)" stroke-width="2" />
+    <path d="M48 38v6l4 2.5" stroke="var(--on-accent)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none" />`,
+  scanned: `
+    <g transform="rotate(-7 32 32)">
+      <rect x="10" y="8" width="44" height="46" rx="2" fill="#f5f2ed" ${ink} />
+      ${photo(15, 13, 34, 30, "g-scanned", false)}
+      <rect x="15" y="13" width="34" height="30" fill="#e9b87a" opacity="0.22" />
+      ${stamp(36, 37, 10)}
+    </g>`,
+  retro: `
+    <path d="M14 18h10l3-5h10l3 5h10a5 5 0 0 1 5 5v24a5 5 0 0 1-5 5H14a5 5 0 0 1-5-5V23a5 5 0 0 1 5-5Z" fill="var(--surface)" ${ink} />
+    <circle cx="32" cy="34" r="10.5" fill="var(--photo)" ${ink} />
+    <circle cx="32" cy="34" r="4.5" fill="#5f646a" />
+    <rect x="44" y="22" width="7" height="4" rx="1" fill="var(--text)" />
+    <rect x="13" y="22" width="12" height="5.5" rx="1.5" fill="var(--accent)" />`,
+  exifIphone: phone("g-exif-iphone", 8, `<rect x="27" y="9" width="10" height="3" rx="1.5" fill="var(--text)" />`) + tag(36, 38),
+  exifMessenger: `
+    <path d="M10 8h36a5 5 0 0 1 5 5v24a5 5 0 0 1-5 5H24l-9 8v-8h-5a5 5 0 0 1-5-5V13a5 5 0 0 1 5-5Z" fill="var(--surface)" ${ink} />
+    ${photo(11, 13, 34, 24, "g-exif-messenger")}
+    ${calendar(38, 36)}`,
+  exifGoogle: `
+    ${photo(6, 8, 20, 16, "g-exif-google-1")}
+    ${photo(30, 8, 20, 16, "g-exif-google-2")}
+    ${photo(6, 30, 20, 16, "g-exif-google-3")}
+    <rect x="30" y="30" width="20" height="16" rx="2.5" fill="none" stroke="var(--muted)" stroke-width="2" stroke-dasharray="3 3" />
+    <path d="M16 46c2 8 14 10 22 4" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round" fill="none" />
+    <path d="M33 47.5l5.5 2.5-1.5 5.8" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none" />`,
+  exifScanned: `
+    <g transform="rotate(-7 28 30)">
+      <rect x="6" y="8" width="40" height="42" rx="2" fill="#f5f2ed" ${ink} />
+      ${photo(11, 13, 30, 27, "g-exif-scanned", false)}
+      <rect x="11" y="13" width="30" height="27" fill="#e9b87a" opacity="0.22" />
+    </g>
+    ${calendar(37, 36)}`,
+}
+---
+
+<svg class={className} viewBox="0 0 64 64" fill="none" aria-hidden="true" set:html={icons[guide]} />

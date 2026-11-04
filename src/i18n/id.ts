@@ -15,6 +15,7 @@ export default {
     screenshot: "cara-menambahkan-tanggal-di-screenshot",
     scanned: "tanggal-di-foto-lama-dan-hasil-scan",
     timestamp: "tanggal-dan-jam-di-foto",
+    guides: "panduan",
     privacy: "kebijakan-privasi",
     exif: "mengubah-tanggal-foto",
     exifIphone: "ubah-tanggal-foto-iphone",
@@ -315,6 +316,14 @@ export default {
       cta: "Atur tanggal sekarang",
       tools: ["Pemindai atau ponsel", "Browser web"],
     },
+  },
+  // The page with every guide, in groups by tool (the navbar's "guides").
+  guidesPage: {
+    title: "Panduan: menambah dan mengubah tanggal foto | DateStamp",
+    description:
+      "Panduan langkah demi langkah untuk menaruh tanggal di foto dan memperbaiki tanggal yang tersimpan di dalamnya: di iPhone, Android, Windows, dan Mac.",
+    h1: "Panduan",
+    intro: "Petunjuk singkat untuk setiap keadaan: mencetak tanggal di foto, atau memperbaiki tanggal yang tersimpan di file agar galeri mengurutkannya dengan benar.",
   },
   exif: {
     title: "Ubah Tanggal Foto (EXIF) – Gratis, Online | DateStamp",

@@ -15,6 +15,7 @@ export default {
     screenshot: "poner-fecha-a-una-captura-de-pantalla",
     scanned: "poner-fecha-a-fotos-antiguas",
     timestamp: "poner-fecha-y-hora-a-una-foto",
+    guides: "guias",
     privacy: "politica-de-privacidad",
     exif: "cambiar-fecha-de-una-foto",
     exifIphone: "cambiar-fecha-foto-iphone",
@@ -315,6 +316,14 @@ export default {
       cta: "Poner las fechas ahora",
       tools: ["Escáner o móvil", "Navegador web"],
     },
+  },
+  // The page with every guide, in groups by tool (the navbar's "guides").
+  guidesPage: {
+    title: "Guías: poner y cambiar la fecha de las fotos | DateStamp",
+    description:
+      "Guías paso a paso para poner la fecha en una foto y corregir la fecha guardada en ella: en iPhone, Android, Windows y Mac, para escaneos y capturas.",
+    h1: "Guías",
+    intro: "Instrucciones breves para cada caso: imprimir la fecha en la foto o corregir la fecha guardada en el archivo para que la galería la ordene bien.",
   },
   exif: {
     title: "Cambiar la fecha de una foto (EXIF) – Gratis | DateStamp",

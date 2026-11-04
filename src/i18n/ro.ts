@@ -15,6 +15,7 @@ export default {
     screenshot: "data-pe-captura-de-ecran",
     scanned: "data-pe-poze-vechi-scanate",
     timestamp: "data-si-ora-pe-poza",
+    guides: "ghiduri",
     privacy: "politica-de-confidentialitate",
     exif: "modificare-data-poza",
     exifIphone: "schimbare-data-poza-iphone",
@@ -315,6 +316,14 @@ export default {
       cta: "Setează datele acum",
       tools: ["Un scanner sau un telefon", "Un browser web"],
     },
+  },
+  // The page with every guide, in groups by tool (the navbar's "guides").
+  guidesPage: {
+    title: "Ghiduri: adaugă și schimbă data pozelor | DateStamp",
+    description:
+      "Ghiduri pas cu pas pentru a pune data pe o poză și a corecta data salvată în ea: pe iPhone, Android, Windows și Mac, pentru scanări și capturi de ecran.",
+    h1: "Ghiduri",
+    intro: "Instrucțiuni scurte pentru fiecare situație: imprimă data pe poză sau corectează data salvată în fișier, ca galeria s-o ordoneze corect.",
   },
   exif: {
     title: "Schimbă data unei poze (EXIF) – gratuit, online | DateStamp",

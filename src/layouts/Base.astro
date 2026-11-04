@@ -72,13 +72,13 @@ const ICON_VERSION = 2
 const icon = (path: string) => `${href(path)}?v=${ICON_VERSION}`
 
 // The navbar: the date stamp, the second tool (changing the date in the
-// photo's EXIF) and the guides (a section of the home page).
+// photo's EXIF) and the guides page (current on it and on every guide).
 const homePath = href(pathOf("home", locale))
 const onHome = page === "home" && !notFound
 const navItems = [
   { label: strings.nav.editor, href: homePath, current: onHome, section: onHome ? "top" : undefined },
   { label: strings.nav.exif, href: href(pathOf("exif", locale)), current: page === "exif" && !notFound, section: undefined },
-  { label: strings.nav.guides, href: `${homePath}#guides`, current: isGuide(page), section: onHome ? "guides" : undefined },
+  { label: strings.nav.guides, href: href(pathOf("guides", locale)), current: (isGuide(page) || page === "guides") && !notFound, section: undefined },
 ]
 
 // One @graph per page: the site, the tool itself, this page (with its
