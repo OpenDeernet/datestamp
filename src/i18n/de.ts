@@ -325,7 +325,7 @@ export default {
     locked: "Die Einstellungen sind bis zum Ende gesperrt.",
     doneHint: "Fertige Fotos haben einen grünen Rahmen.",
   },
-  nav: { editor: "Datum hinzufügen", exif: "Datum ändern", how: "So funktioniert's", faq: "Fragen", guides: "Anleitungen", menu: "Menü", close: "Menü schließen" },
+  nav: { editor: "Datum aufs Foto setzen", exif: "Aufnahmedatum ändern", guides: "Anleitungen", menu: "Menü", close: "Menü schließen" },
   install: { label: "App installieren", iosHint: "Tippe auf Teilen und dann auf „Zum Home-Bildschirm“." },
   consent: {
     text: "Wir verwenden Cookies für Besucherstatistiken (Google Analytics) und für die Werbung, die diese Seite kostenlos hält (Google AdSense). Beides ist freiwillig. Deine Fotos werden nie hochgeladen. Mehr dazu in der",

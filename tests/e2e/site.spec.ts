@@ -113,17 +113,17 @@ test("the navbar links the page's sections; on a phone they are in a menu that c
   await page.goto(pathOf("home", "pl"))
   if (!isMobile) {
     await expect(page.locator('header nav > ul a[aria-current="page"]')).toHaveText(strings.pl.nav.editor)
-    await page.locator("header nav").getByRole("link", { name: strings.pl.nav.faq }).click()
-    // It only scrolls: the address gets no #faq.
-    await expect(page.locator("#faq")).toBeInViewport()
+    await page.locator("header nav").getByRole("link", { name: strings.pl.nav.guides }).click()
+    // It only scrolls: the address gets no #guides.
+    await expect(page.locator("#guides")).toBeInViewport()
     expect(new URL(page.url()).hash).toBe("")
-    // The heading it landed on lights up, and the underline has moved under "FAQ".
-    await expect(page.locator("#faq")).toHaveClass(/is-target/)
+    // The heading it landed on lights up, and the underline has moved under "Guides".
+    await expect(page.locator("#guides")).toHaveClass(/is-target/)
     const underline = page.locator("[data-nav-indicator]")
-    const faqLink = page.locator("header nav").getByRole("link", { name: strings.pl.nav.faq })
+    const guidesLink = page.locator("header nav").getByRole("link", { name: strings.pl.nav.guides })
     await expect
       .poll(async () => {
-        const [line, link] = await Promise.all([underline.boundingBox(), faqLink.boundingBox()])
+        const [line, link] = await Promise.all([underline.boundingBox(), guidesLink.boundingBox()])
         return Math.round(line!.x + line!.width / 2) - Math.round(link!.x + link!.width / 2)
       })
       .toBeLessThanOrEqual(1)
@@ -131,8 +131,8 @@ test("the navbar links the page's sections; on a phone they are in a menu that c
   }
   await page.getByRole("button", { name: strings.pl.nav.menu }).click()
   // The <dialog> itself has no size (its sheet is fixed), so look at its links.
-  const faqLink = page.locator("#mobile-menu").getByRole("link", { name: strings.pl.nav.faq })
-  await expect(faqLink).toBeVisible()
+  const guidesLink = page.locator("#mobile-menu").getByRole("link", { name: strings.pl.nav.guides })
+  await expect(guidesLink).toBeVisible()
   // Panel and tint are absolute on the page, not fixed to the screen (that
   // turns iOS Safari's bars opaque): the tint covers the whole page, the
   // page's scroll is locked, and the panel has no transform while open.
@@ -148,10 +148,10 @@ test("the navbar links the page's sections; on a phone they are in a menu that c
   // background the light page (251, 250, 248) under 30 % black.
   await expect(page.locator('meta[name="theme-color"]')).toHaveCount(0)
   await expect(page.locator("body")).toHaveCSS("background-color", "rgb(176, 175, 174)")
-  await faqLink.click()
-  await expect(page.locator("#faq")).toBeInViewport()
+  await guidesLink.click()
+  await expect(page.locator("#guides")).toBeInViewport()
   expect(new URL(page.url()).hash).toBe("")
-  await expect(faqLink).toBeHidden()
+  await expect(guidesLink).toBeHidden()
   await expect(shade).not.toHaveAttribute("data-open")
   await expect(page.locator("html")).not.toHaveCSS("overflow", "hidden")
   await expect(page.locator('meta[name="theme-color"]')).toHaveCount(4)
@@ -159,13 +159,13 @@ test("the navbar links the page's sections; on a phone they are in a menu that c
 
   // Escape and a tap beside the sheet close it too.
   await page.getByRole("button", { name: strings.pl.nav.menu }).click()
-  await expect(faqLink).toBeVisible()
+  await expect(guidesLink).toBeVisible()
   await page.keyboard.press("Escape")
-  await expect(faqLink).toBeHidden()
+  await expect(guidesLink).toBeHidden()
   await page.getByRole("button", { name: strings.pl.nav.menu }).click()
-  await expect(faqLink).toBeVisible()
+  await expect(guidesLink).toBeVisible()
   await page.mouse.click(380, 400)
-  await expect(faqLink).toBeHidden()
+  await expect(guidesLink).toBeHidden()
 })
 
 test.describe("install the app", () => {
@@ -280,7 +280,7 @@ test("on the home page the inline ad sits after the examples, before the FAQ, aw
   const top = async (selector: string) => (await page.locator(selector).boundingBox())!.y
   const adTop = await top(".ad-inline")
   expect(adTop).toBeGreaterThan(await top("#examples"))
-  expect(adTop).toBeLessThan(await top("#faq"))
+  expect(adTop).toBeLessThan(await top("#guides"))
 })
 
 test("a missing address shows the 404 page in the language of its path, not indexed and without ads", async ({ page }) => {
@@ -321,10 +321,10 @@ test("a section link from a guide opens the home page at that section, with no #
   await page.goto(pathOf("iphone", "pl"))
   if (isMobile) await page.getByRole("button", { name: strings.pl.nav.menu }).click()
   const links = page.locator(isMobile ? "#mobile-menu" : "header nav")
-  await links.getByRole("link", { name: strings.pl.nav.how }).click()
+  await links.getByRole("link", { name: strings.pl.nav.guides }).click()
   await expect(page).toHaveTitle(strings.pl.home.title)
-  await expect(page.locator("#steps")).toBeInViewport()
-  await expect(page.locator("#steps")).toHaveClass(/is-target/)
+  await expect(page.locator("#guides")).toBeInViewport()
+  await expect(page.locator("#guides")).toHaveClass(/is-target/)
   expect(new URL(page.url()).hash).toBe("")
 })
 

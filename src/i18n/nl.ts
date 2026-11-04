@@ -325,7 +325,7 @@ export default {
     locked: "De instellingen zijn vergrendeld tot het opslaan klaar is.",
     doneHint: "Klare foto's hebben een groene rand.",
   },
-  nav: { editor: "Datum toevoegen", exif: "Datum wijzigen", how: "Hoe het werkt", faq: "Vragen", guides: "Handleidingen", menu: "Menu", close: "Menu sluiten" },
+  nav: { editor: "Datum op foto zetten", exif: "Opnamedatum wijzigen", guides: "Handleidingen", menu: "Menu", close: "Menu sluiten" },
   install: { label: "App installeren", iosHint: "Tik op Deel en dan op „Zet op beginscherm”." },
   consent: {
     text: "We gebruiken cookies voor bezoekersstatistieken (Google Analytics) en voor de advertenties die deze site gratis houden (Google AdSense). Beide zijn optioneel. Je foto's worden nooit geüpload. Details in ons",

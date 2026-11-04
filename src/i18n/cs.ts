@@ -325,7 +325,7 @@ export default {
     locked: "Nastavení jsou do konce ukládání zamčená.",
     doneHint: "Hotové fotky mají zelený rámeček.",
   },
-  nav: { editor: "Přidat datum", exif: "Změnit datum", how: "Jak to funguje", faq: "Časté dotazy", guides: "Návody", menu: "Menu", close: "Zavřít menu" },
+  nav: { editor: "Přidat datum do fotky", exif: "Změnit datum pořízení", guides: "Návody", menu: "Menu", close: "Zavřít menu" },
   install: { label: "Nainstalovat aplikaci", iosHint: "Klepněte na Sdílet a pak na „Přidat na plochu“." },
   consent: {
     text: "Soubory cookie používáme pro statistiky návštěvnosti (Google Analytics) a pro reklamy, díky kterým je web zdarma (Google AdSense). Obojí je volitelné. Vaše fotky se nikdy neodesílají. Podrobnosti najdete v",

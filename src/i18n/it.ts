@@ -325,7 +325,7 @@ export default {
     locked: "Le impostazioni sono bloccate fino alla fine.",
     doneHint: "Le foto pronte hanno una cornice verde.",
   },
-  nav: { editor: "Aggiungi data", exif: "Modifica data", how: "Come funziona", faq: "Domande", guides: "Guide", menu: "Menu", close: "Chiudi menu" },
+  nav: { editor: "Aggiungi data sulla foto", exif: "Cambia data di scatto", guides: "Guide", menu: "Menu", close: "Chiudi menu" },
   install: { label: "Installa l'app", iosHint: "Tocca Condividi, poi «Aggiungi alla schermata Home»." },
   consent: {
     text: "Usiamo i cookie per le statistiche delle visite (Google Analytics) e per gli annunci che rendono gratuito questo sito (Google AdSense). Entrambi sono facoltativi. Le tue foto non vengono mai caricate. Maggiori dettagli nella",

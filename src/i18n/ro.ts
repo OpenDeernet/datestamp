@@ -325,7 +325,7 @@ export default {
     locked: "Setările sunt blocate până se termină salvarea.",
     doneHint: "Pozele terminate au un chenar verde.",
   },
-  nav: { editor: "Adaugă data", exif: "Schimbă data", how: "Cum funcționează", faq: "Întrebări", guides: "Ghiduri", menu: "Meniu", close: "Închide meniul" },
+  nav: { editor: "Adaugă data pe poză", exif: "Schimbă data pozei", guides: "Ghiduri", menu: "Meniu", close: "Închide meniul" },
   install: { label: "Instalează aplicația", iosHint: "Atinge Partajează, apoi „Adaugă pe ecranul principal”." },
   consent: {
     text: "Folosim cookie-uri pentru statistici despre vizitatori (Google Analytics) și pentru reclamele care mențin site-ul gratuit (Google AdSense). Ambele sunt opționale. Pozele tale nu se încarcă niciodată. Detalii în",

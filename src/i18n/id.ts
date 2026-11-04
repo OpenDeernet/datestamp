@@ -325,7 +325,7 @@ export default {
     locked: "Pengaturan dikunci sampai penyimpanan selesai.",
     doneHint: "Foto yang selesai memiliki bingkai hijau.",
   },
-  nav: { editor: "Tambah tanggal", exif: "Ubah tanggal", how: "Cara kerja", faq: "FAQ", guides: "Panduan", menu: "Menu", close: "Tutup menu" },
+  nav: { editor: "Tambah tanggal di foto", exif: "Ubah tanggal pengambilan", guides: "Panduan", menu: "Menu", close: "Tutup menu" },
   install: { label: "Instal aplikasi", iosHint: "Ketuk Bagikan, lalu “Tambah ke Layar Utama”." },
   consent: {
     text: "Kami memakai cookie untuk statistik pengunjung (Google Analytics) dan untuk iklan yang membuat situs ini tetap gratis (Google AdSense). Keduanya opsional. Foto Anda tidak pernah diunggah. Detailnya ada di",

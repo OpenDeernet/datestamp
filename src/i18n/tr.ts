@@ -325,7 +325,7 @@ export default {
     locked: "Kaydetme bitene kadar ayarlar kilitlidir.",
     doneHint: "Biten fotoğrafların yeşil çerçevesi vardır.",
   },
-  nav: { editor: "Tarih ekle", exif: "Tarihi değiştir", how: "Nasıl çalışır", faq: "SSS", guides: "Rehberler", menu: "Menü", close: "Menüyü kapat" },
+  nav: { editor: "Fotoğrafa tarih ekle", exif: "Çekim tarihini değiştir", guides: "Rehberler", menu: "Menü", close: "Menüyü kapat" },
   install: { label: "Uygulamayı yükle", iosHint: "Paylaş'a, ardından “Ana Ekrana Ekle”ye dokunun." },
   consent: {
     text: "Ziyaretçi istatistikleri (Google Analytics) ve bu siteyi ücretsiz tutan reklamlar (Google AdSense) için çerez kullanıyoruz. İkisi de isteğe bağlıdır. Fotoğraflarınız asla yüklenmez. Ayrıntılar:",

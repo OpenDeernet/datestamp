@@ -325,7 +325,7 @@ export default {
     locked: "Los ajustes se bloquean hasta terminar.",
     doneHint: "Las fotos listas tienen un marco verde.",
   },
-  nav: { editor: "Poner fecha", exif: "Cambiar fecha", how: "Cómo funciona", faq: "Preguntas", guides: "Guías", menu: "Menú", close: "Cerrar menú" },
+  nav: { editor: "Poner fecha en la foto", exif: "Cambiar fecha de captura", guides: "Guías", menu: "Menú", close: "Cerrar menú" },
   install: { label: "Instalar la app", iosHint: "Toca Compartir y luego «Añadir a pantalla de inicio»." },
   consent: {
     text: "Usamos cookies para estadísticas de visitas (Google Analytics) y para los anuncios que mantienen gratis este sitio (Google AdSense). Ambas son opcionales. Tus fotos nunca se suben. Más detalles en la",

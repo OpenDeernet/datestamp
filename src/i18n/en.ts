@@ -328,7 +328,7 @@ export default {
     locked: "Settings are locked until saving is done.",
     doneHint: "Finished photos have a green frame.",
   },
-  nav: { editor: "Add date", exif: "Change date", how: "How it works", faq: "FAQ", guides: "Guides", menu: "Menu", close: "Close menu" },
+  nav: { editor: "Add date to photo", exif: "Change date taken", guides: "Guides", menu: "Menu", close: "Close menu" },
   install: { label: "Install the app", iosHint: "Tap Share, then “Add to Home Screen”." },
   consent: {
     text: "We use cookies for visitor statistics (Google Analytics) and for the ads that keep this site free (Google AdSense). Both are optional. Your photos are never uploaded. Details in our",

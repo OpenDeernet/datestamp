@@ -325,7 +325,7 @@ export default {
     locked: "Ustawienia są zablokowane do końca zapisu.",
     doneHint: "Gotowe zdjęcia mają zieloną ramkę.",
   },
-  nav: { editor: "Dodaj datę", exif: "Zmień datę", how: "Jak to działa", faq: "Pytania", guides: "Poradniki", menu: "Menu", close: "Zamknij menu" },
+  nav: { editor: "Dodaj datę na zdjęcie", exif: "Zmień datę zrobienia", guides: "Poradniki", menu: "Menu", close: "Zamknij menu" },
   install: { label: "Zainstaluj aplikację", iosHint: "Stuknij Udostępnij, a potem „Do ekranu początkowego”." },
   consent: {
     text: "Używamy plików cookie do statystyk odwiedzin (Google Analytics) i do reklam, dzięki którym strona jest darmowa (Google AdSense). Jedno i drugie jest opcjonalne. Twoje zdjęcia nigdy nie są wysyłane. Szczegóły w",
