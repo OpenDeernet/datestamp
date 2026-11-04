@@ -4,6 +4,7 @@
 // Kingdom, pt → Brazil (the Portuguese copy is Brazilian: "celular",
 // "baixar", "você"). Simplified shapes, no coats of arms: they are 20 px wide.
 import type { Locale } from "../i18n"
+import { svgId } from "../lib/svg-id"
 
 interface Props {
   locale: Locale
@@ -12,7 +13,7 @@ interface Props {
 const { locale } = Astro.props
 // The Union Jack clips its red diagonals; the flag shows twice on a page
 // (the summary and the list), so each copy needs its own clipPath id.
-const clip = `flag-uk-${Math.random().toString(36).slice(2, 8)}`
+const clip = svgId("flag-uk", Astro.url)
 ---
 
 <svg class="h-3.5 w-5 flex-none rounded-[3px] shadow-[0_0_0_1px_rgba(0,0,0,0.12)]" viewBox={locale === "en" ? "0 0 60 30" : "0 0 60 40"} preserveAspectRatio="xMidYMid slice" aria-hidden="true">

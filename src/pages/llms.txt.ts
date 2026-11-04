@@ -29,6 +29,10 @@ export const GET: APIRoute = ({ site }) => {
     ...en.exif.faq.flatMap(({ q, a }) => [`### ${q}`, "", a, ""]),
     "## Guides",
     "",
+    "Every guide on one page, by tool:",
+    "",
+    ...locales.map((locale) => `- [${strings[locale].guidesPage.h1} (${strings[locale].languageName})](${url(pathOf("guides", locale))}): ${strings[locale].guidesPage.description}`),
+    "",
     ...locales.flatMap((locale) =>
       guidePages.map((guide) => `- [${strings[locale].guides[guide].h1}](${url(pathOf(guide, locale))}): ${strings[locale].guides[guide].description}`),
     ),

@@ -2,12 +2,14 @@
 // The brand mark before the wordmark: the same drawing as public/favicon.svg
 // (the D with the orange date stamp in its corner). The glow filter needs an
 // id of its own per copy (the navbar and the mobile menu both show it).
+import { svgId } from "../lib/svg-id"
+
 interface Props {
   class?: string
 }
 
 const { class: className = "size-7" } = Astro.props
-const glow = `logo-glow-${Math.random().toString(36).slice(2, 8)}`
+const glow = svgId("logo-glow", Astro.url)
 ---
 
 <svg class={className} viewBox="0 0 64 64" aria-hidden="true">

@@ -45,6 +45,13 @@ jobs:
           PUBLIC_ADSENSE_SLOT_INLINE: ${{ vars.ADSENSE_SLOT_INLINE }}
           PUBLIC_CONTACT_EMAIL: ${{ vars.CONTACT_EMAIL }}
           PUBLIC_GA_ID: ${{ vars.GA_MEASUREMENT_ID }}
+      # Before the deploy, while the old version is still live: the pages
+      # whose HTML is new or changed, for IndexNow (scripts/indexnow.mjs).
+      - run: node scripts/indexnow.mjs changed dist https://datestamp.eu indexnow-urls.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: indexnow-urls
+          path: indexnow-urls.txt
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
@@ -58,3 +65,21 @@ jobs:
     steps:
       - id: deployment
         uses: actions/deploy-pages@v4
+
+  # After the deploy: tells Bing and the other IndexNow search engines which
+  # pages changed (ChatGPT searches through Bing). Never fails the deploy.
+  indexnow:
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.workflow_run.head_sha || github.sha }}
+          sparse-checkout: scripts
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - uses: actions/download-artifact@v4
+        with:
+          name: indexnow-urls
+      - run: node scripts/indexnow.mjs submit https://datestamp.eu indexnow-urls.txt

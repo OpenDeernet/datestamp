@@ -1,6 +1,7 @@
 import { expect } from "@playwright/test"
 import { guidePages, locales, pages, pathOf, strings } from "../../src/i18n"
 import { test, visit } from "./helpers"
+import { KEY } from "../../scripts/indexnow.mjs"
 
 for (const locale of locales) {
   test(`${locale}: home page has its language, title and hreflang alternates`, async ({ page }) => {
@@ -140,6 +141,9 @@ test("robots.txt welcomes crawlers and llms.txt describes the site", async ({ re
   const llms = await (await request.get("/llms.txt")).text()
   expect(llms.startsWith("# DateStamp")).toBe(true)
   for (const locale of locales) expect(llms).toContain(pathOf("home", locale))
+  for (const locale of locales) expect(llms).toContain(pathOf("guides", locale))
+  // IndexNow's key, at the root, as the search engines check it.
+  expect(await (await request.get(`/${KEY}.txt`)).text()).toBe(KEY)
 })
 
 test("the navbar links the tools and the guides; on a phone they are in a menu that closes itself", async ({ page, isMobile }) => {
