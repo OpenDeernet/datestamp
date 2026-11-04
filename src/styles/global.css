@@ -244,6 +244,19 @@
 :root[data-theme="dark"] .theme-switch-indicator {
   transform: translateX(28px);
 }
+/* The picked choice's icon is orange, from data-theme like the highlight:
+   aria-pressed is set only once theme.ts runs, and until then the HTML's
+   default ("system") would flash orange on every page load. */
+:root:not([data-theme]) [data-theme-choice="system"],
+:root[data-theme="light"] [data-theme-choice="light"],
+:root[data-theme="dark"] [data-theme-choice="dark"] {
+  color: var(--accent);
+}
+:root:not([data-theme]) .theme-switch-menu [data-theme-choice="system"],
+:root[data-theme="light"] .theme-switch-menu [data-theme-choice="light"],
+:root[data-theme="dark"] .theme-switch-menu [data-theme-choice="dark"] {
+  font-weight: 700;
+}
 /* The narrow navbar's theme button shows the current choice's icon. */
 .theme-menu-icon {
   display: none;

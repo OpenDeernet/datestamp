@@ -50,6 +50,23 @@ test("the theme switch applies and remembers a theme, and system forgets it", as
   await expect(page.locator("html")).not.toHaveAttribute("data-theme", /.*/)
 })
 
+test("the picked theme is shown before any script runs, so it does not flash on a new page", async ({ page, isMobile }) => {
+  test.skip(isMobile, "the three buttons are on wider screens")
+  await page.addInitScript(() => localStorage.setItem("datestamp:theme", "light"))
+  // Only the inline <head> script runs: theme.ts (which sets aria-pressed) never loads.
+  await page.route(/\/_astro\/.*\.js$/, (route) => route.abort())
+  await page.goto(pathOf("guides", "pl"))
+  const color = (theme: string) => page.locator(`header [role=group] [data-theme-choice="${theme}"]`).evaluate((button) => getComputedStyle(button).color)
+  const accent = await page.evaluate(() => {
+    const probe = document.createElement("span")
+    probe.style.color = "var(--accent)"
+    document.body.append(probe)
+    return getComputedStyle(probe).color
+  })
+  expect(await color("light")).toBe(accent)
+  expect(await color("system")).not.toBe(accent)
+})
+
 test("on a narrow phone the theme is a menu: its button shows the choice and closes after a pick", async ({ page }) => {
   await page.setViewportSize({ width: 375, height: 800 })
   await visit(page)
