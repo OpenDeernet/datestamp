@@ -17,6 +17,10 @@ export default {
     timestamp: "fotografa-tarih-ve-saat-ekleme",
     privacy: "gizlilik-politikasi",
     exif: "fotograf-tarihini-degistirme",
+    exifIphone: "iphone-fotograf-tarihi-degistirme",
+    exifMessenger: "whatsapp-fotograf-tarihi-yanlis",
+    exifGoogle: "google-fotograflar-yanlis-sira",
+    exifScanned: "taranmis-fotograf-tarihi",
   },
   home: {
     title: "Fotoğrafa Tarih Ekleme – Ücretsiz ve Güvenli | DateStamp",
@@ -60,6 +64,8 @@ export default {
       },
     ],
     guidesTitle: "Rehberler",
+    // The card that leads to the other tool (the date in the file, the exif page).
+    exifTool: { title: "Fotoğrafa kayıtlı tarih yanlış mı?", body: "Çekim tarihini dosyanın kendisinde (EXIF) değiştirin, galeri fotoğrafı doğru yerde göstersin. Fotoğrafa hiçbir şey basılmaz ve kalitesi korunur." },
   },
   guides: {
     iphone: {
@@ -232,6 +238,82 @@ export default {
       tip: "Saat, fotoğraf makinenizin saatinin kaydettiği saattir. Basılı bir tarih de her düzenleme gibi değiştirilebilir, bu yüzden tek başına saati kanıtlamaz: orijinalleri de saklayın.",
       cta: "Hemen tarih ekleyin",
       tools: ["Bilgisayar veya telefon", "Web tarayıcısı"],
+    },
+    exifIphone: {
+      title: "iPhone'da fotoğraf tarihi nasıl değiştirilir | DateStamp",
+      description:
+        "iPhone fotoğraflarının çekim tarihini düzeltin, Fotoğraflar'da doğru günde dursunlar. Ücretsiz, Safari'de, uygulama yok, kalite kaybı yok.",
+      h1: "iPhone'da bir fotoğrafın tarihi nasıl değiştirilir",
+      intro:
+        "iPhone'daki Fotoğraflar uygulaması her resmi dosyaya kayıtlı çekim tarihine göre sıralar. Bu tarih yanlışsa – mesajlaşma uygulamasından gelen bir fotoğraf, bir tarama, bir ekran görüntüsü – DateStamp doğrusunu Safari'de dosyaya yazar:",
+      steps: [
+        "Bu sayfayı iPhone'unuzda Safari ile açın.",
+        "“Fotoğraf seçin” düğmesine dokunun ve tarihi yanlış olan fotoğrafları seçin.",
+        "Her fotoğrafın altında tarihi değiştirin ya da “Hepsine uygula” ile hepsine aynı tarihi verin.",
+        "“Galeriye kaydet” düğmesine, ardından “Görüntüleri Kaydet”e dokunun: yeni tarihli fotoğraflar Fotoğraflar'a gelir.",
+        "Her fotoğraf yalnızca bir kez görünsün diye eski kopyaları silin.",
+      ],
+      tipTitle: "Bilmekte fayda var",
+      tip: "Mesajlaşma uygulamasından gelen bir fotoğraf çoğu zaman tarihini kaybeder: DateStamp bu durumda turuncu “dosya tarihi” gösterir. Fotoğrafın gerçekten çekildiği günü girin.",
+      cta: "Tarihi şimdi değiştirin",
+      tools: ["iPhone", "Safari"],
+    },
+    exifMessenger: {
+      title: "WhatsApp fotoğraflarının tarihi yanlış mı? | DateStamp",
+      description:
+        "WhatsApp veya Messenger'dan gelen fotoğraflar çekildikleri günü değil, geldikleri günü taşır. Gerçek tarihi ücretsiz olarak dosyaya geri yazın.",
+      h1: "WhatsApp ve Messenger fotoğraflarının tarihi nasıl düzeltilir",
+      intro:
+        "WhatsApp, Messenger ve diğer mesajlaşma uygulamaları fotoğraflardaki kamera bilgilerini siler; galeri de onları geldikleri güne koyar. DateStamp her fotoğrafa gerçek tarihi geri yazar:",
+      steps: [
+        "Sohbetteki fotoğrafları telefonunuza ya da bilgisayarınıza kaydedin.",
+        "Aşağıdaki “Fotoğraf seçin” düğmesine dokunun ve onları seçin.",
+        "Kendi tarihi olmayan fotoğraflarda turuncu “dosya tarihi” görünür: bu, geldikleri gündür.",
+        "Her birinin çekildiği günü girin ya da “Hepsine uygula” ile bütün bir gruba tek tarih verin.",
+        "Kaydedin – telefonda galeriye, bilgisayarda bir klasöre – ve eski kopyaları silin.",
+      ],
+      tipTitle: "Bilmekte fayda var",
+      tip: "Fotoğrafı belge olarak isteyin (WhatsApp'ta: ek, sonra Belge): böylece orijinal dosya, kamera tarihiyle birlikte gelir.",
+      cta: "Tarihleri şimdi düzeltin",
+      tools: ["Bilgisayar veya telefon", "Web tarayıcısı"],
+    },
+    exifGoogle: {
+      title: "Google Fotoğraflar'da sıra yanlış mı? Düzeltin | DateStamp",
+      description:
+        "Google Fotoğraflar her fotoğrafa kayıtlı çekim tarihine göre sıralar. Tarihi dosyada düzeltin, fotoğraf doğru güne geçsin – ücretsiz, tarayıcıda.",
+      h1: "Google Fotoğraflar'da ya da galeride yanlış günde duran fotoğraflar",
+      intro:
+        "Google Fotoğraflar, iCloud Fotoğrafları ve telefon galerileri resimleri içlerine kayıtlı çekim tarihine (EXIF) göre sıralar. Tarih yoksa ya da yanlışsa fotoğraf başka bir günün arasına düşer. Tarihi dosyada düzeltin:",
+      steps: [
+        "Yanlış yerde duran fotoğrafları indirin ya da orijinallerini bulun.",
+        "Onları aşağıda seçin. Her birinin altında galerinin gördüğü tarih yazar; turuncu “dosya tarihi”, fotoğrafın kendi tarihi olmadığı anlamına gelir.",
+        "Her fotoğrafın altında tarihi değiştirin ya da “Hepsine uygula” ile hepsine aynı tarihi verin.",
+        "Fotoğrafları yeni tarihle kaydedin.",
+        "Onları Google Fotoğraflar'a yeniden yükleyin: artık doğru günde görünürler.",
+      ],
+      tipTitle: "Bilmekte fayda var",
+      tip: "Kaydedilen fotoğraf yeni bir dosyadır, bu yüzden galeri eski kopyayı da tutar. Fotoğraf iki kez görünmesin diye onu silin.",
+      cta: "Tarihleri şimdi düzeltin",
+      tools: ["Bilgisayar veya telefon", "Web tarayıcısı"],
+    },
+    exifScanned: {
+      title: "Taranmış fotoğraflara çekim tarihi verme | DateStamp",
+      description:
+        "Bir tarama, tarandığı günün tarihini taşır; eski fotoğraflar bugünkülerin arasına düşer. Gerçek yılı ücretsiz olarak dosyaya yazın.",
+      h1: "Taranmış fotoğrafların çekim tarihi nasıl ayarlanır",
+      intro:
+        "Bir tarayıcı ya da tarama uygulaması her taramayı yapıldığı günle kaydeder; 1995'ten bir fotoğraf bugünkülerin arasına düşer. DateStamp her taramaya gerçek tarihi yazar, galeri de onu kendi yılına geri koyar:",
+      steps: [
+        "Baskıları tarayın ya da telefonla fotoğraflarını çekin.",
+        "Taramaları aşağıda seçin.",
+        "“Hepsine uygula” ile bütün gruba tek tarih verin: bir tatil, bir yıl.",
+        "Tek tek fotoğrafları küçük resimlerinin altında düzeltin. Yalnızca yılı biliyorsanız o yıldan herhangi bir gün seçin.",
+        "Taramaları gerçek tarihleriyle kaydedin.",
+      ],
+      tipTitle: "Bilmekte fayda var",
+      tip: "Tarihi eski fotoğrafın üzerinde de görmek ister misiniz? DateStamp onu köşeye de basabilir, 90'ların film makinelerinin turuncusuyla.",
+      cta: "Tarihleri şimdi ayarlayın",
+      tools: ["Tarayıcı veya telefon", "Web tarayıcısı"],
     },
   },
   exif: {

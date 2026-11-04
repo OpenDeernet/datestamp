@@ -4,9 +4,11 @@
 // have to click through to the home page.
 import Base from "../layouts/Base.astro"
 import Editor from "./Editor.astro"
+import ExifEditor from "./ExifEditor.astro"
 import GuideLinks from "./GuideLinks.astro"
 import InlineAd from "./InlineAd.astro"
-import { guidePages, t, type GuidePage, type Locale } from "../i18n"
+import ToolLink from "./ToolLink.astro"
+import { exifGuidePages, href, isExifPage, pathOf, stampGuidePages, t, type GuidePage, type Locale } from "../i18n"
 
 interface Props {
   locale: Locale
@@ -16,7 +18,9 @@ interface Props {
 const { locale, guide } = Astro.props
 const strings = t(locale)
 const content = strings.guides[guide]
-const others = guidePages.filter((other) => other !== guide)
+// A guide for changing the date gets that editor, and its tool's guides come first.
+const exif = isExifPage(guide)
+const others = (exif ? [...exifGuidePages, ...stampGuidePages] : [...stampGuidePages, ...exifGuidePages]).filter((other) => other !== guide)
 
 const howToJsonLd = {
   "@type": "HowTo",
@@ -55,7 +59,7 @@ const howToJsonLd = {
 
   <section class="py-8" id="editor">
     <h2 class="mb-4 text-2xl font-bold">{content.cta}</h2>
-    <Editor locale={locale} />
+    {exif ? <ExifEditor locale={locale} /> : <Editor locale={locale} />}
   </section>
 
   <!-- The other guides: links between them help readers and search engines find them all. -->
@@ -64,4 +68,15 @@ const howToJsonLd = {
     <GuideLinks locale={locale} guides={others} />
   </section>
 
+  <!-- Old and scanned photos: the date on the picture and the date in the file are both wanted. -->
+  {
+    guide === "scanned" && (
+      <ToolLink id="exif-tool" tool="exif" title={strings.home.exifTool.title} body={strings.home.exifTool.body} cta={strings.exif.h1} href={href(pathOf("exif", locale))} />
+    )
+  }
+  {
+    guide === "exifScanned" && (
+      <ToolLink id="stamp" tool="stamp" title={strings.exif.stamp.title} body={strings.exif.stamp.body} cta={strings.exif.stamp.cta} href={href(pathOf("home", locale))} />
+    )
+  }
 </Base>

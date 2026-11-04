@@ -89,6 +89,22 @@ test("share picture, description and icons are set", async ({ page, request }) =
   }
 })
 
+test("the change-date pages share their own picture, in every language", async ({ page, request }) => {
+  for (const [path, h1] of [
+    [pathOf("exif", "pl"), strings.pl.exif.h1],
+    [pathOf("exifMessenger", "de"), strings.de.exif.h1],
+  ]) {
+    await page.goto(path)
+    const image = await page.locator('meta[property="og:image"]').getAttribute("content")
+    expect(image, path).toMatch(/\/og\/[a-z]{2}-exif\.png$/)
+    expect((await request.get(new URL(image!).pathname)).headers()["content-type"]).toContain("image/png")
+    await expect(page.locator('meta[property="og:image:alt"]')).toHaveAttribute("content", h1)
+  }
+  // A date stamp guide keeps the stamp's picture.
+  await page.goto(pathOf("scanned", "pl"))
+  await expect(page.locator('meta[property="og:image"]')).toHaveAttribute("content", /\/og\/pl\.png$/)
+})
+
 test("JSON-LD is one valid graph with the site, the app and the page", async ({ page }) => {
   for (const [path, extra] of [[pathOf("home", "pl"), "FAQPage"], [pathOf("iphone", "pl"), "HowTo"]] as const) {
     await page.goto(path)

@@ -1,0 +1,40 @@
+---
+// A card that leads to the other tool: from the date stamp to "change the
+// date" (the home page, the guide for scanned photos) and back (the change
+// date page, its guide for scans). Two tools, each with its own search, so
+// a visitor on the wrong one finds the right one.
+interface Props {
+  id: string
+  title: string
+  body: string
+  cta: string
+  href: string
+  /** Which tool the link opens: its button shows a retro date or an EXIF tag. */
+  tool: "stamp" | "exif"
+}
+
+const { id, title, body, cta, href, tool } = Astro.props
+---
+
+<section aria-labelledby={id} class="pt-10 sm:pt-12">
+  <div class="flex flex-wrap items-center justify-between gap-4 rounded-2xl bg-subtle px-5 py-6 sm:px-8">
+    <div class="min-w-0 max-w-130">
+      <h2 id={id} class="text-lg font-semibold tracking-tight">{title}</h2>
+      <p class="mt-1 text-[15px] text-muted">{body}</p>
+    </div>
+    <a class="inline-flex h-11 items-center gap-2 rounded-lg border border-line-strong bg-surface px-4 text-sm font-semibold no-underline hover:border-accent" href={href}>
+      {
+        tool === "stamp" ? (
+          <span class="stamp text-[12px]" data-style="retro" aria-hidden="true">
+            '98 7 14
+          </span>
+        ) : (
+          <span class="rounded bg-ink px-1.5 py-0.5 font-mono text-[11px] font-semibold text-page" aria-hidden="true">
+            EXIF
+          </span>
+        )
+      }
+      {cta}
+    </a>
+  </div>
+</section>

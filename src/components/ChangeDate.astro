@@ -8,7 +8,8 @@ import Base from "../layouts/Base.astro"
 import ExifEditor from "./ExifEditor.astro"
 import GuideLinks from "./GuideLinks.astro"
 import InlineAd from "./InlineAd.astro"
-import { guidePages, href, pathOf, t, type Locale } from "../i18n"
+import ToolLink from "./ToolLink.astro"
+import { exifGuidePages, href, pathOf, stampGuidePages, t, type Locale } from "../i18n"
 
 interface Props {
   locale: Locale
@@ -82,24 +83,10 @@ const faqJsonLd = {
   </section>
 
   <!-- The other tool: the date printed on the picture. -->
-  <section aria-labelledby="stamp" class="pt-10 sm:pt-12">
-    <div class="flex flex-wrap items-center justify-between gap-4 rounded-2xl bg-subtle px-5 py-6 sm:px-8">
-      <div class="min-w-0 max-w-130">
-        <h2 id="stamp" class="text-lg font-semibold tracking-tight">{page.stamp.title}</h2>
-        <p class="mt-1 text-[15px] text-muted">{page.stamp.body}</p>
-      </div>
-      <a
-        class="inline-flex h-11 items-center gap-2 rounded-lg border border-line-strong bg-surface px-4 text-sm font-semibold no-underline hover:border-accent"
-        href={href(pathOf("home", locale))}
-      >
-        <span class="stamp text-[12px]" data-style="retro" aria-hidden="true">'98 7 14</span>
-        {page.stamp.cta}
-      </a>
-    </div>
-  </section>
+  <ToolLink id="stamp" tool="stamp" title={page.stamp.title} body={page.stamp.body} cta={page.stamp.cta} href={href(pathOf("home", locale))} />
 
   <section aria-labelledby="guides" class="pt-10 pb-4 sm:pt-12">
     <h2 id="guides" class="mb-3 text-xl font-semibold tracking-tight sm:text-[22px]">{strings.home.guidesTitle}</h2>
-    <GuideLinks locale={locale} guides={guidePages} />
+    <GuideLinks locale={locale} guides={[...exifGuidePages, ...stampGuidePages]} />
   </section>
 </Base>

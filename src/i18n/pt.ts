@@ -17,6 +17,10 @@ export default {
     timestamp: "colocar-data-e-hora-na-foto",
     privacy: "politica-de-privacidade",
     exif: "alterar-data-da-foto",
+    exifIphone: "mudar-data-foto-iphone",
+    exifMessenger: "data-errada-fotos-whatsapp",
+    exifGoogle: "fotos-fora-de-ordem-google-fotos",
+    exifScanned: "data-fotos-digitalizadas",
   },
   home: {
     title: "Colocar data na foto – grátis e online | DateStamp",
@@ -60,6 +64,8 @@ export default {
       },
     ],
     guidesTitle: "Guias",
+    // The card that leads to the other tool (the date in the file, the exif page).
+    exifTool: { title: "A data salva na foto está errada?", body: "Altere a data de captura no próprio arquivo (EXIF), para a galeria mostrar a foto no lugar certo. Nada é impresso na foto e ela não perde qualidade." },
   },
   guides: {
     iphone: {
@@ -232,6 +238,82 @@ export default {
       tip: "A hora é a do relógio da câmera. Uma data impressa pode ser alterada como qualquer edição, então sozinha ela não prova o horário: guarde também os originais.",
       cta: "Colocar a data agora",
       tools: ["Computador ou celular", "Navegador"],
+    },
+    exifIphone: {
+      title: "Como mudar a data de uma foto no iPhone | DateStamp",
+      description:
+        "Corrija a data de captura das fotos do iPhone para elas ficarem no dia certo no app Fotos. Grátis, no Safari, sem app e sem perder qualidade.",
+      h1: "Como mudar a data de uma foto no iPhone",
+      intro:
+        "O app Fotos do iPhone organiza cada imagem pela data de captura salva no arquivo. Quando ela está errada – uma foto de um app de mensagens, um escaneamento, um print –, o DateStamp grava a certa no arquivo, no Safari:",
+      steps: [
+        "Abra esta página no Safari do seu iPhone.",
+        "Toque em “Escolher fotos” e escolha as fotos com a data errada.",
+        "Mude a data embaixo de cada foto, ou dê a mesma a todas com “Aplicar a todas”.",
+        "Toque em “Salvar na galeria” e depois em “Salvar imagens”: as fotos com a nova data vão para o Fotos.",
+        "Apague as cópias antigas, para cada foto aparecer só uma vez.",
+      ],
+      tipTitle: "Bom saber",
+      tip: "Uma foto recebida por mensagem muitas vezes perde a data: o DateStamp mostra então “data do arquivo” em laranja. Digite o dia em que ela foi tirada de verdade.",
+      cta: "Mudar a data agora",
+      tools: ["iPhone", "Safari"],
+    },
+    exifMessenger: {
+      title: "Data errada nas fotos do WhatsApp? Corrija | DateStamp",
+      description:
+        "Fotos do WhatsApp ou do Messenger ficam com o dia em que chegaram, não o dia em que foram tiradas. Grave a data real no arquivo, grátis, no navegador.",
+      h1: "Como corrigir a data das fotos do WhatsApp e do Messenger",
+      intro:
+        "WhatsApp, Messenger e outros apps de mensagens apagam os dados da câmera das fotos, e a galeria as coloca no dia em que chegaram. O DateStamp grava de novo a data real em cada foto:",
+      steps: [
+        "Salve as fotos da conversa no celular ou no computador.",
+        "Toque em “Escolher fotos” aqui embaixo e escolha as fotos.",
+        "Fotos sem data própria aparecem com “data do arquivo” em laranja: é o dia em que chegaram.",
+        "Digite o dia em que cada uma foi tirada, ou dê a mesma data a um grupo inteiro com “Aplicar a todas”.",
+        "Salve as fotos – na galeria do celular ou em uma pasta do computador – e apague as cópias antigas.",
+      ],
+      tipTitle: "Bom saber",
+      tip: "Peça a foto como documento (no WhatsApp: anexar e depois Documento): assim chega o arquivo original, com a data da câmera.",
+      cta: "Corrigir as datas agora",
+      tools: ["Computador ou celular", "Navegador"],
+    },
+    exifGoogle: {
+      title: "Fotos fora de ordem no Google Fotos? Resolva | DateStamp",
+      description:
+        "O Google Fotos organiza pela data de captura salva em cada foto. Corrija essa data no arquivo e a foto vai para o dia certo – grátis, no navegador.",
+      h1: "Fotos no dia errado no Google Fotos ou na galeria",
+      intro:
+        "O Google Fotos, o Fotos do iCloud e as galerias dos celulares organizam as imagens pela data de captura salva nelas (EXIF). Se ela falta ou está errada, a foto vai parar no meio de outro dia. Corrija a data no arquivo:",
+      steps: [
+        "Baixe as fotos que estão no lugar errado, ou encontre os originais.",
+        "Escolha as fotos aqui embaixo. Cada uma mostra a data que a galeria vê; “data do arquivo” em laranja quer dizer que ela não tem data própria.",
+        "Mude a data embaixo de cada foto, ou dê a mesma a todas com “Aplicar a todas”.",
+        "Salve as fotos com a nova data.",
+        "Envie as fotos de novo para o Google Fotos: agora elas aparecem no dia certo.",
+      ],
+      tipTitle: "Bom saber",
+      tip: "A foto salva é um arquivo novo, então a galeria guarda também a cópia antiga. Apague essa cópia para a foto não aparecer duas vezes.",
+      cta: "Corrigir as datas agora",
+      tools: ["Computador ou celular", "Navegador"],
+    },
+    exifScanned: {
+      title: "Colocar a data real em fotos digitalizadas | DateStamp",
+      description:
+        "Uma foto digitalizada tem a data da digitalização, e as fotos antigas se misturam às de hoje. Grave o ano real no arquivo, grátis, no navegador.",
+      h1: "Como definir a data de captura de fotos digitalizadas",
+      intro:
+        "Um scanner ou um app de digitalização salva cada imagem com o dia em que foi feita, e uma foto de 1995 vai parar no meio das de hoje. O DateStamp grava a data real em cada imagem, para a galeria devolvê-la ao seu ano:",
+      steps: [
+        "Digitalize as fotos impressas, ou fotografe-as com o celular.",
+        "Escolha as imagens aqui embaixo.",
+        "Dê a mesma data ao grupo inteiro com “Aplicar a todas”: uma viagem, um ano.",
+        "Corrija fotos avulsas embaixo da miniatura. Se você só sabe o ano, escolha qualquer dia dele.",
+        "Salve as imagens com a data real.",
+      ],
+      tipTitle: "Bom saber",
+      tip: "Quer ver a data na foto antiga também? O DateStamp também imprime a data no canto, no laranja das câmeras de filme dos anos 90.",
+      cta: "Definir as datas agora",
+      tools: ["Scanner ou celular", "Navegador"],
     },
   },
   exif: {

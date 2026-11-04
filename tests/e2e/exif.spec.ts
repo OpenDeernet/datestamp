@@ -127,6 +127,35 @@ test("the navbar links the page and marks it current", async ({ page, isMobile }
   if (!isMobile) await expect(page.locator('header nav > ul a[aria-current="page"]')).toHaveText(strings.pl.nav.exif)
 })
 
+test("a change-date guide has the change-date editor, a stamp guide the stamp editor", async ({ page }) => {
+  await visit(page, pathOf("exifMessenger", "pl"))
+  await expect(page.locator("h1")).toHaveText(strings.pl.guides.exifMessenger.h1)
+  await expect(page.locator("[data-exif-editor]")).toHaveCount(1)
+  await expect(page.locator("[data-editor]")).toHaveCount(0)
+  // Its HowTo is in the page's one JSON-LD graph.
+  const graph = JSON.parse((await page.locator('script[type="application/ld+json"]').textContent())!)["@graph"]
+  expect(graph.find((node: { "@type": string }) => node["@type"] === "HowTo").name).toBe(strings.pl.guides.exifMessenger.h1)
+
+  await visit(page, pathOf("iphone", "pl"))
+  await expect(page.locator("[data-editor]")).toHaveCount(1)
+  await expect(page.locator("[data-exif-editor]")).toHaveCount(0)
+})
+
+test("the two tools link to each other", async ({ page }) => {
+  // The cards between the tools (the navbar links them too, with the same words in Polish).
+  const toExif = page.locator('section[aria-labelledby="exif-tool"] a')
+  const toStamp = page.locator('section[aria-labelledby="stamp"] a')
+  await visit(page, "/pl/")
+  await expect(toExif).toContainText(strings.pl.exif.h1)
+  await toExif.click()
+  await expect(page).toHaveURL(new RegExp(`${PAGE}$`))
+  // Both scanned-photo guides lead to the other tool.
+  await visit(page, pathOf("scanned", "pl"))
+  await expect(toExif).toHaveAttribute("href", new RegExp(`${PAGE}$`))
+  await visit(page, pathOf("exifScanned", "pl"))
+  await expect(toStamp).toHaveAttribute("href", /\/pl\/$/)
+})
+
 test("the page links to the date stamp", async ({ page }) => {
   await visit(page, PAGE)
   await page.getByRole("link", { name: strings.pl.exif.stamp.cta }).click()

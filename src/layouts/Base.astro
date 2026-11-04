@@ -5,7 +5,7 @@ import ConsentBanner from "../components/ConsentBanner.astro"
 import Flag from "../components/Flag.astro"
 import LogoMark from "../components/LogoMark.astro"
 import ThemeSwitch from "../components/ThemeSwitch.astro"
-import { defaultLocale, href, isGuide, locales, ogLocales, pathOf, t, type Locale, type Page } from "../i18n"
+import { defaultLocale, href, isExifPage, isGuide, locales, ogLocales, pathOf, t, type Locale, type Page } from "../i18n"
 import { adsense } from "../lib/ads"
 
 interface Props {
@@ -30,7 +30,11 @@ const absolute = (other: Locale) => absoluteUrl(pathOf(page, other))
 const canonical = absolute(locale)
 const home = absoluteUrl(pathOf("home", locale))
 const siteRoot = absoluteUrl(pathOf("home", defaultLocale))
-const ogImage = absoluteUrl(`/og/${locale}.png`)
+// The share picture shows the tool the page is about: the date stamp, or
+// changing the date saved in the photo (public/og/<locale>-exif.png).
+const exifTool = isExifPage(page) && !notFound
+const ogImage = absoluteUrl(exifTool ? `/og/${locale}-exif.png` : `/og/${locale}.png`)
+const ogAlt = exifTool ? strings.exif.h1 : strings.home.h1
 // Runs first in <head>, before any Google script: applies the stored
 // cookie choice (src/lib/consent.ts, same key and rules). Without one, ad
 // requests are paused and Google Analytics is not loaded at all; with
@@ -174,7 +178,7 @@ const jsonLd = {
     <meta property="og:image:type" content="image/png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content={strings.home.h1} />
+    <meta property="og:image:alt" content={ogAlt} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />

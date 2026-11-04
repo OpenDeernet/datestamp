@@ -1,6 +1,6 @@
 // Renders the site's pictures into public/: the icon PNGs from
 // public/favicon.svg and one share picture (og:image) per language from the
-// dev-only /og/<locale>/ pages. Run after changing the favicon, the OG
+// dev-only /og/<locale>/ and /og/<locale>-exif/ pages. Run after changing the favicon, the OG
 // layout or a home page title: `npm run assets`, then commit public/.
 import { chromium } from "@playwright/test"
 import { spawn } from "node:child_process"
@@ -40,12 +40,13 @@ try {
   await waitFor(`http://localhost:${PORT}/og/en/`)
   await mkdir(out("og"), { recursive: true })
   await page.setViewportSize({ width: 1200, height: 630 })
-  for (const locale of locales) {
-    await page.goto(`http://localhost:${PORT}/og/${locale}/`, { waitUntil: "networkidle" })
+  // Each language's two pictures: the date stamp, and changing the date (-exif).
+  for (const name of locales.flatMap((locale) => [locale, `${locale}-exif`])) {
+    await page.goto(`http://localhost:${PORT}/og/${name}/`, { waitUntil: "networkidle" })
     // The dev server's toolbar is not part of the picture.
     await page.evaluate(() => document.querySelector("astro-dev-toolbar")?.remove())
-    await page.locator("[data-og]").screenshot({ path: out(`og/${locale}.png`) })
-    console.log("og", locale)
+    await page.locator("[data-og]").screenshot({ path: out(`og/${name}.png`) })
+    console.log("og", name)
   }
 } finally {
   await browser.close()

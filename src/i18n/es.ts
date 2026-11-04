@@ -17,6 +17,10 @@ export default {
     timestamp: "poner-fecha-y-hora-a-una-foto",
     privacy: "politica-de-privacidad",
     exif: "cambiar-fecha-de-una-foto",
+    exifIphone: "cambiar-fecha-foto-iphone",
+    exifMessenger: "fecha-incorrecta-fotos-whatsapp",
+    exifGoogle: "fotos-desordenadas-google-fotos",
+    exifScanned: "fecha-fotos-escaneadas",
   },
   home: {
     title: "Poner fecha a una foto – gratis y online | DateStamp",
@@ -60,6 +64,8 @@ export default {
       },
     ],
     guidesTitle: "Guías",
+    // The card that leads to the other tool (the date in the file, the exif page).
+    exifTool: { title: "¿La fecha guardada en la foto está mal?", body: "Cambia la fecha de captura en el propio archivo (EXIF), para que tu galería muestre la foto en su sitio. No se imprime nada y la foto no pierde calidad." },
   },
   guides: {
     iphone: {
@@ -232,6 +238,82 @@ export default {
       tip: "La hora es la que registró el reloj de la cámara. Una fecha impresa se puede cambiar como cualquier edición, así que por sí sola no prueba la hora: guarda también los originales.",
       cta: "Poner la fecha ahora",
       tools: ["Ordenador o móvil", "Navegador web"],
+    },
+    exifIphone: {
+      title: "Cómo cambiar la fecha de una foto en iPhone | DateStamp",
+      description:
+        "Corrige la fecha de captura de las fotos del iPhone para que aparezcan en el día correcto en Fotos. Gratis, en Safari, sin app y sin perder calidad.",
+      h1: "Cómo cambiar la fecha de una foto en el iPhone",
+      intro:
+        "La app Fotos del iPhone ordena cada imagen por la fecha de captura guardada en el archivo. Cuando está mal – una foto de una app de mensajería, un escaneo, una captura de pantalla –, DateStamp escribe la correcta en el archivo, en Safari:",
+      steps: [
+        "Abre esta página en Safari en tu iPhone.",
+        "Toca «Elegir fotos» y elige las fotos con la fecha equivocada.",
+        "Cambia la fecha bajo cada foto, o pon una a todas con «Poner a todas».",
+        "Toca «Guardar en la galería» y luego «Guardar imágenes»: las fotos con la nueva fecha llegan a Fotos.",
+        "Borra las copias antiguas para que cada foto esté una sola vez.",
+      ],
+      tipTitle: "Conviene saber",
+      tip: "Una foto recibida por mensajería suele perder su fecha: DateStamp muestra entonces «fecha del archivo» en naranja. Escribe el día en que se hizo de verdad.",
+      cta: "Cambiar la fecha ahora",
+      tools: ["iPhone", "Safari"],
+    },
+    exifMessenger: {
+      title: "Fecha incorrecta en fotos de WhatsApp | DateStamp",
+      description:
+        "Las fotos de WhatsApp o Messenger llevan el día en que llegaron, no el día en que se hicieron. Devuelve la fecha real al archivo, gratis, en el navegador.",
+      h1: "Cómo corregir la fecha de las fotos de WhatsApp y Messenger",
+      intro:
+        "WhatsApp, Messenger y otras apps de mensajería quitan los datos de la cámara a las fotos, así que la galería las coloca en el día en que llegaron. DateStamp vuelve a escribir la fecha real en cada foto:",
+      steps: [
+        "Guarda las fotos del chat en el móvil o en el ordenador.",
+        "Toca «Elegir fotos» aquí abajo y elígelas.",
+        "Las fotos sin fecha propia llevan «fecha del archivo» en naranja: es el día en que llegaron.",
+        "Escribe el día en que se hizo cada una, o pon una misma fecha a todo un grupo con «Poner a todas».",
+        "Guárdalas – en la galería del móvil o en una carpeta del ordenador – y borra las copias antiguas.",
+      ],
+      tipTitle: "Conviene saber",
+      tip: "Pide la foto como documento (en WhatsApp: adjuntar y luego Documento): así llega el archivo original, con su fecha de la cámara.",
+      cta: "Corregir las fechas ahora",
+      tools: ["Ordenador o móvil", "Navegador web"],
+    },
+    exifGoogle: {
+      title: "¿Fotos desordenadas en Google Fotos? Arréglalo | DateStamp",
+      description:
+        "Google Fotos ordena por la fecha de captura guardada en cada foto. Corrígela en el archivo y la foto pasa al día correcto, gratis y en el navegador.",
+      h1: "Fotos en el día equivocado en Google Fotos o en la galería",
+      intro:
+        "Google Fotos, Fotos de iCloud y las galerías del móvil ordenan las imágenes por la fecha de captura guardada en ellas (EXIF). Si falta o está mal, la foto acaba entre las de otro día. Corrige la fecha en el archivo:",
+      steps: [
+        "Descarga las fotos que están fuera de sitio, o busca sus originales.",
+        "Elígelas aquí abajo. Cada una muestra la fecha que ve la galería; «fecha del archivo» en naranja significa que no tiene una propia.",
+        "Cambia la fecha bajo cada foto, o pon una a todas con «Poner a todas».",
+        "Guarda las fotos con la nueva fecha.",
+        "Vuelve a subirlas a Google Fotos: ahora aparecen en el día correcto.",
+      ],
+      tipTitle: "Conviene saber",
+      tip: "La foto guardada es un archivo nuevo, así que la galería conserva también la copia antigua. Bórrala para no tener la foto dos veces.",
+      cta: "Corregir las fechas ahora",
+      tools: ["Ordenador o móvil", "Navegador web"],
+    },
+    exifScanned: {
+      title: "Poner la fecha real a fotos escaneadas | DateStamp",
+      description:
+        "Un escaneo lleva el día en que se escaneó, así que las fotos antiguas acaban entre las de hoy. Escribe en el archivo el año real, gratis y online.",
+      h1: "Cómo poner la fecha de captura a fotos escaneadas",
+      intro:
+        "Un escáner o una app de escaneo guarda cada imagen con el día en que se escaneó, así que una foto de 1995 acaba entre las de hoy. DateStamp escribe la fecha real en cada escaneo para que la galería lo devuelva a su año:",
+      steps: [
+        "Escanea las copias o fotografíalas con el móvil.",
+        "Elige los escaneos aquí abajo.",
+        "Pon una misma fecha a todo el grupo con «Poner a todas»: unas vacaciones, un año.",
+        "Corrige fotos sueltas bajo su miniatura. Si solo sabes el año, elige cualquier día de ese año.",
+        "Guarda los escaneos con su fecha real.",
+      ],
+      tipTitle: "Conviene saber",
+      tip: "¿Quieres ver también la fecha en la foto antigua? DateStamp puede imprimirla en la esquina, en el naranja de las cámaras de carrete de los 90.",
+      cta: "Poner las fechas ahora",
+      tools: ["Escáner o móvil", "Navegador web"],
     },
   },
   exif: {

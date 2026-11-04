@@ -17,6 +17,10 @@ export default {
     timestamp: "tanggal-dan-jam-di-foto",
     privacy: "kebijakan-privasi",
     exif: "mengubah-tanggal-foto",
+    exifIphone: "ubah-tanggal-foto-iphone",
+    exifMessenger: "tanggal-foto-whatsapp-salah",
+    exifGoogle: "urutan-foto-salah-google-foto",
+    exifScanned: "tanggal-foto-hasil-scan",
   },
   home: {
     title: "Tambahkan Tanggal di Foto – Gratis & Privat | DateStamp",
@@ -60,6 +64,8 @@ export default {
       },
     ],
     guidesTitle: "Panduan",
+    // The card that leads to the other tool (the date in the file, the exif page).
+    exifTool: { title: "Tanggal yang tersimpan di foto salah?", body: "Ubah tanggal pengambilan di dalam file itu sendiri (EXIF), agar galeri menampilkan foto di tempat yang benar. Tidak ada yang dicetak dan kualitas foto tetap." },
   },
   guides: {
     iphone: {
@@ -232,6 +238,82 @@ export default {
       tip: "Jamnya adalah yang dicatat oleh jam kamera Anda. Tanggal yang tercetak bisa diubah seperti suntingan lain, jadi itu saja tidak membuktikan waktunya – simpan juga foto aslinya.",
       cta: "Tambahkan tanggal sekarang",
       tools: ["Komputer atau ponsel", "Browser web"],
+    },
+    exifIphone: {
+      title: "Cara Mengubah Tanggal Foto di iPhone – Gratis | DateStamp",
+      description:
+        "Perbaiki tanggal pengambilan foto iPhone agar berada di hari yang benar di Foto. Gratis, di Safari, tanpa aplikasi dan tanpa menurunkan kualitas.",
+      h1: "Cara mengubah tanggal foto di iPhone",
+      intro:
+        "Aplikasi Foto di iPhone mengurutkan setiap gambar menurut tanggal pengambilan yang tersimpan di file. Kalau tanggalnya salah – foto dari aplikasi chat, hasil scan, tangkapan layar – DateStamp menulis tanggal yang benar ke file, di Safari:",
+      steps: [
+        "Buka halaman ini di Safari di iPhone Anda.",
+        "Ketuk “Pilih foto” dan pilih foto yang tanggalnya salah.",
+        "Ubah tanggal di bawah setiap foto, atau beri semuanya tanggal yang sama dengan “Terapkan ke semua”.",
+        "Ketuk “Simpan ke galeri”, lalu “Simpan Gambar”: foto dengan tanggal baru masuk ke Foto.",
+        "Hapus salinan lama agar setiap foto hanya ada sekali.",
+      ],
+      tipTitle: "Perlu diketahui",
+      tip: "Foto yang diterima lewat aplikasi chat sering kehilangan tanggalnya: DateStamp lalu menampilkan “tanggal file” berwarna oranye. Isi hari foto itu benar-benar diambil.",
+      cta: "Ubah tanggal sekarang",
+      tools: ["iPhone", "Safari"],
+    },
+    exifMessenger: {
+      title: "Tanggal Foto WhatsApp Salah? Perbaiki Gratis | DateStamp",
+      description:
+        "Foto dari WhatsApp atau Messenger memakai hari foto itu diterima, bukan hari diambil. Kembalikan tanggal aslinya ke file, gratis, di browser.",
+      h1: "Cara memperbaiki tanggal foto dari WhatsApp dan Messenger",
+      intro:
+        "WhatsApp, Messenger, dan aplikasi chat lain menghapus data kamera dari foto, jadi galeri menaruhnya di hari foto itu diterima. DateStamp menulis kembali tanggal aslinya ke setiap foto:",
+      steps: [
+        "Simpan foto dari percakapan ke ponsel atau komputer.",
+        "Ketuk “Pilih foto” di bawah dan pilih foto-foto itu.",
+        "Foto tanpa tanggal sendiri ditandai “tanggal file” berwarna oranye: itu hari foto diterima.",
+        "Isi hari setiap foto diambil, atau beri satu kelompok tanggal yang sama dengan “Terapkan ke semua”.",
+        "Simpan – ke galeri di ponsel, ke folder di komputer – lalu hapus salinan lama.",
+      ],
+      tipTitle: "Perlu diketahui",
+      tip: "Minta foto dikirim sebagai dokumen (di WhatsApp: lampiran, lalu Dokumen): yang datang adalah file asli, lengkap dengan tanggal kamera.",
+      cta: "Perbaiki tanggal sekarang",
+      tools: ["Komputer atau ponsel", "Browser web"],
+    },
+    exifGoogle: {
+      title: "Urutan Foto Salah di Google Foto? Perbaiki | DateStamp",
+      description:
+        "Google Foto mengurutkan menurut tanggal pengambilan yang tersimpan di setiap foto. Perbaiki di file, dan foto pindah ke hari yang benar – gratis.",
+      h1: "Foto di hari yang salah di Google Foto atau galeri",
+      intro:
+        "Google Foto, Foto iCloud, dan galeri ponsel mengurutkan gambar menurut tanggal pengambilan yang tersimpan di dalamnya (EXIF). Kalau tanggalnya tidak ada atau salah, foto masuk ke hari lain. Perbaiki tanggal di file:",
+      steps: [
+        "Unduh foto yang ada di tempat yang salah, atau cari file aslinya.",
+        "Pilih foto-foto itu di bawah. Setiap foto menampilkan tanggal yang dilihat galeri; “tanggal file” berwarna oranye berarti foto tidak punya tanggal sendiri.",
+        "Ubah tanggal di bawah setiap foto, atau beri semuanya tanggal yang sama dengan “Terapkan ke semua”.",
+        "Simpan foto dengan tanggal baru.",
+        "Unggah lagi ke Google Foto: sekarang foto muncul di hari yang benar.",
+      ],
+      tipTitle: "Perlu diketahui",
+      tip: "Foto yang disimpan adalah file baru, jadi galeri juga menyimpan salinan lama. Hapus salinan itu agar foto tidak muncul dua kali.",
+      cta: "Perbaiki tanggal sekarang",
+      tools: ["Komputer atau ponsel", "Browser web"],
+    },
+    exifScanned: {
+      title: "Atur Tanggal Asli pada Foto Hasil Scan | DateStamp",
+      description:
+        "Hasil scan memakai tanggal saat dipindai, jadi foto lama bercampur dengan foto hari ini. Tulis tahun aslinya ke file – gratis, di browser.",
+      h1: "Cara mengatur tanggal pengambilan foto hasil scan",
+      intro:
+        "Pemindai atau aplikasi scan menyimpan setiap hasil scan dengan hari saat dibuat, jadi foto dari tahun 1995 masuk di antara foto hari ini. DateStamp menulis tanggal asli ke setiap hasil scan, agar galeri mengembalikannya ke tahunnya:",
+      steps: [
+        "Pindai cetakan foto, atau potret dengan ponsel.",
+        "Pilih hasil scan di bawah.",
+        "Beri seluruh kelompok satu tanggal dengan “Terapkan ke semua”: satu liburan, satu tahun.",
+        "Perbaiki foto satu per satu di bawah thumbnail-nya. Kalau hanya tahu tahunnya, pilih hari mana saja di tahun itu.",
+        "Simpan hasil scan dengan tanggal aslinya.",
+      ],
+      tipTitle: "Perlu diketahui",
+      tip: "Ingin tanggalnya juga terlihat di foto lama? DateStamp juga bisa mencetaknya di sudut, dengan oranye kamera film tahun 90-an.",
+      cta: "Atur tanggal sekarang",
+      tools: ["Pemindai atau ponsel", "Browser web"],
     },
   },
   exif: {

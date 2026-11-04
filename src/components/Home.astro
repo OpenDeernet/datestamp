@@ -4,7 +4,8 @@ import Editor from "./Editor.astro"
 import ExamplePhoto from "./ExamplePhoto.astro"
 import GuideLinks from "./GuideLinks.astro"
 import InlineAd from "./InlineAd.astro"
-import { guidePages, t, type Locale } from "../i18n"
+import ToolLink from "./ToolLink.astro"
+import { guidePages, href, pathOf, t, type Locale } from "../i18n"
 import { SAMPLES_AUTHOR, samples } from "../lib/samples"
 import { formatDate } from "../lib/stamp"
 
@@ -130,6 +131,9 @@ const faqJsonLd = {
       }
     </dl>
   </section>
+
+  <!-- The other tool: the date saved in the file, not printed on it. -->
+  <ToolLink id="exif-tool" tool="exif" title={home.exifTool.title} body={home.exifTool.body} cta={strings.exif.h1} href={href(pathOf("exif", locale))} />
 
   <section aria-labelledby="guides" class="pt-10 pb-4 sm:pt-12">
     <h2 id="guides" class="mb-3 text-xl font-semibold tracking-tight sm:text-[22px]">{home.guidesTitle}</h2>

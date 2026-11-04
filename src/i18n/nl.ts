@@ -17,6 +17,10 @@ export default {
     timestamp: "datum-en-tijd-op-foto",
     privacy: "privacybeleid",
     exif: "datum-foto-wijzigen",
+    exifIphone: "datum-foto-wijzigen-iphone",
+    exifMessenger: "verkeerde-datum-whatsapp-fotos",
+    exifGoogle: "fotos-verkeerde-volgorde-google-fotos",
+    exifScanned: "opnamedatum-gescande-fotos",
   },
   home: {
     title: "Datum op foto zetten – gratis en privé | DateStamp",
@@ -60,6 +64,8 @@ export default {
       },
     ],
     guidesTitle: "Handleidingen",
+    // The card that leads to the other tool (the date in the file, the exif page).
+    exifTool: { title: "Klopt de datum in de foto niet?", body: "Wijzig de opnamedatum in het bestand zelf (EXIF), zodat je galerij de foto op de juiste plek toont. Er wordt niets op gedrukt en de foto houdt zijn kwaliteit." },
   },
   guides: {
     iphone: {
@@ -232,6 +238,82 @@ export default {
       tip: "De tijd is die van de klok van je camera. Een opgedrukte datum kan worden gewijzigd zoals elke bewerking, dus op zichzelf bewijst hij het tijdstip niet – bewaar ook de originelen.",
       cta: "Zet de datum er nu op",
       tools: ["Een computer of telefoon", "Een webbrowser"],
+    },
+    exifIphone: {
+      title: "Datum van een foto wijzigen op je iPhone | DateStamp",
+      description:
+        "Verbeter de opnamedatum van iPhone-foto's, zodat ze in Foto's op de juiste dag staan. Gratis, in Safari, zonder app en zonder kwaliteitsverlies.",
+      h1: "Zo wijzig je de datum van een foto op je iPhone",
+      intro:
+        "De Foto's-app op je iPhone sorteert elke foto op de opnamedatum in het bestand. Klopt die niet – een foto uit een chat-app, een scan, een screenshot –, dan schrijft DateStamp de juiste erin, in Safari:",
+      steps: [
+        "Open deze pagina in Safari op je iPhone.",
+        "Tik op ‘Foto's kiezen’ en kies de foto's met de verkeerde datum.",
+        "Wijzig de datum onder elke foto, of geef ze allemaal dezelfde met ‘Voor alle instellen’.",
+        "Tik op ‘Opslaan in galerij’ en dan op ‘Bewaar afbeeldingen’: de foto's met de nieuwe datum komen in Foto's.",
+        "Verwijder de oude kopieën, zodat elke foto er maar één keer staat.",
+      ],
+      tipTitle: "Goed om te weten",
+      tip: "Een foto die je via een chat-app kreeg, is zijn datum vaak kwijt: DateStamp toont dan een oranje ‘bestandsdatum’. Vul de dag in waarop hij echt is gemaakt.",
+      cta: "Wijzig de datum nu",
+      tools: ["iPhone", "Safari"],
+    },
+    exifMessenger: {
+      title: "Verkeerde datum bij WhatsApp-foto's? | DateStamp",
+      description:
+        "Foto's uit WhatsApp of Messenger krijgen de dag waarop ze binnenkwamen, niet de opnamedag. Zet de echte datum terug in het bestand, gratis.",
+      h1: "Zo verbeter je de datum van WhatsApp- en Messenger-foto's",
+      intro:
+        "WhatsApp, Messenger en andere chat-apps halen de cameragegevens uit foto's, dus zet de galerij ze bij de dag waarop ze binnenkwamen. DateStamp schrijft de echte datum terug in elke foto:",
+      steps: [
+        "Sla de foto's uit het gesprek op je telefoon of computer op.",
+        "Tik hieronder op ‘Foto's kiezen’ en kies ze.",
+        "Foto's zonder eigen datum hebben een oranje ‘bestandsdatum’: dat is de dag waarop ze binnenkwamen.",
+        "Vul voor elke foto de opnamedag in, of geef een hele stapel één datum met ‘Voor alle instellen’.",
+        "Sla ze op – in de galerij op een telefoon, in een map op een computer – en verwijder de oude kopieën.",
+      ],
+      tipTitle: "Goed om te weten",
+      tip: "Vraag de foto als document (in WhatsApp: bijlage, dan Document): dan komt het originele bestand binnen, met de datum van de camera.",
+      cta: "Verbeter de datums nu",
+      tools: ["Een computer of telefoon", "Een webbrowser"],
+    },
+    exifGoogle: {
+      title: "Foto's in verkeerde volgorde in Google Foto's? | DateStamp",
+      description:
+        "Google Foto's sorteert op de opnamedatum in elke foto. Verbeter die in het bestand en de foto schuift naar de juiste dag – gratis, in de browser.",
+      h1: "Foto's op de verkeerde dag in Google Foto's of de galerij",
+      intro:
+        "Google Foto's, iCloud-foto's en telefoongalerijen sorteren foto's op de opnamedatum die erin staat (EXIF). Ontbreekt die of klopt hij niet, dan belandt een foto tussen die van een andere dag. Verbeter de datum in het bestand:",
+      steps: [
+        "Download de foto's die op de verkeerde plek staan, of zoek hun originelen.",
+        "Kies ze hieronder. Elke foto toont de datum die de galerij ziet; een oranje ‘bestandsdatum’ betekent dat hij geen eigen datum heeft.",
+        "Wijzig de datum onder elke foto, of geef ze allemaal dezelfde met ‘Voor alle instellen’.",
+        "Sla de foto's op met de nieuwe datum.",
+        "Upload ze opnieuw naar Google Foto's: nu staan ze op de juiste dag.",
+      ],
+      tipTitle: "Goed om te weten",
+      tip: "De opgeslagen foto is een nieuw bestand, dus de galerij houdt ook de oude kopie. Verwijder die, anders staat de foto er twee keer in.",
+      cta: "Verbeter de datums nu",
+      tools: ["Een computer of telefoon", "Een webbrowser"],
+    },
+    exifScanned: {
+      title: "Opnamedatum instellen voor gescande foto's | DateStamp",
+      description:
+        "Een scan krijgt de dag van het scannen, dus oude foto's belanden tussen die van vandaag. Zet het echte jaar in het bestand – gratis, in de browser.",
+      h1: "Zo stel je de opnamedatum van gescande foto's in",
+      intro:
+        "Een scanner of scan-app slaat elke scan op met de dag waarop hij is gemaakt, dus een foto uit 1995 belandt tussen die van vandaag. DateStamp schrijft de echte datum in elke scan, zodat de galerij hem terugzet in zijn jaar:",
+      steps: [
+        "Scan de afdrukken, of fotografeer ze met je telefoon.",
+        "Kies de scans hieronder.",
+        "Geef de hele stapel één datum met ‘Voor alle instellen’: een vakantie, een jaar.",
+        "Verbeter losse foto's onder hun miniatuur. Weet je alleen het jaar, kies dan een willekeurige dag daarin.",
+        "Sla de scans op met hun echte datum.",
+      ],
+      tipTitle: "Goed om te weten",
+      tip: "Wil je de datum ook op de oude foto zien? DateStamp zet hem ook in de hoek, in het oranje van filmcamera's uit de jaren 90.",
+      cta: "Stel de datums nu in",
+      tools: ["Een scanner of telefoon", "Een webbrowser"],
     },
   },
   exif: {

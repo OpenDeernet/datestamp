@@ -17,6 +17,10 @@ export default {
     timestamp: "aggiungere-data-e-ora-a-una-foto",
     privacy: "informativa-sulla-privacy",
     exif: "modificare-data-foto",
+    exifIphone: "cambiare-data-foto-iphone",
+    exifMessenger: "data-sbagliata-foto-whatsapp",
+    exifGoogle: "foto-in-ordine-sbagliato-google-foto",
+    exifScanned: "data-foto-scansionate",
   },
   home: {
     title: "Aggiungere la data alle foto – gratis | DateStamp",
@@ -60,6 +64,8 @@ export default {
       },
     ],
     guidesTitle: "Guide",
+    // The card that leads to the other tool (the date in the file, the exif page).
+    exifTool: { title: "La data salvata nella foto è sbagliata?", body: "Modifica la data di scatto nel file stesso (EXIF), così la galleria mostra la foto nel posto giusto. Non viene stampato nulla e la foto non perde qualità." },
   },
   guides: {
     iphone: {
@@ -232,6 +238,82 @@ export default {
       tip: "L'ora è quella dell'orologio della fotocamera. Una data stampata si può cambiare come ogni modifica, quindi da sola non prova l'ora: conserva anche gli originali.",
       cta: "Aggiungi la data ora",
       tools: ["Computer o telefono", "Browser web"],
+    },
+    exifIphone: {
+      title: "Come cambiare la data di una foto su iPhone | DateStamp",
+      description:
+        "Correggi la data di scatto delle foto dell'iPhone, così in Foto stanno nel giorno giusto. Gratis, in Safari, senza app e senza perdere qualità.",
+      h1: "Come cambiare la data di una foto su iPhone",
+      intro:
+        "L'app Foto dell'iPhone ordina ogni immagine in base alla data di scatto salvata nel file. Quando è sbagliata – una foto da una chat, una scansione, uno screenshot – DateStamp scrive quella giusta nel file, in Safari:",
+      steps: [
+        "Apri questa pagina in Safari sul tuo iPhone.",
+        "Tocca «Scegli foto» e scegli le foto con la data sbagliata.",
+        "Cambia la data sotto ogni foto, oppure danne una a tutte con «Imposta per tutte».",
+        "Tocca «Salva nella galleria», poi «Salva immagini»: le foto con la nuova data arrivano in Foto.",
+        "Elimina le vecchie copie, così ogni foto c'è una volta sola.",
+      ],
+      tipTitle: "Buono a sapersi",
+      tip: "Una foto ricevuta in chat spesso ha perso la sua data: DateStamp mostra allora «data del file» in arancione. Scrivi il giorno in cui è stata scattata davvero.",
+      cta: "Cambia la data ora",
+      tools: ["iPhone", "Safari"],
+    },
+    exifMessenger: {
+      title: "Data sbagliata nelle foto di WhatsApp | DateStamp",
+      description:
+        "Le foto di WhatsApp o Messenger hanno il giorno in cui sono arrivate, non quello dello scatto. Rimetti nel file la data vera, gratis, nel browser.",
+      h1: "Come correggere la data delle foto di WhatsApp e Messenger",
+      intro:
+        "WhatsApp, Messenger e le altre app di chat tolgono dalle foto i dati della fotocamera, così la galleria le mette nel giorno in cui sono arrivate. DateStamp riscrive in ogni foto la data vera:",
+      steps: [
+        "Salva le foto della chat sul telefono o sul computer.",
+        "Tocca «Scegli foto» qui sotto e selezionale.",
+        "Le foto senza una data propria hanno «data del file» in arancione: è il giorno in cui sono arrivate.",
+        "Scrivi il giorno di scatto di ognuna, oppure dai una sola data a un intero gruppo con «Imposta per tutte».",
+        "Salvale – nella galleria sul telefono, in una cartella sul computer – ed elimina le vecchie copie.",
+      ],
+      tipTitle: "Buono a sapersi",
+      tip: "Chiedi la foto come documento (in WhatsApp: allega, poi Documento): così arriva il file originale, con la data della fotocamera.",
+      cta: "Correggi le date ora",
+      tools: ["Computer o telefono", "Browser web"],
+    },
+    exifGoogle: {
+      title: "Foto in ordine sbagliato in Google Foto? | DateStamp",
+      description:
+        "Google Foto ordina in base alla data di scatto salvata in ogni foto. Correggila nel file e la foto torna nel giorno giusto, gratis, nel browser.",
+      h1: "Foto nel giorno sbagliato in Google Foto o nella galleria",
+      intro:
+        "Google Foto, Foto di iCloud e le gallerie dei telefoni ordinano le immagini in base alla data di scatto salvata al loro interno (EXIF). Se manca o è sbagliata, la foto finisce tra quelle di un altro giorno. Correggi la data nel file:",
+      steps: [
+        "Scarica le foto fuori posto, o trova i loro originali.",
+        "Sceglile qui sotto. Ognuna mostra la data che vede la galleria; «data del file» in arancione vuol dire che non ne ha una propria.",
+        "Cambia la data sotto ogni foto, oppure danne una a tutte con «Imposta per tutte».",
+        "Salva le foto con la nuova data.",
+        "Caricale di nuovo su Google Foto: ora compaiono nel giorno giusto.",
+      ],
+      tipTitle: "Buono a sapersi",
+      tip: "La foto salvata è un nuovo file, quindi la galleria tiene anche la vecchia copia. Eliminala, così la foto non compare due volte.",
+      cta: "Correggi le date ora",
+      tools: ["Computer o telefono", "Browser web"],
+    },
+    exifScanned: {
+      title: "Data di scatto delle foto scansionate | DateStamp",
+      description:
+        "Una scansione ha la data in cui è stata fatta, così le vecchie foto finiscono tra quelle di oggi. Scrivi nel file l'anno vero, gratis, nel browser.",
+      h1: "Come impostare la data di scatto delle foto scansionate",
+      intro:
+        "Uno scanner o un'app di scansione salva ogni scansione con il giorno in cui è stata fatta, così una foto del 1995 finisce tra quelle di oggi. DateStamp scrive la data vera in ogni scansione, perché la galleria la rimetta nel suo anno:",
+      steps: [
+        "Scansiona le stampe, oppure fotografale con il telefono.",
+        "Scegli le scansioni qui sotto.",
+        "Dai una sola data a tutto il gruppo con «Imposta per tutte»: una vacanza, un anno.",
+        "Correggi le singole foto sotto la loro miniatura. Se conosci solo l'anno, scegli un giorno qualsiasi di quell'anno.",
+        "Salva le scansioni con la loro data vera.",
+      ],
+      tipTitle: "Buono a sapersi",
+      tip: "Vuoi vedere la data anche sulla vecchia foto? DateStamp può stamparla nell'angolo, nell'arancione delle macchine a pellicola degli anni '90.",
+      cta: "Imposta le date ora",
+      tools: ["Scanner o telefono", "Browser web"],
     },
   },
   exif: {

@@ -17,6 +17,10 @@ export default {
     timestamp: "data-i-godzina-na-zdjeciu",
     privacy: "polityka-prywatnosci",
     exif: "zmien-date-zdjecia",
+    exifIphone: "jak-zmienic-date-zdjecia-na-iphonie",
+    exifMessenger: "zla-data-zdjec-z-whatsappa",
+    exifGoogle: "zdjecia-w-zlej-kolejnosci-w-galerii",
+    exifScanned: "data-zrobienia-skanow-zdjec",
   },
   home: {
     title: "Dodaj datę do zdjęcia – online, za darmo | DateStamp",
@@ -60,6 +64,8 @@ export default {
       },
     ],
     guidesTitle: "Poradniki",
+    // The card that leads to the other tool (the date in the file, the exif page).
+    exifTool: { title: "Data zapisana w zdjęciu jest zła?", body: "Zmień datę zrobienia w samym pliku (EXIF), żeby galeria pokazała zdjęcie we właściwym miejscu. Nic się nie nadrukowuje, a zdjęcie nie traci jakości." },
   },
   guides: {
     iphone: {
@@ -232,6 +238,82 @@ export default {
       tip: "Godzina pochodzi z zegara aparatu. Wpisaną datę da się zmienić jak każdą edycję, więc sama nie jest dowodem czasu – zachowaj też oryginały.",
       cta: "Dodaj datę teraz",
       tools: ["Komputer albo telefon", "Przeglądarka internetowa"],
+    },
+    exifIphone: {
+      title: "Jak zmienić datę zdjęcia na iPhonie – za darmo | DateStamp",
+      description:
+        "Popraw datę zrobienia zdjęć z iPhone'a, żeby w Zdjęciach były pod właściwym dniem. Za darmo, w Safari, bez aplikacji i bez utraty jakości.",
+      h1: "Jak zmienić datę zdjęcia na iPhonie",
+      intro:
+        "Aplikacja Zdjęcia na iPhonie układa zdjęcia według daty zrobienia zapisanej w pliku. Gdy ta data jest zła – zdjęcie z komunikatora, skan, zrzut ekranu – DateStamp wpisze do pliku właściwą, w Safari:",
+      steps: [
+        "Otwórz tę stronę w Safari na iPhonie.",
+        "Stuknij „Wybierz zdjęcia” i wybierz zdjęcia ze złą datą.",
+        "Zmień datę pod każdym zdjęciem albo nadaj wszystkim jedną przyciskiem „Ustaw dla wszystkich”.",
+        "Stuknij „Zapisz w galerii”, potem „Zachowaj obrazki”: zdjęcia z nową datą trafią do Zdjęć.",
+        "Usuń stare kopie, żeby każde zdjęcie było tylko raz.",
+      ],
+      tipTitle: "Warto wiedzieć",
+      tip: "Zdjęcie z komunikatora często traci swoją datę: DateStamp pokazuje wtedy pomarańczową „datę pliku”. Wpisz dzień, w którym naprawdę je zrobiono.",
+      cta: "Zmień datę teraz",
+      tools: ["iPhone", "Safari"],
+    },
+    exifMessenger: {
+      title: "Zła data zdjęć z WhatsAppa? Popraw ją za darmo | DateStamp",
+      description:
+        "Zdjęcia z WhatsAppa i Messengera dostają dzień, w którym przyszły, a nie dzień zrobienia. Wpisz do pliku prawdziwą datę, za darmo, w przeglądarce.",
+      h1: "Jak poprawić datę zdjęć z WhatsAppa i Messengera",
+      intro:
+        "WhatsApp, Messenger i inne komunikatory usuwają ze zdjęć dane z aparatu, więc galeria układa je pod dniem, w którym przyszły. DateStamp wpisze do każdego zdjęcia prawdziwą datę:",
+      steps: [
+        "Zapisz zdjęcia z czatu w telefonie albo na komputerze.",
+        "Stuknij „Wybierz zdjęcia” poniżej i je wybierz.",
+        "Zdjęcia bez własnej daty mają pomarańczową „datę pliku”: to dzień, w którym przyszły.",
+        "Wpisz dzień zrobienia każdego z nich albo nadaj całej paczce jedną datę przyciskiem „Ustaw dla wszystkich”.",
+        "Zapisz je – w telefonie do galerii, na komputerze do folderu – i usuń stare kopie.",
+      ],
+      tipTitle: "Warto wiedzieć",
+      tip: "Poproś o zdjęcie jako dokument (w WhatsAppie: załącznik, potem Dokument): przyjdzie wtedy oryginalny plik, z datą z aparatu.",
+      cta: "Popraw daty teraz",
+      tools: ["Komputer albo telefon", "Przeglądarka internetowa"],
+    },
+    exifGoogle: {
+      title: "Zdjęcia w złej kolejności w Zdjęciach Google? | DateStamp",
+      description:
+        "Zdjęcia Google układają zdjęcia według daty zrobienia zapisanej w pliku. Popraw ją, a zdjęcie trafi pod właściwy dzień – za darmo, w przeglądarce.",
+      h1: "Zdjęcia pod złym dniem w Zdjęciach Google i w galerii",
+      intro:
+        "Zdjęcia Google, Zdjęcia iCloud i galerie w telefonach układają zdjęcia według daty zrobienia zapisanej w pliku (EXIF). Gdy jej brakuje albo jest zła, zdjęcie ląduje wśród innego dnia. Popraw datę w pliku:",
+      steps: [
+        "Pobierz zdjęcia, które są w złym miejscu, albo znajdź ich oryginały.",
+        "Wybierz je poniżej. Pod każdym widać datę, którą widzi galeria; pomarańczowa „data pliku” znaczy, że zdjęcie nie ma własnej.",
+        "Zmień datę pod każdym zdjęciem albo nadaj wszystkim jedną przyciskiem „Ustaw dla wszystkich”.",
+        "Zapisz zdjęcia z nową datą.",
+        "Wgraj je ponownie do Zdjęć Google: pojawią się pod właściwym dniem.",
+      ],
+      tipTitle: "Warto wiedzieć",
+      tip: "Zapisane zdjęcie to nowy plik, więc galeria zachowa też starą kopię. Usuń ją, żeby zdjęcie nie było tam dwa razy.",
+      cta: "Popraw daty teraz",
+      tools: ["Komputer albo telefon", "Przeglądarka internetowa"],
+    },
+    exifScanned: {
+      title: "Data zrobienia na zeskanowanych zdjęciach | DateStamp",
+      description:
+        "Skan ma datę skanowania, więc stare zdjęcia lądują wśród dzisiejszych. Wpisz do pliku rok, w którym naprawdę je zrobiono – za darmo, w przeglądarce.",
+      h1: "Jak ustawić datę zrobienia na zeskanowanych zdjęciach",
+      intro:
+        "Skaner albo aplikacja do skanowania zapisuje każdy skan z dniem skanowania, więc zdjęcie z 1995 roku ląduje wśród dzisiejszych. DateStamp wpisze do każdego skanu prawdziwą datę, żeby galeria odłożyła go do jego roku:",
+      steps: [
+        "Zeskanuj odbitki albo sfotografuj je telefonem.",
+        "Wybierz skany poniżej.",
+        "Nadaj całej paczce jedną datę przyciskiem „Ustaw dla wszystkich” – wakacje, rok.",
+        "Popraw pojedyncze zdjęcia pod ich miniaturą. Jeśli znasz tylko rok, wybierz dowolny dzień z tego roku.",
+        "Zapisz skany z ich prawdziwą datą.",
+      ],
+      tipTitle: "Warto wiedzieć",
+      tip: "Chcesz też widzieć datę na starym zdjęciu? DateStamp nadrukuje ją w rogu, pomarańczową jak z aparatów na kliszę z lat 90.",
+      cta: "Ustaw daty teraz",
+      tools: ["Skaner albo telefon", "Przeglądarka internetowa"],
     },
   },
   exif: {

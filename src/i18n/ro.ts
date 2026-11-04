@@ -17,6 +17,10 @@ export default {
     timestamp: "data-si-ora-pe-poza",
     privacy: "politica-de-confidentialitate",
     exif: "modificare-data-poza",
+    exifIphone: "schimbare-data-poza-iphone",
+    exifMessenger: "data-gresita-poze-whatsapp",
+    exifGoogle: "poze-in-ordine-gresita-google-foto",
+    exifScanned: "data-poze-scanate",
   },
   home: {
     title: "Adaugă data pe poză – gratuit și privat | DateStamp",
@@ -60,6 +64,8 @@ export default {
       },
     ],
     guidesTitle: "Ghiduri",
+    // The card that leads to the other tool (the date in the file, the exif page).
+    exifTool: { title: "Data salvată în poză e greșită?", body: "Schimbă data la care a fost făcută poza chiar în fișier (EXIF), ca galeria s-o arate la locul potrivit. Nu se imprimă nimic pe poză și calitatea rămâne aceeași." },
   },
   guides: {
     iphone: {
@@ -232,6 +238,82 @@ export default {
       tip: "Ora este cea înregistrată de ceasul aparatului. O dată pusă pe poză poate fi schimbată ca orice editare, deci singură nu dovedește ora – păstrează și originalele.",
       cta: "Adaugă data acum",
       tools: ["Un calculator sau un telefon", "Un browser web"],
+    },
+    exifIphone: {
+      title: "Cum schimbi data unei poze pe iPhone – gratuit | DateStamp",
+      description:
+        "Corectează data pozelor de pe iPhone, ca în Poze să apară la ziua potrivită. Gratuit, în Safari, fără aplicație și fără pierderi de calitate.",
+      h1: "Cum schimbi data unei poze pe iPhone",
+      intro:
+        "Aplicația Poze de pe iPhone ordonează fiecare imagine după data salvată în fișier. Când data e greșită – o poză primită pe chat, o scanare, o captură de ecran –, DateStamp scrie data corectă în fișier, în Safari:",
+      steps: [
+        "Deschide această pagină în Safari pe iPhone.",
+        "Atinge „Alege poze” și alege pozele cu data greșită.",
+        "Schimbă data sub fiecare poză sau dă-le tuturor aceeași dată cu „Aplică la toate”.",
+        "Atinge „Salvează în galerie”, apoi „Salvează imaginile”: pozele cu noua dată ajung în Poze.",
+        "Șterge copiile vechi, ca fiecare poză să apară o singură dată.",
+      ],
+      tipTitle: "Bine de știut",
+      tip: "O poză primită pe chat și-a pierdut adesea data: DateStamp arată atunci „data fișierului” cu portocaliu. Scrie ziua în care a fost făcută cu adevărat.",
+      cta: "Schimbă data acum",
+      tools: ["iPhone", "Safari"],
+    },
+    exifMessenger: {
+      title: "Dată greșită la pozele de pe WhatsApp? | DateStamp",
+      description:
+        "Pozele de pe WhatsApp sau Messenger primesc ziua în care au sosit, nu ziua în care au fost făcute. Pune data reală înapoi în fișier, gratuit.",
+      h1: "Cum corectezi data pozelor de pe WhatsApp și Messenger",
+      intro:
+        "WhatsApp, Messenger și alte aplicații de chat șterg din poze datele aparatului, așa că galeria le pune la ziua în care au sosit. DateStamp scrie înapoi data reală în fiecare poză:",
+      steps: [
+        "Salvează pozele din conversație pe telefon sau pe calculator.",
+        "Atinge „Alege poze” mai jos și alege-le.",
+        "Pozele fără dată proprie au „data fișierului” cu portocaliu: e ziua în care au sosit.",
+        "Scrie ziua în care a fost făcută fiecare sau dă unui grup întreg aceeași dată cu „Aplică la toate”.",
+        "Salvează-le – în galerie pe telefon, într-un folder pe calculator – și șterge copiile vechi.",
+      ],
+      tipTitle: "Bine de știut",
+      tip: "Cere poza ca document (în WhatsApp: atașează, apoi Document): așa sosește fișierul original, cu data de la aparat.",
+      cta: "Corectează datele acum",
+      tools: ["Un calculator sau un telefon", "Un browser web"],
+    },
+    exifGoogle: {
+      title: "Poze în ordine greșită în Google Foto? Rezolvă | DateStamp",
+      description:
+        "Google Foto ordonează pozele după data salvată în fiecare. Corecteaz-o în fișier și poza trece la ziua potrivită – gratuit, în browser.",
+      h1: "Poze la ziua greșită în Google Foto sau în galerie",
+      intro:
+        "Google Foto, Poze iCloud și galeriile de pe telefoane ordonează imaginile după data salvată în ele (EXIF). Când lipsește sau e greșită, poza ajunge printre cele din altă zi. Corectează data în fișier:",
+      steps: [
+        "Descarcă pozele care stau la locul greșit sau găsește originalele.",
+        "Alege-le mai jos. Fiecare arată data pe care o vede galeria; „data fișierului” cu portocaliu înseamnă că nu are una proprie.",
+        "Schimbă data sub fiecare poză sau dă-le tuturor aceeași dată cu „Aplică la toate”.",
+        "Salvează pozele cu noua dată.",
+        "Încarcă-le din nou în Google Foto: acum apar la ziua potrivită.",
+      ],
+      tipTitle: "Bine de știut",
+      tip: "Poza salvată e un fișier nou, deci galeria păstrează și copia veche. Șterge-o, ca poza să nu apară de două ori.",
+      cta: "Corectează datele acum",
+      tools: ["Un calculator sau un telefon", "Un browser web"],
+    },
+    exifScanned: {
+      title: "Data reală pe pozele scanate – gratuit | DateStamp",
+      description:
+        "O scanare are data în care a fost făcută, așa că pozele vechi ajung printre cele de azi. Scrie în fișier anul real, gratuit, în browser.",
+      h1: "Cum setezi data reală a pozelor scanate",
+      intro:
+        "Un scanner sau o aplicație de scanare salvează fiecare imagine cu ziua în care a fost făcută, așa că o poză din 1995 ajunge printre cele de azi. DateStamp scrie data reală în fiecare scanare, ca galeria s-o pună înapoi în anul ei:",
+      steps: [
+        "Scanează pozele tipărite sau fotografiază-le cu telefonul.",
+        "Alege scanările mai jos.",
+        "Dă întregului grup aceeași dată cu „Aplică la toate”: o vacanță, un an.",
+        "Corectează pozele una câte una sub miniatura lor. Dacă știi doar anul, alege orice zi din el.",
+        "Salvează scanările cu data lor reală.",
+      ],
+      tipTitle: "Bine de știut",
+      tip: "Vrei să vezi data și pe poza veche? DateStamp o poate imprima și în colț, în portocaliul aparatelor cu film din anii '90.",
+      cta: "Setează datele acum",
+      tools: ["Un scanner sau un telefon", "Un browser web"],
     },
   },
   exif: {

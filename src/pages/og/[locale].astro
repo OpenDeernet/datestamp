@@ -1,17 +1,26 @@
 ---
-// The share picture (og:image) of each language, as a 1200×630 page that
-// `npm run assets` screenshots into public/og/<locale>.png. It exists only
-// on the dev server: a production build has no such pages.
+// The share pictures (og:image) of each language, as 1200×630 pages that
+// `npm run assets` screenshots into public/og/: <locale>.png for the date
+// stamp, <locale>-exif.png for changing the date saved in the photo (its
+// page and guides). They exist only on the dev server: a production build
+// has no such pages.
 import "../../styles/global.css"
 import { locales, t, type Locale } from "../../i18n"
+import { formatDate } from "../../lib/stamp"
 
 export function getStaticPaths() {
-  return import.meta.env.DEV ? locales.map((locale) => ({ params: { locale } })) : []
+  return import.meta.env.DEV ? locales.flatMap((locale) => [{ params: { locale } }, { params: { locale: `${locale}-exif` } }]) : []
 }
 
-const locale = Astro.params.locale as Locale
+const exif = Astro.params.locale!.endsWith("-exif")
+const locale = Astro.params.locale!.replace(/-exif$/, "") as Locale
 const s = t(locale)
 const facts = s.home.facts
+// The exif picture: the date a messenger left (the day it arrived), struck
+// out, and the real one, in the language's own format with the time.
+const timeFormat = s.dateFormats.find((format) => format.endsWith("-time")) ?? s.dateFormats[0]
+const wrongDate = formatDate(new Date(2026, 9, 29, 11, 50), timeFormat)
+const realDate = formatDate(new Date(1998, 6, 14, 18, 30), timeFormat)
 ---
 
 <!doctype html>
@@ -26,7 +35,7 @@ const facts = s.home.facts
       <div class="flex w-160 flex-col justify-between py-16 pl-18">
         <div class="text-[34px] font-extrabold tracking-tight">Date<span class="text-[#ff7a1a]">Stamp</span></div>
         <div>
-          <h1 class="m-0 text-[76px] leading-[1.02] font-extrabold tracking-tight text-balance">{s.home.h1}</h1>
+          <h1 class="m-0 text-[76px] leading-[1.02] font-extrabold tracking-tight text-balance">{exif ? s.exif.h1 : s.home.h1}</h1>
           <p class="mt-7 text-[25px] text-balance text-[#bdb6ae]">{facts.join(" · ")}</p>
         </div>
         <!-- The address, not a slogan: the facts above already say the photos stay put. -->
@@ -41,9 +50,19 @@ const facts = s.home.facts
             <path d="M0 110 L70 60 L130 95 L210 30 L290 90 L350 55 L408 85 V150 H0Z" fill="#2a2440" />
             <path d="M0 130 L90 95 L170 125 L260 90 L340 120 L408 105 V150 H0Z" fill="#1b1830" />
           </svg>
-          <span class="absolute right-5 bottom-4 font-mono text-[34px] font-semibold text-[#ff8a1f] [text-shadow:0_0_5px_rgba(255,90,0,0.5)]">'26 7 14</span>
+          {!exif && <span class="absolute right-5 bottom-4 font-mono text-[34px] font-semibold text-[#ff8a1f] [text-shadow:0_0_5px_rgba(255,90,0,0.5)]">'26 7 14</span>}
         </div>
       </div>
+      <!-- Exif: nothing on the print, the date changes in the file, shown as its EXIF field. -->
+      {
+        exif && (
+          <div class="absolute right-12 bottom-14 w-112 -rotate-2 rounded-2xl bg-[#2a2826] px-7 py-6 shadow-[0_24px_50px_rgba(0,0,0,0.5)] ring-1 ring-white/10">
+            <div class="font-mono text-[18px] tracking-wide text-[#bdb6ae]">EXIF · DateTimeOriginal</div>
+            <div class="mt-3 font-mono text-[26px] whitespace-nowrap text-[#8a8379] line-through decoration-2">{wrongDate}</div>
+            <div class="mt-1 font-mono text-[38px] font-semibold whitespace-nowrap text-[#ff8a1f]">{realDate}</div>
+          </div>
+        )
+      }
     </div>
   </body>
 </html>

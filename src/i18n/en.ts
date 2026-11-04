@@ -20,6 +20,10 @@ export default {
     timestamp: "add-date-and-time-to-photo",
     privacy: "privacy-policy",
     exif: "change-photo-date",
+    exifIphone: "change-photo-date-on-iphone",
+    exifMessenger: "fix-photo-date-whatsapp-messenger",
+    exifGoogle: "photos-in-wrong-order-google-photos",
+    exifScanned: "set-date-taken-on-scanned-photos",
   },
   home: {
     title: "Add Date to Photo – Free & Private | DateStamp",
@@ -63,6 +67,8 @@ export default {
       },
     ],
     guidesTitle: "Guides",
+    // The card that leads to the other tool (the date in the file, the exif page).
+    exifTool: { title: "Is the date saved in the photo wrong?", body: "Change the date taken in the file itself (EXIF), so your gallery shows the photo in the right place. Nothing is printed and the photo keeps its quality." },
   },
   guides: {
     iphone: {
@@ -235,6 +241,82 @@ export default {
       tip: "The time is the one your camera's clock recorded. A printed date can be changed like any edit, so on its own it does not prove the time – keep the originals too.",
       cta: "Add the date now",
       tools: ["A computer or a phone", "A web browser"],
+    },
+    exifIphone: {
+      title: "How to Change the Date of a Photo on iPhone | DateStamp",
+      description:
+        "Fix the date taken of iPhone photos so they sit on the right day in Photos. Free, in Safari, no app to install, and every photo keeps its quality.",
+      h1: "How to change the date of a photo on iPhone",
+      intro:
+        "Photos on iPhone sorts every picture by the date taken saved inside it. When that date is wrong – a photo from a messenger, a scan, a screenshot – DateStamp writes the right one into the file, in Safari:",
+      steps: [
+        "Open this page in Safari on your iPhone.",
+        "Tap “Choose photos” and pick the photos with the wrong date.",
+        "Change the date under each photo, or give them all one with “Set for all”.",
+        "Tap “Save to gallery”, then “Save Images”: the photos with the new date land in Photos.",
+        "Delete the old copies, so each photo is there only once.",
+      ],
+      tipTitle: "Good to know",
+      tip: "A photo you received in a messenger has often lost its date: DateStamp then shows “file date” in orange. Type in the day it was really taken.",
+      cta: "Change the date now",
+      tools: ["iPhone", "Safari"],
+    },
+    exifMessenger: {
+      title: "Wrong Date on WhatsApp Photos? Fix It Free | DateStamp",
+      description:
+        "Photos from WhatsApp or Messenger get the day they arrived, not the day they were taken. Put the right date back into the file, free, in the browser.",
+      h1: "How to fix the date of photos from WhatsApp and Messenger",
+      intro:
+        "WhatsApp, Messenger and other messengers strip the camera data from photos, so the gallery files them under the day they arrived. DateStamp writes the real date back into each photo:",
+      steps: [
+        "Save the photos from the chat to your phone or computer.",
+        "Tap “Choose photos” below and pick them.",
+        "Photos without a date of their own are marked “file date” in orange: that is the day they arrived.",
+        "Type in the day each one was taken, or give a whole batch one date with “Set for all”.",
+        "Save them – to the gallery on a phone, into a folder on a computer – and delete the old copies.",
+      ],
+      tipTitle: "Good to know",
+      tip: "Ask for the photo as a document (in WhatsApp: attach, then Document): it then arrives as the original file, with its camera date.",
+      cta: "Fix the dates now",
+      tools: ["A computer or a phone", "A web browser"],
+    },
+    exifGoogle: {
+      title: "Photos in the Wrong Order in Google Photos? | DateStamp",
+      description:
+        "Google Photos sorts by the date taken saved in each photo. Fix that date in the file and the photo moves to the right day – free, in the browser.",
+      h1: "Photos on the wrong day in Google Photos or the gallery",
+      intro:
+        "Google Photos, iCloud Photos and phone galleries sort pictures by the date taken saved inside them (EXIF). When it is missing or wrong, a photo lands among another day's. Fix the date in the file:",
+      steps: [
+        "Download the photos that sit in the wrong place, or find their originals.",
+        "Choose them below. Each shows the date the gallery sees; “file date” in orange means the photo has none of its own.",
+        "Change the date under each photo, or give them all one with “Set for all”.",
+        "Save the photos with the new date.",
+        "Upload them to Google Photos again: they now appear on the right day.",
+      ],
+      tipTitle: "Good to know",
+      tip: "The saved photo is a new file, so the gallery keeps the old copy too. Delete it, so the photo is not there twice.",
+      cta: "Fix the dates now",
+      tools: ["A computer or a phone", "A web browser"],
+    },
+    exifScanned: {
+      title: "Set the Date Taken on Scanned Photos | DateStamp",
+      description:
+        "A scan carries the day it was scanned, so old photos land among today's. Write the year they were really taken into the file – free, in the browser.",
+      h1: "How to set the date taken on scanned photos",
+      intro:
+        "A scanner or a scanning app saves each scan with the day it was made, so a photo from 1995 lands among today's. DateStamp writes the real date into each scan, so galleries put it back in its year:",
+      steps: [
+        "Scan the prints, or photograph them with your phone.",
+        "Choose the scans below.",
+        "Give the whole batch one date with “Set for all” – a holiday, a year.",
+        "Correct single photos under their thumbnail. If you know only the year, pick any day in it.",
+        "Save the scans with their real date.",
+      ],
+      tipTitle: "Good to know",
+      tip: "Want the date visible on the old photo too? DateStamp can also print it in the corner, in the orange of 90s film cameras.",
+      cta: "Set the dates now",
+      tools: ["A scanner or a phone", "A web browser"],
     },
   },
   exif: {

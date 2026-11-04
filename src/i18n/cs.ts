@@ -17,6 +17,10 @@ export default {
     timestamp: "datum-a-cas-na-fotce",
     privacy: "ochrana-osobnich-udaju",
     exif: "zmenit-datum-fotky",
+    exifIphone: "zmenit-datum-fotky-iphone",
+    exifMessenger: "spatne-datum-fotek-z-whatsappu",
+    exifGoogle: "fotky-ve-spatnem-poradi-google-fotky",
+    exifScanned: "datum-porizeni-naskenovanych-fotek",
   },
   home: {
     title: "Přidat datum do fotky – online a zdarma | DateStamp",
@@ -60,6 +64,8 @@ export default {
       },
     ],
     guidesTitle: "Návody",
+    // The card that leads to the other tool (the date in the file, the exif page).
+    exifTool: { title: "Je datum uložené ve fotce špatně?", body: "Změňte datum pořízení přímo v souboru (EXIF), aby galerie ukázala fotku na správném místě. Nic se na fotku netiskne a kvalita zůstane stejná." },
   },
   guides: {
     iphone: {
@@ -232,6 +238,82 @@ export default {
       tip: "Čas pochází z hodin fotoaparátu. Vepsané datum lze změnit jako jakoukoli úpravu, takže samo o sobě není důkazem času – originály si také ponechte.",
       cta: "Přidat datum teď",
       tools: ["Počítač nebo telefon", "Webový prohlížeč"],
+    },
+    exifIphone: {
+      title: "Jak změnit datum fotky na iPhonu – zdarma | DateStamp",
+      description:
+        "Opravte datum pořízení fotek z iPhonu, aby byly ve Fotkách u správného dne. Zdarma, v Safari, bez aplikace a bez ztráty kvality.",
+      h1: "Jak změnit datum fotky na iPhonu",
+      intro:
+        "Aplikace Fotky na iPhonu řadí každý snímek podle data pořízení uloženého v souboru. Když je špatně – fotka z chatovací aplikace, sken, snímek obrazovky –, DateStamp do souboru zapíše to správné, v Safari:",
+      steps: [
+        "Otevřete tuto stránku v Safari na iPhonu.",
+        "Klepněte na „Vybrat fotky“ a vyberte fotky se špatným datem.",
+        "Změňte datum pod každou fotkou, nebo dejte všem stejné tlačítkem „Nastavit všem“.",
+        "Klepněte na „Uložit do galerie“ a pak na „Uložit obrázky“: fotky s novým datem se objeví ve Fotkách.",
+        "Smažte staré kopie, ať je každá fotka jen jednou.",
+      ],
+      tipTitle: "Dobré vědět",
+      tip: "Fotka z chatovací aplikace často přijde o své datum: DateStamp pak ukáže oranžové „datum souboru“. Zadejte den, kdy opravdu vznikla.",
+      cta: "Změnit datum teď",
+      tools: ["iPhone", "Safari"],
+    },
+    exifMessenger: {
+      title: "Špatné datum fotek z WhatsAppu? Opravte ho | DateStamp",
+      description:
+        "Fotky z WhatsAppu nebo Messengeru mají den, kdy přišly, ne den pořízení. Vraťte do souboru skutečné datum, zdarma a v prohlížeči.",
+      h1: "Jak opravit datum fotek z WhatsAppu a Messengeru",
+      intro:
+        "WhatsApp, Messenger a další chatovací aplikace mažou z fotek data z fotoaparátu, takže je galerie zařadí ke dni, kdy přišly. DateStamp do každé fotky zapíše skutečné datum:",
+      steps: [
+        "Uložte fotky z chatu do telefonu nebo počítače.",
+        "Klepněte níže na „Vybrat fotky“ a vyberte je.",
+        "Fotky bez vlastního data mají oranžové „datum souboru“: to je den, kdy přišly.",
+        "Zadejte den pořízení každé z nich, nebo dejte celé dávce jedno datum tlačítkem „Nastavit všem“.",
+        "Uložte je – v telefonu do galerie, v počítači do složky – a smažte staré kopie.",
+      ],
+      tipTitle: "Dobré vědět",
+      tip: "Požádejte o fotku jako dokument (ve WhatsAppu: příloha, pak Dokument): přijde pak původní soubor i s datem z fotoaparátu.",
+      cta: "Opravit data teď",
+      tools: ["Počítač nebo telefon", "Webový prohlížeč"],
+    },
+    exifGoogle: {
+      title: "Fotky ve špatném pořadí ve Fotkách Google? | DateStamp",
+      description:
+        "Fotky Google řadí podle data pořízení uloženého v každé fotce. Opravte ho v souboru a fotka se přesune ke správnému dni – zdarma, v prohlížeči.",
+      h1: "Fotky u špatného dne ve Fotkách Google nebo v galerii",
+      intro:
+        "Fotky Google, Fotky na iCloudu i galerie v telefonech řadí snímky podle data pořízení uloženého v nich (EXIF). Když chybí nebo je špatně, fotka skončí mezi fotkami jiného dne. Opravte datum v souboru:",
+      steps: [
+        "Stáhněte fotky, které jsou na špatném místě, nebo najděte jejich originály.",
+        "Vyberte je níže. U každé je datum, které vidí galerie; oranžové „datum souboru“ znamená, že vlastní nemá.",
+        "Změňte datum pod každou fotkou, nebo dejte všem stejné tlačítkem „Nastavit všem“.",
+        "Uložte fotky s novým datem.",
+        "Nahrajte je znovu do Fotek Google: teď se objeví u správného dne.",
+      ],
+      tipTitle: "Dobré vědět",
+      tip: "Uložená fotka je nový soubor, takže galerie si nechá i starou kopii. Smažte ji, ať tam fotka není dvakrát.",
+      cta: "Opravit data teď",
+      tools: ["Počítač nebo telefon", "Webový prohlížeč"],
+    },
+    exifScanned: {
+      title: "Datum pořízení u naskenovaných fotek | DateStamp",
+      description:
+        "Sken nese den skenování, takže staré fotky skončí mezi dnešními. Zapište do souboru rok, kdy opravdu vznikly – zdarma, v prohlížeči.",
+      h1: "Jak nastavit datum pořízení naskenovaných fotek",
+      intro:
+        "Skener nebo skenovací aplikace uloží každý sken s dnem, kdy vznikl, takže fotka z roku 1995 skončí mezi dnešními. DateStamp do každého skenu zapíše skutečné datum, aby ho galerie vrátila do jeho roku:",
+      steps: [
+        "Naskenujte fotky, nebo je vyfoťte telefonem.",
+        "Vyberte skeny níže.",
+        "Dejte celé dávce jedno datum tlačítkem „Nastavit všem“: dovolená, rok.",
+        "Jednotlivé fotky opravte pod jejich náhledem. Když znáte jen rok, zvolte libovolný den v něm.",
+        "Uložte skeny s jejich skutečným datem.",
+      ],
+      tipTitle: "Dobré vědět",
+      tip: "Chcete datum vidět i na staré fotce? DateStamp ho umí vytisknout do rohu, v oranžové barvě fotoaparátů na film z 90. let.",
+      cta: "Nastavit data teď",
+      tools: ["Skener nebo telefon", "Webový prohlížeč"],
     },
   },
   exif: {

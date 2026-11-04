@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest"
-import { defaultLocale, guidePages, locales, pages, pathOf, strings, type Strings } from "../../src/i18n"
+import { defaultLocale, exifGuidePages, guidePages, locales, pages, pathOf, strings, type Strings } from "../../src/i18n"
 
 // Every leaf key of an object, as "a.b.c" paths.
 const keys = (value: unknown, prefix = ""): string[] =>
@@ -52,6 +52,14 @@ describe("translations", () => {
     const s = strings[locale].exif
     expect(s.steps.join(" ")).toContain(s.editor.setAllButton)
     expect(s.faq.map(({ a }) => a).join(" ")).toContain(s.editor.setAllButton)
+  })
+
+  // A step that quotes a button uses that locale's own label.
+  it.each(locales)("%s change-date guides quote the editor's own buttons", (locale) => {
+    const s = strings[locale]
+    for (const guide of exifGuidePages) expect(s.guides[guide].steps.join(" "), guide).toContain(s.exif.editor.setAllButton)
+    expect(s.guides.exifIphone.steps.join(" ")).toContain(s.editor.pick)
+    expect(s.guides.exifIphone.steps.join(" ")).toContain(s.editor.saveToGallery)
   })
 
   it.each(locales)("%s offers date formats without duplicates", (locale) => {

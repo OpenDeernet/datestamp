@@ -17,6 +17,10 @@ export default {
     timestamp: "datum-und-uhrzeit-auf-foto",
     privacy: "datenschutz",
     exif: "foto-datum-aendern",
+    exifIphone: "foto-datum-aendern-iphone",
+    exifMessenger: "falsches-datum-whatsapp-fotos",
+    exifGoogle: "fotos-falsche-reihenfolge-google-fotos",
+    exifScanned: "aufnahmedatum-gescannte-fotos",
   },
   home: {
     title: "Datum auf Foto hinzufügen – kostenlos | DateStamp",
@@ -60,6 +64,8 @@ export default {
       },
     ],
     guidesTitle: "Anleitungen",
+    // The card that leads to the other tool (the date in the file, the exif page).
+    exifTool: { title: "Stimmt das Datum im Foto nicht?", body: "Ändere das Aufnahmedatum in der Datei selbst (EXIF), damit die Galerie das Foto an der richtigen Stelle zeigt. Nichts wird aufgedruckt, die Qualität bleibt." },
   },
   guides: {
     iphone: {
@@ -232,6 +238,82 @@ export default {
       tip: "Die Uhrzeit stammt von der Uhr der Kamera. Ein aufgedrucktes Datum lässt sich wie jede Bearbeitung ändern und beweist den Zeitpunkt allein nicht – bewahre auch die Originale auf.",
       cta: "Jetzt Datum hinzufügen",
       tools: ["Computer oder Handy", "Webbrowser"],
+    },
+    exifIphone: {
+      title: "Foto-Datum am iPhone ändern – kostenlos | DateStamp",
+      description:
+        "Korrigiere das Aufnahmedatum von iPhone-Fotos, damit sie in Fotos am richtigen Tag stehen. Kostenlos, in Safari, ohne App und ohne Qualitätsverlust.",
+      h1: "Wie du das Datum eines Fotos am iPhone änderst",
+      intro:
+        "Die Fotos-App am iPhone sortiert jedes Bild nach dem Aufnahmedatum, das in der Datei steht. Ist es falsch – ein Foto aus einem Messenger, ein Scan, ein Screenshot –, schreibt DateStamp das richtige hinein, in Safari:",
+      steps: [
+        "Öffne diese Seite in Safari auf deinem iPhone.",
+        "Tippe auf „Fotos auswählen“ und wähle die Fotos mit dem falschen Datum.",
+        "Ändere das Datum unter jedem Foto, oder gib allen eins mit „Für alle setzen“.",
+        "Tippe auf „In Galerie speichern“, dann auf „Bilder sichern“: Die Fotos mit dem neuen Datum landen in Fotos.",
+        "Lösche die alten Kopien, damit jedes Foto nur einmal da ist.",
+      ],
+      tipTitle: "Gut zu wissen",
+      tip: "Ein Foto aus einem Messenger hat sein Datum oft verloren: DateStamp zeigt dann ein orangefarbenes „Dateidatum“. Trag den Tag ein, an dem es wirklich aufgenommen wurde.",
+      cta: "Jetzt Datum ändern",
+      tools: ["iPhone", "Safari"],
+    },
+    exifMessenger: {
+      title: "Falsches Datum bei WhatsApp-Fotos? So geht's | DateStamp",
+      description:
+        "Fotos aus WhatsApp oder Messenger tragen den Tag, an dem sie ankamen, nicht den Aufnahmetag. Schreib das echte Datum zurück in die Datei, kostenlos.",
+      h1: "Wie du das Datum von WhatsApp- und Messenger-Fotos korrigierst",
+      intro:
+        "WhatsApp, Messenger und andere Messenger entfernen die Kameradaten aus Fotos, deshalb ordnet die Galerie sie beim Tag ihrer Ankunft ein. DateStamp schreibt das echte Datum zurück in jedes Foto:",
+      steps: [
+        "Speichere die Fotos aus dem Chat auf dem Handy oder Computer.",
+        "Tippe unten auf „Fotos auswählen“ und wähle sie aus.",
+        "Fotos ohne eigenes Datum sind mit einem orangefarbenen „Dateidatum“ markiert: Das ist der Tag, an dem sie ankamen.",
+        "Trag für jedes den Aufnahmetag ein, oder gib einem ganzen Stapel mit „Für alle setzen“ ein Datum.",
+        "Speichere sie – am Handy in der Galerie, am Computer in einem Ordner – und lösche die alten Kopien.",
+      ],
+      tipTitle: "Gut zu wissen",
+      tip: "Bitte darum, das Foto als Dokument zu schicken (in WhatsApp: Anhang, dann Dokument): Dann kommt die Originaldatei mit dem Kameradatum an.",
+      cta: "Jetzt Daten korrigieren",
+      tools: ["Computer oder Handy", "Webbrowser"],
+    },
+    exifGoogle: {
+      title: "Fotos in falscher Reihenfolge in Google Fotos? | DateStamp",
+      description:
+        "Google Fotos sortiert nach dem Aufnahmedatum in jeder Datei. Korrigiere es, und das Foto rückt an den richtigen Tag – kostenlos, im Browser.",
+      h1: "Fotos am falschen Tag in Google Fotos oder der Galerie",
+      intro:
+        "Google Fotos, iCloud-Fotos und Handy-Galerien sortieren Bilder nach dem Aufnahmedatum in der Datei (EXIF). Fehlt es oder ist es falsch, landet ein Foto bei einem anderen Tag. Korrigiere das Datum in der Datei:",
+      steps: [
+        "Lade die Fotos herunter, die an der falschen Stelle stehen, oder such ihre Originale.",
+        "Wähle sie unten aus. Unter jedem steht das Datum, das die Galerie sieht; ein orangefarbenes „Dateidatum“ heißt, das Foto hat kein eigenes.",
+        "Ändere das Datum unter jedem Foto, oder gib allen eins mit „Für alle setzen“.",
+        "Speichere die Fotos mit dem neuen Datum.",
+        "Lade sie wieder in Google Fotos hoch: Jetzt stehen sie am richtigen Tag.",
+      ],
+      tipTitle: "Gut zu wissen",
+      tip: "Das gespeicherte Foto ist eine neue Datei, die Galerie behält also auch die alte Kopie. Lösche sie, damit das Foto nicht doppelt da ist.",
+      cta: "Jetzt Daten korrigieren",
+      tools: ["Computer oder Handy", "Webbrowser"],
+    },
+    exifScanned: {
+      title: "Aufnahmedatum für gescannte Fotos setzen | DateStamp",
+      description:
+        "Ein Scan trägt den Tag des Scannens, deshalb landen alte Fotos bei den heutigen. Schreib das echte Aufnahmejahr in die Datei – kostenlos, im Browser.",
+      h1: "Wie du das Aufnahmedatum gescannter Fotos setzt",
+      intro:
+        "Ein Scanner oder eine Scan-App speichert jeden Scan mit dem Tag, an dem er entstand, deshalb landet ein Foto von 1995 bei den heutigen. DateStamp schreibt das echte Datum in jeden Scan, damit die Galerie ihn in sein Jahr einordnet:",
+      steps: [
+        "Scanne die Abzüge, oder fotografiere sie mit dem Handy ab.",
+        "Wähle unten die Scans aus.",
+        "Gib dem ganzen Stapel mit „Für alle setzen“ ein Datum – ein Urlaub, ein Jahr.",
+        "Korrigiere einzelne Fotos unter ihrem Vorschaubild. Kennst du nur das Jahr, nimm einen beliebigen Tag darin.",
+        "Speichere die Scans mit ihrem echten Datum.",
+      ],
+      tipTitle: "Gut zu wissen",
+      tip: "Soll das Datum auch auf dem alten Foto stehen? DateStamp druckt es auch in die Ecke, im Orange der Filmkameras der 90er.",
+      cta: "Jetzt Daten setzen",
+      tools: ["Scanner oder Handy", "Webbrowser"],
     },
   },
   exif: {

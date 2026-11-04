@@ -49,13 +49,19 @@ export const t = (locale: Locale) => strings[locale]
  * "exif" is the second tool: it changes the date saved in the photo (EXIF)
  * instead of printing it on the picture.
  */
-export const pages = ["home", "exif", "iphone", "android", "windows", "mac", "batch", "screenshot", "timestamp", "scanned", "retro", "privacy"] as const
+export const pages = ["home", "exif", "iphone", "android", "windows", "mac", "batch", "screenshot", "timestamp", "scanned", "retro", "exifIphone", "exifMessenger", "exifGoogle", "exifScanned", "privacy"] as const
 export type Page = (typeof pages)[number]
 
 /** The how-to pages (Guide.astro), each aimed at one search: "add date to photo on iPhone"... */
-export const guidePages = ["iphone", "android", "windows", "mac", "batch", "screenshot", "timestamp", "scanned", "retro"] as const satisfies readonly Page[]
+export const stampGuidePages = ["iphone", "android", "windows", "mac", "batch", "screenshot", "timestamp", "scanned", "retro"] as const satisfies readonly Page[]
+/** The guides for the second tool, changing the date saved in the photo (their editor is ExifEditor). */
+export const exifGuidePages = ["exifIphone", "exifMessenger", "exifGoogle", "exifScanned"] as const satisfies readonly Page[]
+export const guidePages = [...stampGuidePages, ...exifGuidePages] as const
 export type GuidePage = (typeof guidePages)[number]
+export type ExifGuidePage = (typeof exifGuidePages)[number]
 export const isGuide = (page: Page): page is GuidePage => (guidePages as readonly Page[]).includes(page)
+/** The pages of the "change the date" tool: its own page and its guides (their own share picture, ExifEditor). */
+export const isExifPage = (page: Page): page is "exif" | ExifGuidePage => page === "exif" || (exifGuidePages as readonly Page[]).includes(page)
 
 /** A page's path in a locale, without the base: /, /pl/, /de/datum-auf-foto-iphone/. */
 export function pathOf(page: Page, locale: Locale): string {
