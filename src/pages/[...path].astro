@@ -3,6 +3,7 @@
 // lists each (page, locale) pair under its translated path, so adding a
 // locale or a page never means copying page files.
 import type { GetStaticPaths } from "astro"
+import ChangeDate from "../components/ChangeDate.astro"
 import Home from "../components/Home.astro"
 import Guide from "../components/Guide.astro"
 import Privacy from "../components/Privacy.astro"
@@ -27,5 +28,6 @@ const { page, locale } = Astro.props
 ---
 
 {page === "home" && <Home locale={locale} />}
+{page === "exif" && <ChangeDate locale={locale} />}
 {isGuide(page) && <Guide locale={locale} guide={page} />}
 {page === "privacy" && <Privacy locale={locale} />}

@@ -20,6 +20,13 @@ export const GET: APIRoute = ({ site }) => {
     "",
     ...locales.map((locale) => `- [${strings[locale].home.h1} (${strings[locale].languageName})](${url(pathOf("home", locale))})`),
     "",
+    "## Change the date of a photo",
+    "",
+    "A second tool on the same site rewrites the date taken (DateTimeOriginal, DateTimeDigitized, DateTime) in each photo's EXIF data, so galleries sort it where it belongs, and prints nothing on the picture. A JPEG is not re-encoded: only its EXIF changes, every pixel and the rest of the metadata (camera, lens, GPS, orientation) stay. HEIC, PNG and WebP are saved as a JPEG with the new date. Dates can be changed one by one, set to one date for every photo, or shifted later or earlier by days, hours and minutes (for a camera whose clock was wrong).",
+    "",
+    ...locales.map((locale) => `- [${strings[locale].exif.h1} (${strings[locale].languageName})](${url(pathOf("exif", locale))}): ${strings[locale].exif.description}`),
+    "",
+    ...en.exif.faq.flatMap(({ q, a }) => [`### ${q}`, "", a, ""]),
     "## Guides",
     "",
     ...locales.flatMap((locale) =>

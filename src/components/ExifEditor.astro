@@ -1,0 +1,87 @@
+---
+// The "change the date" editor: the same photos' column and save buttons
+// as the date stamp editor, with its own settings. Each photo's date is
+// open under it, and two tools change every photo at once: one date for
+// all, or a shift (later/earlier by days, hours, minutes) for a camera
+// whose clock was off. src/lib/exif-editor.ts brings it to life.
+import PhotoColumn from "./PhotoColumn.astro"
+import SaveActions from "./SaveActions.astro"
+import { t, type ExifEditorStrings, type Locale } from "../i18n"
+
+interface Props {
+  locale: Locale
+}
+
+const { locale } = Astro.props
+const strings = t(locale)
+const s: ExifEditorStrings = { ...strings.editor, ...strings.exif.editor }
+// The cards show the date with its time: that is what changes.
+const format = strings.dateFormats.find((item) => item.endsWith("-time")) ?? strings.dateFormats[0]
+const button = "inline-flex cursor-pointer items-center justify-center gap-2 rounded-lg font-semibold transition disabled:cursor-not-allowed"
+const secondary = `${button} h-11 border border-line bg-surface px-3 text-sm font-medium hover:border-line-strong disabled:text-muted disabled:hover:border-line`
+const field = "h-11 w-full min-w-0 rounded-lg border border-line bg-page px-3 text-[15px] text-ink disabled:cursor-not-allowed disabled:opacity-60"
+const units = [
+  { name: "days", label: s.days, max: 36500 },
+  { name: "hours", label: s.hours, max: 999 },
+  { name: "minutes", label: s.minutes, max: 999 },
+] as const
+---
+
+<div
+  class="@container flex flex-wrap overflow-hidden rounded-2xl border border-line bg-surface"
+  data-exif-editor
+  data-strings={JSON.stringify(s)}
+  data-format={format}
+>
+  <PhotoColumn locale={locale} wide />
+
+  <div class="flex min-w-0 flex-[1_1_320px] flex-col gap-5 border-t border-line p-4 sm:p-5 lg:border-t-0 lg:border-l">
+    <fieldset class="m-0 flex min-w-0 flex-col gap-5 border-0 p-0" data-options>
+      <legend class="mb-0.5 p-0 text-[15px] font-semibold">{s.bulk}</legend>
+
+      <div>
+        <label for="exif-all" class="mb-2 block text-[13px] font-semibold">{s.setAll}</label>
+        <input id="exif-all" type="datetime-local" step="60" name="all" class={field} />
+        <button type="button" class={`${secondary} mt-2 w-full`} data-set-all disabled>{s.setAllButton}</button>
+      </div>
+
+      <fieldset class="m-0 min-w-0 border-0 p-0">
+        <legend class="mb-2 p-0 text-[13px] font-semibold">{s.shift}</legend>
+        <div class="mb-2 grid grid-cols-2 gap-2">
+          {
+            [
+              { value: "1", label: s.later },
+              { value: "-1", label: s.earlier },
+            ].map((choice, index) => (
+              <label class="flex h-11 cursor-pointer items-center justify-center rounded-lg border border-line bg-surface px-2 text-sm transition hover:border-line-strong has-checked:border-accent has-checked:font-semibold has-checked:ring-1 has-checked:ring-accent has-focus-visible:outline-2 has-focus-visible:outline-accent has-disabled:cursor-not-allowed has-disabled:opacity-60">
+                <input class="sr-only" type="radio" name="direction" value={choice.value} checked={index === 0} />
+                {choice.label}
+              </label>
+            ))
+          }
+        </div>
+        <div class="grid grid-cols-3 gap-2">
+          {
+            units.map((unit) => (
+              <label class="flex min-w-0 flex-col gap-1 text-[13px] text-muted">
+                {unit.label}
+                <input type="number" inputmode="numeric" name={unit.name} min="0" max={unit.max} step="1" value="0" class={`${field} font-mono tabular-nums`} />
+              </label>
+            ))
+          }
+        </div>
+        <button type="button" class={`${secondary} mt-2 w-full`} data-shift disabled>{s.shiftButton}</button>
+      </fieldset>
+
+      <p class="m-0 text-[13px] text-muted">{s.note}</p>
+    </fieldset>
+
+    <SaveActions locale={locale} />
+  </div>
+</div>
+
+<script>
+  import { mountExifEditor } from "../lib/exif-editor"
+
+  document.querySelectorAll<HTMLElement>("[data-exif-editor]").forEach(mountExifEditor)
+</script>

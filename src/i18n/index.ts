@@ -20,6 +20,8 @@ export { defaultLocale, locales, ogLocales, type Locale }
 
 export type Strings = typeof en
 export type EditorStrings = Strings["editor"]
+/** The "change the date" editor: the shared editor strings, with its own on top. */
+export type ExifEditorStrings = Strings["editor"] & Strings["exif"]["editor"]
 
 /**
  * Polish and Czech typesetting: a one-letter word (pl: a, i, o, u, w, z;
@@ -42,8 +44,12 @@ export const strings: Record<Locale, Strings> = { en, pl: keepOneLetterWords(pl,
 
 export const t = (locale: Locale) => strings[locale]
 
-/** The pages of the site; each locale gives each its own (translated) slug. */
-export const pages = ["home", "iphone", "android", "windows", "mac", "batch", "screenshot", "timestamp", "scanned", "retro", "privacy"] as const
+/**
+ * The pages of the site; each locale gives each its own (translated) slug.
+ * "exif" is the second tool: it changes the date saved in the photo (EXIF)
+ * instead of printing it on the picture.
+ */
+export const pages = ["home", "exif", "iphone", "android", "windows", "mac", "batch", "screenshot", "timestamp", "scanned", "retro", "privacy"] as const
 export type Page = (typeof pages)[number]
 
 /** The how-to pages (Guide.astro), each aimed at one search: "add date to photo on iPhone"... */

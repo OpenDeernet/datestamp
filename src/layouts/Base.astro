@@ -67,11 +67,13 @@ const askConsent = Boolean(adsense.client || gaId) || import.meta.env.DEV
 const ICON_VERSION = 2
 const icon = (path: string) => `${href(path)}?v=${ICON_VERSION}`
 
-// The navbar: the editor and its sections on the home page, the guide.
+// The navbar: the editor and its sections on the home page, the second
+// tool (changing the date in the photo's EXIF), the guides.
 const homePath = href(pathOf("home", locale))
 const onHome = page === "home" && !notFound
 const navItems = [
   { label: strings.nav.editor, href: homePath, current: onHome, section: onHome ? "top" : undefined },
+  { label: strings.nav.exif, href: href(pathOf("exif", locale)), current: page === "exif" && !notFound, section: undefined },
   { label: strings.nav.how, href: `${homePath}#steps`, current: false, section: onHome ? "steps" : undefined },
   { label: strings.nav.faq, href: `${homePath}#faq`, current: false, section: onHome ? "faq" : undefined },
   { label: strings.nav.guides, href: `${homePath}#guides`, current: isGuide(page), section: onHome ? "guides" : undefined },

@@ -4,7 +4,7 @@ Guidance for Claude Code working in this repository.
 
 ## What this is
 
-**DateStamp** – a free web tool that puts the date on photos (the orange "film camera" date, a white one or a label). It runs **entirely in the browser**: there is no backend, photos never leave the device, and that privacy is part of the pitch. The site is static, hosted on **GitHub Pages**, earns its traffic from **SEO in many languages** and its money from **Google AdSense** in two side rails.
+**DateStamp** – a free web tool that puts the date on photos (the orange "film camera" date, a white one or a label), with a second tool on its own page that changes the date taken saved in the photo's EXIF (nothing printed, a JPEG not re-encoded). It runs **entirely in the browser**: there is no backend, photos never leave the device, and that privacy is part of the pitch. The site is static, hosted on **GitHub Pages**, earns its traffic from **SEO in many languages** and its money from **Google AdSense** in two side rails.
 
 The owner talks to Claude in Polish; code, comments and commit messages are in English.
 
@@ -36,8 +36,8 @@ Astro 7 runs one dev/preview server per project and refuses a second (`Dev serve
 
 ## Tests and CI
 
-- **Unit (Vitest, `tests/unit`)**: date formats, `fitPixels` (the iOS pixel cap), file filtering and unique names (`src/lib/files.ts`), and the translations: every locale has every key of `en`, no empty strings, the same number of FAQ entries/features/steps, placeholders kept, URL-safe and distinct paths.
-- **End-to-end (Playwright, `tests/e2e`)**, on desktop Chrome and an emulated Pixel 7, against `astro preview` of the build: EXIF date and file-date fallback, the progress bar, dropping onto any part of the page, a non-photo file, remove/clear, saving every photo as its own full-size JPEG, the ZIP's contents, "done" going back to "ready" after an option change, per-language date formats and their memory, every page in every locale answering, lang/title/hreflang/canonical, the language menu, the theme switch, no horizontal scroll, sitemap and ads.txt.
+- **Unit (Vitest, `tests/unit`)**: date formats, the date shift and the redated file name (`shift.ts`), `fitPixels` (the iOS pixel cap), file filtering and unique names (`src/lib/files.ts`), and the translations: every locale has every key of `en`, no empty strings, the same number of FAQ entries/features/steps, placeholders kept, URL-safe and distinct paths.
+- **End-to-end (Playwright, `tests/e2e`)**, on desktop Chrome and an emulated Pixel 7, against `astro preview` of the build: EXIF date and file-date fallback, the progress bar, dropping onto any part of the page, a non-photo file, remove/clear, saving every photo as its own full-size JPEG, the ZIP's contents, "done" going back to "ready" after an option change, per-language date formats and their memory, the change-date page (`exif.spec.ts`: a JPEG's picture untouched, the new date in its EXIF, set all and shift, HEIC → JPEG), every page in every locale answering, lang/title/hreflang/canonical, the language menu, the theme switch, no horizontal scroll, sitemap and ads.txt.
 - Fixtures in `tests/fixtures`: `exif-landscape.jpg` (EXIF date 1998-07-14 18:30, 1200×800), two photos without EXIF, and a text file.
 - The e2e build has fake AdSense and GA4 ids (`TEST_ADS_ENV` in playwright.config.ts, the same in ci.yml's build step), so ad slots and the cookie banner are tested as in production; `test` from helpers.ts blocks every request to Google's ad and analytics servers and pre-sets a rejected cookie choice (`test.use({ consent: null })` for the banner's own test).
 - `useFileDownloads(page)` (tests/e2e/helpers.ts) removes the folder picker and the share sheet, so saving falls back to plain downloads that Playwright can catch.
@@ -70,7 +70,11 @@ src/
   components/
     Home.astro            landing page: hero, editor, features, FAQ (+ FAQPage JSON-LD), guide links
     Guide.astro           how-to page for a long-tail search (+ HowTo JSON-LD), editor included
-    Editor.astro          static markup of the editor; passes its strings in data-strings
+    Editor.astro          static markup of the date stamp editor; passes its strings in data-strings
+    ExifEditor.astro      the "change the date" editor: same columns, its own settings (one date for all, the shift)
+    PhotoColumn.astro / SaveActions.astro   the parts both editors share: drop zone, progress, photo grid / save buttons
+    ChangeDate.astro      the "change the date" page (`exif`): hero, ExifEditor, steps (+ HowTo), FAQ (+ FAQPage), a link to the stamp
+    GuideLinks.astro      the list of guide links (home, every guide, the change-date page)
     Select.astro          a dropdown on <el-select> (only the format uses it)
     ExamplePhoto.astro    a CSS/SVG stand-in photo for the "how it looks" examples
     ThemeSwitch.astro / Flag.astro / AdRail.astro / InlineAd.astro / Privacy.astro
@@ -78,7 +82,10 @@ src/
   lib/
     stamp.ts              pure drawing: formatDate, drawStamp, renderStamped, fitPixels, canvasToJpeg
     photo.ts              photoDate (EXIF → file date fallback), decodePhoto, stampedFileName
-    editor.ts             browser behaviour: picking/dropping files, previews, options, photo states, saving
+    workbench.ts          what both editors share: picking/dropping files, cards and their states, the queue, progress, saving (folder/gallery/files/ZIP)
+    editor.ts             the date stamp editor on the workbench: its options, stamped previews, stamped export
+    exif-editor.ts        the "change the date" editor on the workbench: set all, shift, export with redateJpeg
+    shift.ts              pure: shiftDate (clock time, days/hours/minutes), redatedFileName
     files.ts              pure helpers: droppedPhotos (the drop filter), uniqueName
     progress.ts           the progress bar (start/step/percent/finish/fail/hold)
     theme.ts              light/dark/system
@@ -102,6 +109,8 @@ tests/unit, tests/e2e, tests/fixtures
 
 ## How the editor works
 
+Two editors share one base, `src/lib/workbench.ts` (`mountWorkbench`): adding and dropping photos, the cards and their states, the queue, the progress bar and every save mode. Each editor passes what differs: how a card's preview is drawn, the date label, the export, the file name, its settings fieldset and its statistics event. The date stamp editor (`editor.ts`) is described below; the "change the date" one has its own section after it. Markup: `PhotoColumn.astro` and `SaveActions.astro` are shared, the settings column is each editor's own.
+
 1. The user picks photos (the zone opens a hidden `<input type="file" multiple>`) or drops them **anywhere on the page**: the drop listeners are on `document`, so a photo dropped beside the zone is not opened by the browser. The drop filter is lenient (an empty MIME type passes, as the macOS Photos app and HEIC in Chrome give none); a file the browser cannot decode gets the "cannot open" message.
 2. `photoDate` reads `DateTimeOriginal` (or `CreateDate`) with exifr. Without EXIF (screenshots, photos from messengers) it uses `file.lastModified`, and the UI says so. Each photo has a `datetime-local` input to change its date.
 3. `decodePhoto` = `createImageBitmap(file)`, which applies the EXIF orientation by itself. If that fails on a HEIC (name, type, or an `ftyp` HEIF brand in its first bytes: Chrome, Edge and Firefox cannot decode it), `src/lib/heic.ts` imports libheif (`libheif-js`, WebAssembly, ~2 MB, LGPL-3.0, its own chunk) at that moment and decodes it; the service worker does not precache that chunk. Fixture `exif-landscape.heic` (made from exif-landscape.jpg with macOS `sips`).
@@ -113,7 +122,7 @@ tests/unit, tests/e2e, tests/fixtures
 - Full resolution: up to **100 MP** (`MAX_EXPORT_PIXELS`), except on **iPhone and iPad, 16 MP** (`SAFE_EXPORT_PIXELS`: iOS Safari refuses canvases above ~16.7 MP; `maxExportPixels()` spots iPadOS by its touch screen, as it reports a Mac). If the full size still fails (a browser's memory or own limit), the export retries at 16 MP rather than saving nothing. `tests/e2e/large.spec.ts` saves a generated 6000×6000 photo of ~10+ MB whole. JPEG quality **0.95**; outside the date the saved photo is within PSNR ≥ 40 dB of the original (tests/e2e/quality.spec.ts).
 - **EXIF survives** (`src/lib/exif.ts`, no library): a canvas drops all metadata, so the original JPEG's APP1 EXIF segment is copied into the new file, with Orientation set to 1 (the pixels are already upright), the pixel dimensions set to the exported size, the IFD1 thumbnail dropped (it shows the photo without the date), and the date taken overwritten when the user changed it under the thumbnail. A photo without EXIF (screenshot, PNG, HEIC) gets a minimal EXIF with the stamped date. Camera, lens and GPS stay: it is the user's own file and never leaves the device.
 - Not kept: the ICC colour profile. The canvas works in sRGB, so a wide-gamut (Display P3) iPhone photo comes out in sRGB; keeping P3 would need a `display-p3` canvas and its profile written into the file.
-- Tests: `tests/unit/exif.test.ts` (segment parsing, fitting, building, broken input) and `tests/e2e/quality.spec.ts` (resolution, PSNR outside the date, the date really drawn in its corner and nowhere else, EXIF fields, edited date, no-EXIF photo, a sideways photo turned upright, the ZIP, a new `-date.jpg` file with the original untouched). Fixtures: `exif-full.jpg` (1600×1200, photo-like texture, date, Make/Model/Lens, GPS, EXIF size), `rotated.jpg` (stored 800×600, Orientation 6).
+- Tests: `tests/unit/exif.test.ts` (segment parsing, fitting, building, broken input, `redateJpeg`) and `tests/e2e/quality.spec.ts` (resolution, PSNR outside the date, the date really drawn in its corner and nowhere else, EXIF fields, edited date, no-EXIF photo, a sideways photo turned upright, the ZIP, a new `-date.jpg` file with the original untouched). Fixtures: `exif-full.jpg` (1600×1200, photo-like texture, date, Make/Model/Lens, GPS, EXIF size), `rotated.jpg` (stored 800×600, Orientation 6).
 
 ### Saving many photos: no ZIP by default
 
@@ -145,6 +154,18 @@ Each card has `data-state` (styled in `global.css`): `waiting → loading → re
 
 Adding and exporting are **serialised** through one queue (`run()` in editor.ts), because they share the progress bar: photos dropped during an export load after it.
 
+### Changing the date in the EXIF (the `exif` page)
+
+The second tool (`/change-photo-date/`, `/pl/zmien-date-zdjecia/`...) prints nothing: it rewrites the date taken, so galleries sort the photo where it belongs. `exif-editor.ts` on the workbench, `ExifEditor.astro` for the markup.
+
+- **A JPEG is not encoded again.** `redateJpeg` (src/lib/exif.ts) changes only the EXIF segment: DateTimeOriginal, DateTimeDigitized and DateTime written in place; an EXIF without them gets a new Exif IFD (and IFD0, if it had no pointer) appended to the segment, the old values staying at their offsets. Everything else stays: camera, GPS, orientation, the IFD1 thumbnail (the pixels did not change). A JPEG without EXIF gets a minimal one after its JFIF segment; an unreadable EXIF is replaced by a minimal one. `OffsetTime*` is kept on purpose: the user edits the camera's clock time, not the zone.
+- **HEIC, PNG, WebP** have no JPEG to keep: decoded, drawn at full size (same caps as the stamp editor) and saved as a JPEG with a minimal EXIF.
+- **File names:** the same name for a JPEG (it is the same photo), `.jpg` for the rest (`redatedFileName`). In a folder `uniqueName` still never overwrites.
+- **The cards** have the date field open (`dateOpen`), the date with its time (the locale's `-time` format), and "Was: …" once changed; they are wider (`<PhotoColumn wide>`: one column on a narrow phone, at most two), or the datetime field is cut off.
+- **Every photo at once:** one date for all (`datetime-local` + button), and a shift: later/earlier radio tiles (no minus sign: iOS's numeric keypad has none) and days/hours/minutes. `shiftDate` moves the clock time, so "1 day later" keeps the hour across a DST change.
+- Statistics: `dates_save` {count, method, changed} (counts only).
+- Tests: `tests/e2e/exif.spec.ts` (picture bytes identical outside the EXIF, the new date and the kept tags, set all and shift, a photo without EXIF and the ZIP, HEIC → JPEG, the navbar link).
+
 ### Date formats per language
 
 The format list and its order come from the locale (`dateFormats` in `src/i18n/<locale>.ts`): the country's own way first, and the first is the default. pl/de `14.07.2026`, es/fr/it/pt `14/07/2026`, en both `14/07/2026` and the US `07/14/2026`, then a variant with the time, retro (`'26 7 14`) and ISO. A format remembered on a page in another language that this page does not offer falls back to the page's default.
@@ -173,7 +194,7 @@ The e2e tests run with `serviceWorkers: "block"` (a worker would answer requests
 
 A **stacked layout** after Tailwind's Catalyst (owner's choice): a navbar on the frame colour (`bg-frame`), and the page in one rounded panel (`lg:rounded-xl lg:bg-page lg:ring-1 lg:ring-line lg:shadow-xs`, 8 px margin, 24 px padding). Below `lg` the panel is the page itself, no frame.
 
-- Navbar: logo, a divider, links (the editor, how it works `#steps`, FAQ `#faq`, guides `#guides`: the list on the home page; on a guide page "guides" is the current item), then the theme switch and the language menu. Link labels are `nav` in the locale files.
+- Navbar: logo, a divider, links (the editor, "change date" (the `exif` page), how it works `#steps`, FAQ `#faq`, guides `#guides`: the list on the home page; on a guide page "guides" is the current item), then the theme switch and the language menu. Link labels are `nav` in the locale files.
 - The navbar has **one underline** (`[data-nav-indicator]`), placed by Base.astro's script: under the current page's item, and on the home page under the section being read (it follows the scroll, sliding with a CSS transition; after a click on a section link it stays on that link until the visitor scrolls by hand, because near the end of the page the scroll cannot bring the last sections to the top). Between pages it slides too: cross-document view transitions (`@view-transition { navigation: auto }` in global.css) with the root's own animation off, so only `view-transition-name: nav-indicator` moves; browsers without them (Firefox) just load the page. Off with reduced motion.
 - Section links only scroll, smoothly (`scroll-behavior: smooth`, off with reduced motion): Base.astro's script stops the jump and adds no `#section` to the address (an arriving hash is dropped too), and "Add date" on the home page scrolls to the top. The heading they land on grows slightly and gets a marker scribble drawn under its text in the accent, once the smooth scroll has stopped, which then fades (`.scribble`/`.is-target` in global.css; Base.astro's script wraps the text and adds the SVG, so a second click on the same link replays it; `:target` alone would not).
 - Below `lg` the links are in a sheet from the left (`#mobile-menu`, opened by the hamburger). It is **not a modal `<dialog>`**: the top layer is fixed to the screen, and iOS Safari then paints its status bar and toolbar opaque (also with Elements' `<el-dialog>`). It is an `absolute` panel on the page, put at `scrollY` with `h-svh`, the page's scroll locked (`overflow: hidden` on `<html>`) and header/main `inert`; its tint `[data-menu-shade]` is `absolute inset-0` over the whole page, and while it is open the `theme-color` metas are taken out and `<html>`/`<body>` get the page colour × 0.7: Safari paints the status bar, above the page where no layer reaches, from theme-color or else the page background (changing theme-color's value on an open page did nothing in iOS 26); the open panel has `translate: none` (an identity transform would still make it a layer). Base.astro's script opens and closes it (X, a tap on the tint, Escape, any of its links: a `#section` link does not leave the page), as on magdalenakuznik.pl. At its bottom, above the theme switch: "Install the app" (Chrome/Edge's `beforeinstallprompt`; on iOS, which has none, a hint about Safari's Share menu; hidden when running as the app).
@@ -200,15 +221,13 @@ Locales: **en (default, no prefix), pl, de, es, fr, it, pt, nl, cs, tr, ro, id**
 
 - **All user-facing text lives in `src/i18n/<locale>.ts`.** Never hardcode copy in components. Polish strings get a non-breaking space after every one-letter word (a, i, o, u, w, z) in `src/i18n/index.ts` (`keepOneLetterWords`), so none ends a line; type plain spaces in pl.ts. `en.ts` is the reference shape; the others end with `satisfies typeof en`, so `npm run check` fails when a key is missing.
 - **Slugs are translated** (`slugs` in each locale file), because the slug is a ranking signal in the searcher's language: `/de/datum-auf-foto-iphone/`, `/pl/jak-dodac-date-do-zdjecia-na-iphonie/`.
-- Pages: `home`, the guides (`guidePages`: `iphone`, `android`, `windows`, `mac`, `batch` = many photos at once, `screenshot`, `timestamp` = date and time for reports and claims, `scanned` = old and scanned photos with the date typed in, `retro` = the old-camera date effect), `privacy`. 11 pages × 12 locales = 132.
+- Pages: `home`, `exif` (the "change the date" tool, ChangeDate.astro; strings under `exif`, its editor's own strings under `exif.editor`, merged over `editor`), the guides (`guidePages`: `iphone`, `android`, `windows`, `mac`, `batch` = many photos at once, `screenshot`, `timestamp` = date and time for reports and claims, `scanned` = old and scanned photos with the date typed in, `retro` = the old-camera date effect), `privacy`. 12 pages × 12 locales = 144.
 - `pathOf(page, locale)` gives a page's path and `href(path)` adds the base path (GitHub Pages serves under `/<repo>/`). **Always build internal links and asset URLs with `href()`**, never a bare `/…`, or they break on GitHub Pages.
 - Every page outputs a canonical URL, `hreflang` alternates for every locale plus `x-default` (English), and JSON-LD: `WebApplication` on every page, `FAQPage` on home, `HowTo` on guides.
 - The sitemap's i18n option pairs pages only when their paths match after the locale prefix, so it links the home pages but not the translated-slug guides. The `hreflang` tags in `<head>` cover those; that is enough for Google.
 - Titles: the main search phrase first, then the benefit, then `| DateStamp`. Keep them under about 60 characters, and descriptions at about 150–160.
 
-**Add a locale:** add it to `locales` in `src/i18n/locales.ts`, copy `en.ts` to `<locale>.ts` and translate it (slugs and `dateFormats` too), import it in `src/i18n/index.ts`'s `strings`, and draw its flag in `Flag.astro`. The unit tests then check it is complete. Pages, hreflang and the sitemap follow by themselves.
-
-**Add a guide** (a how-to page for one search phrase, e.g. "add date to a screenshot"): add its key to `pages` and `guidePages` in `src/i18n/index.ts`; in every locale file add its slug under `slugs` and its content under `guides` (title ≤ 60 chars and description 90–160, the unit tests check; h1, intro, 5 steps, tip, cta, `tools` for the HowTo JSON-LD). Routing, the home page's guide list, the "more guides" links on every guide, the sitemap, hreflang and llms.txt follow by themselves. Write each language's copy around the phrase people search for in it, not a translation of the English.
+**Adding a locale or a guide:** the steps are in the `add-language-or-guide` skill (`.claude/skills/add-language-or-guide/SKILL.md`).
 
 Translations should read naturally: use the phrase people actually search for in that language (e.g. "Datum auf Foto", "poner fecha a una foto", "colocar data na foto"), not a word-for-word translation of English.
 
@@ -230,7 +249,7 @@ Two vertical ad units in side rails, left and right of the 960 px content column
 
 - `PUBLIC_GA_ID` (`G-…`, repository variable `GA_MEASUREMENT_ID`); without it there is no GA at all.
 - **"Basic" Consent Mode v2:** without consent for statistics, gtag.js is not even downloaded; consent defaults are all `denied`, and an accepted choice updates `analytics_storage` (and the ad signals as the ads choice says). Withdrawing statistics later sends `denied` and deletes the `_ga` cookies (`revokeAnalytics`).
-- **App events** (`track()` in `src/lib/analytics.ts`, sent only with consent): `photos_add` {count, with_exif}, `photos_save` {count, method: folder|gallery|files|zip, style, format, position, size}, `editor_error`. **Never send a photo, a file name, or a date from a photo** — the privacy policy promises it. In GA's admin, turn off Enhanced measurement's "File downloads" to be safe (the saved photos are blob links).
+- **App events** (`track()` in `src/lib/analytics.ts`, sent only with consent): `photos_add` {count, with_exif}, `photos_save` {count, method: folder|gallery|files|zip, style, format, position, size}, `dates_save` {count, method, changed} (the change-date page), `editor_error`. **Never send a photo, a file name, or a date from a photo** — the privacy policy promises it. In GA's admin, turn off Enhanced measurement's "File downloads" to be safe (the saved photos are blob links).
 - The privacy policy has a "Statistics" section in every locale; keep it in step with what is sent.
 - **Trade-off the owner accepted:** a home-made banner is not a Google-certified CMP (TCF). In the EEA, the UK and Switzerland AdSense then serves only limited ads, which pay noticeably less there. Switching to Google's own CMP (AdSense → Privacy & messaging → European regulations) means removing our banner and the `<head>` pause script, not running both.
 - **Privacy policy** (`privacy` page, all locales) names AdSense cookies and links to Google's ad settings. The contact email comes from `PUBLIC_CONTACT_EMAIL` (`vars.CONTACT_EMAIL`). Keep the page accurate when adding anything that stores or sends data.

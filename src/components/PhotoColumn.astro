@@ -1,0 +1,89 @@
+---
+// The photos' column of an editor (both the date stamp's and "change the
+// date"'s): the hidden file input, the drop zone, the progress panel, the
+// photo grid and "add more". src/lib/workbench.ts brings it to life.
+import { t, type Locale } from "../i18n"
+
+interface Props {
+  locale: Locale
+  /** Wider cards ("change the date": the date field under each photo is open and needs the room). */
+  wide?: boolean
+}
+
+const s = t(Astro.props.locale).editor
+const columns = Astro.props.wide ? "grid-cols-1 min-[440px]:grid-cols-2" : "grid-cols-2 sm:grid-cols-3 lg:grid-cols-4"
+const button = "inline-flex cursor-pointer items-center justify-center gap-2 rounded-lg font-semibold transition disabled:cursor-not-allowed"
+---
+
+<!-- The input lives outside the zone: the zone opens it with input.click(),
+     and a click from inside the zone would open it twice. -->
+<input type="file" accept="image/*,.heic,.heif" multiple hidden data-input />
+
+<div class="relative flex min-w-0 flex-[999_1_520px] flex-col gap-4 p-4 sm:p-5">
+  <div
+    class="group flex min-h-40 flex-1 cursor-pointer flex-col items-center justify-center gap-3.5 rounded-xl border-[1.5px] border-dashed border-line-strong bg-page p-6 text-center transition-colors hover:border-accent data-dragging:border-accent data-dragging:bg-accent-soft sm:min-h-95"
+    data-dropzone
+  >
+    <svg class="size-11 text-ink" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"
+      ></path>
+    </svg>
+    <div class="pointer-coarse:hidden">
+      <p class="text-xl font-semibold">{s.dropTitle}</p>
+      <p class="text-muted">{s.dropHint}</p>
+    </div>
+    <button type="button" class={`${button} h-12 bg-accent px-6 text-on-accent hover:brightness-105`}>{s.pick}</button>
+    <p class="font-mono text-xs text-muted">JPG · PNG · HEIC · WEBP</p>
+  </div>
+
+  <!-- Floats over the bottom of the photos' column, so opening and closing
+       it never moves the photos: it fades in with a small slide, and closed
+       it is invisible and inert (progress.ts). Absolute, not fixed: a
+       fixed layer turns iOS Safari's toolbar opaque. -->
+  <div
+    class="progress pointer-events-none absolute inset-x-4 bottom-4 z-10 translate-y-2 opacity-0 transition-[opacity,translate] duration-300 ease-out data-open:pointer-events-auto data-open:translate-y-0 data-open:opacity-100 motion-reduce:transition-none sm:inset-x-5 sm:bottom-5"
+    data-progress
+    inert
+  >
+    <div class="rounded-xl border border-line bg-page px-3.5 py-3 shadow-lg">
+      <div class="mb-2 flex items-baseline justify-between gap-3 text-[15px] font-semibold" aria-live="polite">
+        <span class="progress-label" data-progress-label></span>
+        <span class="font-mono text-[13px] font-normal text-muted tabular-nums" data-progress-count></span>
+      </div>
+      <div class="h-1.5 overflow-hidden rounded-full bg-line" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+        <div class="progress-fill h-full origin-left rounded-full bg-accent transition-transform duration-350" data-progress-fill></div>
+      </div>
+      <!-- On phones the share sheet needs a fresh tap once a long export is done. -->
+      <button type="button" class={`${button} mt-3 h-11 bg-accent px-4 text-on-accent`} data-save-now hidden>{s.saveNow}</button>
+    </div>
+  </div>
+
+  <!-- With a mouse, a long album scrolls inside, so the editor keeps its
+       size: as high as the drop zone when the columns are stacked, and
+       down to "add more" when they stand side by side (52.5rem = the two
+       columns' 520 + 320 px bases), where its zero basis lets the settings
+       set the height. Its scroll area reaches up to the editor's top
+       border (-mt/pt = the column's padding), so cut-off photos fade out
+       at that line. Not on touch screens: a scroll container is its own
+       layer and turns iOS Safari's toolbar opaque. -->
+  <div
+    class:list={["grid content-start gap-3 empty:hidden pointer-fine:-m-1 pointer-fine:-mt-4 pointer-fine:max-h-97 pointer-fine:overflow-y-auto pointer-fine:overscroll-contain pointer-fine:p-1 pointer-fine:pt-4 sm:pointer-fine:-mt-5 sm:pointer-fine:pt-5 pointer-fine:@min-[52.5rem]:max-h-none pointer-fine:@min-[52.5rem]:min-h-0 pointer-fine:@min-[52.5rem]:flex-[1_1_0]", columns]}
+    data-photos
+  ></div>
+
+  <!-- At the bottom of the column (mt-auto), level with the save buttons on
+       the right, however few photos there are. -->
+  <button
+    type="button"
+    class={`${button} mt-auto h-11 self-stretch border border-dashed border-line-strong bg-surface px-4 text-sm font-medium hover:border-accent sm:self-start`}
+    data-add-more
+    hidden
+  >
+    <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>
+    {s.addMore}
+  </button>
+</div>
+

@@ -29,6 +29,9 @@ describe("translations", () => {
       s.home.steps.items.length,
       s.home.examples.captions.length,
       ...guidePages.map((guide) => s.guides[guide].steps.length),
+      s.exif.steps.length,
+      s.exif.faq.length,
+      s.exif.facts.length,
       s.privacy.sections.length,
     ]
     expect(of(strings[locale])).toEqual(of(strings.en))
@@ -38,11 +41,18 @@ describe("translations", () => {
   // about 160; shorter descriptions get replaced by a snippet Google picks.
   it.each(locales)("%s has titles and descriptions that fit a search result", (locale) => {
     const s = strings[locale]
-    for (const page of [s.home, ...guidePages.map((guide) => s.guides[guide]), s.privacy]) {
+    for (const page of [s.home, s.exif, ...guidePages.map((guide) => s.guides[guide]), s.privacy]) {
       expect(page.title.length, page.title).toBeLessThanOrEqual(60)
       expect(page.description.length, page.description).toBeLessThanOrEqual(160)
       expect(page.description.length, page.description).toBeGreaterThanOrEqual(90)
     }
+  })
+
+  // The steps and the FAQ quote the shift's label, so it must be the editor's own.
+  it.each(locales)("%s quotes the editor's own label for the date shift", (locale) => {
+    const s = strings[locale].exif
+    expect(s.steps.join(" ")).toContain(s.editor.shift)
+    expect(s.faq.map(({ a }) => a).join(" ")).toContain(s.editor.shift)
   })
 
   it.each(locales)("%s offers date formats without duplicates", (locale) => {
@@ -65,9 +75,10 @@ describe("translations", () => {
     for (const text of all) expect(text, text).not.toMatch(/(?<=^|[\s(„"])[aiouwzAIOUWZ] /)
   })
 
-  it.each(locales)("%s keeps the {name} and {email} placeholders", (locale) => {
+  it.each(locales)("%s keeps the {name}, {email} and {date} placeholders", (locale) => {
     expect(strings[locale].editor.cannotOpen).toContain("{name}")
     expect(strings[locale].privacy.contact).toContain("{email}")
+    expect(strings[locale].exif.editor.before).toContain("{date}")
   })
 })
 

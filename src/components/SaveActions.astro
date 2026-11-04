@@ -1,0 +1,23 @@
+---
+// An editor's save buttons, under its settings: "Save all" (its label
+// follows the save mode, src/lib/workbench.ts), the ZIP, "clear" and the hint.
+import { t, type Locale } from "../i18n"
+
+interface Props {
+  locale: Locale
+}
+
+const s = t(Astro.props.locale).editor
+const button = "inline-flex cursor-pointer items-center justify-center gap-2 rounded-lg font-semibold transition disabled:cursor-not-allowed"
+---
+
+<div class="mt-auto flex flex-col gap-2">
+  <button type="button" class={`${button} h-12 bg-accent font-bold text-on-accent hover:brightness-105 disabled:bg-subtle disabled:text-muted disabled:hover:brightness-100`} data-save-all disabled>
+    {s.downloadAll}
+  </button>
+  <div class="flex gap-2">
+    <button type="button" class={`${button} h-11 flex-1 border border-line bg-surface px-3 text-sm font-medium hover:border-line-strong`} data-zip hidden>{s.downloadAsZip}</button>
+    <button type="button" class={`${button} h-11 px-3 text-sm font-medium text-muted hover:text-ink`} data-clear hidden>{s.clear}</button>
+  </div>
+  <p class="text-center text-[13px] text-muted" data-save-hint>{s.saveFirst}</p>
+</div>

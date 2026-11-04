@@ -1,0 +1,30 @@
+---
+// A list of links to guide pages, by their h1 (the home page, every guide's
+// "more guides", the "change the date" page). Links between the pages help
+// readers and search engines find them all.
+import { href, pathOf, t, type GuidePage, type Locale } from "../i18n"
+
+interface Props {
+  locale: Locale
+  guides: readonly GuidePage[]
+}
+
+const { locale, guides } = Astro.props
+const strings = t(locale)
+---
+
+<ul class="grid gap-2 sm:grid-cols-2">
+  {
+    guides.map((guide) => (
+      <li>
+        <a
+          class="flex min-h-12 items-center justify-between gap-3 rounded-lg border border-line bg-surface px-3.5 py-2 text-[15px] no-underline hover:border-line-strong"
+          href={href(pathOf(guide, locale))}
+        >
+          {strings.guides[guide].h1}
+          <svg class="size-4 flex-none text-muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
+        </a>
+      </li>
+    ))
+  }
+</ul>

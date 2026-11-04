@@ -2,8 +2,9 @@
 import Base from "../layouts/Base.astro"
 import Editor from "./Editor.astro"
 import ExamplePhoto from "./ExamplePhoto.astro"
+import GuideLinks from "./GuideLinks.astro"
 import InlineAd from "./InlineAd.astro"
-import { guidePages, href, pathOf, t, type Locale } from "../i18n"
+import { guidePages, t, type Locale } from "../i18n"
 import { SAMPLES_AUTHOR, samples } from "../lib/samples"
 import { formatDate } from "../lib/stamp"
 
@@ -132,21 +133,7 @@ const faqJsonLd = {
 
   <section aria-labelledby="guides" class="pt-10 pb-4 sm:pt-12">
     <h2 id="guides" class="mb-3 text-xl font-semibold tracking-tight sm:text-[22px]">{home.guidesTitle}</h2>
-    <ul class="grid gap-2 sm:grid-cols-2">
-      {
-        guidePages.map((guide) => (
-          <li>
-            <a
-              class="flex min-h-12 items-center justify-between gap-3 rounded-lg border border-line bg-surface px-3.5 py-2 text-[15px] no-underline hover:border-line-strong"
-              href={href(pathOf(guide, locale))}
-            >
-              {strings.guides[guide].h1}
-              <svg class="size-4 flex-none text-muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
-            </a>
-          </li>
-        ))
-      }
-    </ul>
+    <GuideLinks locale={locale} guides={guidePages} />
   </section>
 </Base>
 
