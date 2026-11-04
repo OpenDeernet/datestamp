@@ -240,7 +240,6 @@ export default {
       "Wijzig de opnamedatum in de EXIF-gegevens van je foto's, zodat je galerij ze goed sorteert. Eén foto of een heel album, zonder kwaliteitsverlies.",
     h1: "Datum van een foto wijzigen",
     subtitle: "Verbeter de opnamedatum die in de foto staat, zodat Google Foto's, iCloud en je computer hem op de juiste plek tonen. De foto zelf blijft hetzelfde.",
-    facts: ["Gratis", "Geen kwaliteitsverlies", "Foto's blijven bij jou"],
     stepsTitle: "Zo wijzig je de datum van een foto",
     steps: [
       "Kies de foto's of sleep ze naar de pagina. Eén of een heel album.",

@@ -240,7 +240,6 @@ export default {
       "Schimbă data la care a fost făcută o poză în datele EXIF, ca galeria s-o pună unde trebuie. O poză sau un album întreg, fără pierderi de calitate.",
     h1: "Schimbă data unei poze",
     subtitle: "Corectează data salvată în poză, ca Google Foto, iCloud și calculatorul s-o arate la locul potrivit. Imaginea în sine rămâne la fel.",
-    facts: ["Gratuit", "Fără pierderi de calitate", "Pozele rămân la tine"],
     stepsTitle: "Cum schimbi data unei poze",
     steps: [
       "Alege pozele sau trage-le pe pagină. Una sau un album întreg.",

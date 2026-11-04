@@ -240,7 +240,6 @@ export default {
       "Cambia la fecha en que se hizo una foto en sus datos EXIF, para que tu galería la ordene bien. Una foto o un álbum entero, sin perder calidad.",
     h1: "Cambiar la fecha de una foto",
     subtitle: "Corrige la fecha de captura guardada en la foto, para que Google Fotos, iCloud y tu ordenador la muestren en su sitio. La imagen no cambia.",
-    facts: ["Gratis", "Sin perder calidad", "Tus fotos se quedan contigo"],
     stepsTitle: "Cómo cambiar la fecha de una foto",
     steps: [
       "Elige las fotos o arrástralas a la página. Una o un álbum entero.",

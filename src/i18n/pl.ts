@@ -240,7 +240,6 @@ export default {
       "Zmień datę zrobienia zdjęcia w danych EXIF, żeby galeria ułożyła je we właściwym miejscu. Jedno zdjęcie lub cały album, bez utraty jakości.",
     h1: "Zmień datę zdjęcia",
     subtitle: "Popraw datę zrobienia zapisaną w zdjęciu, żeby Zdjęcia Google, iCloud i komputer pokazywały je we właściwym miejscu. Sam obraz się nie zmienia.",
-    facts: ["Za darmo", "Bez utraty jakości", "Zdjęcia zostają u Ciebie"],
     stepsTitle: "Jak zmienić datę zdjęcia",
     steps: [
       "Wybierz zdjęcia albo przeciągnij je na stronę. Jedno albo cały album.",

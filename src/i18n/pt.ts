@@ -240,7 +240,6 @@ export default {
       "Altere a data em que a foto foi tirada nos dados EXIF, para a galeria organizar no lugar certo. Uma foto ou um álbum inteiro, sem perder qualidade.",
     h1: "Alterar a data da foto",
     subtitle: "Corrija a data de captura salva na foto, para o Google Fotos, o iCloud e o computador mostrarem no lugar certo. A imagem continua igual.",
-    facts: ["Grátis", "Sem perder qualidade", "Suas fotos ficam com você"],
     stepsTitle: "Como alterar a data de uma foto",
     steps: [
       "Escolha as fotos ou arraste para a página. Uma ou um álbum inteiro.",

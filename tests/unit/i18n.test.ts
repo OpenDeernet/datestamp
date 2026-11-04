@@ -31,7 +31,6 @@ describe("translations", () => {
       ...guidePages.map((guide) => s.guides[guide].steps.length),
       s.exif.steps.length,
       s.exif.faq.length,
-      s.exif.facts.length,
       s.privacy.sections.length,
     ]
     expect(of(strings[locale])).toEqual(of(strings.en))

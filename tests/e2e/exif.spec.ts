@@ -106,6 +106,17 @@ test.describe("changing the date", () => {
   })
 })
 
+test("the editor is as tall as the date stamp editor", async ({ page, isMobile }) => {
+  test.skip(isMobile, "stacked on a phone: each column as tall as its content")
+  const height = async (path: string, selector: string) => {
+    await visit(page, path)
+    return (await page.locator(selector).boundingBox())!.height
+  }
+  for (const locale of ["pl", "de", "en"] as const) {
+    expect(await height(pathOf("exif", locale), "[data-exif-editor]")).toBe(await height(pathOf("home", locale), "[data-editor]"))
+  }
+})
+
 test("the navbar links the page and marks it current", async ({ page, isMobile }) => {
   await visit(page, "/pl/")
   if (isMobile) await page.getByRole("button", { name: strings.pl.nav.menu }).click()

@@ -240,7 +240,6 @@ export default {
       "Změňte datum pořízení v EXIF datech fotky, aby ji galerie zařadila na správné místo. Jedna fotka nebo celé album, bez ztráty kvality.",
     h1: "Změnit datum fotky",
     subtitle: "Opravte datum pořízení uložené ve fotce, aby ji Fotky Google, iCloud i počítač ukazovaly na správném místě. Samotný obraz zůstane stejný.",
-    facts: ["Zdarma", "Bez ztráty kvality", "Fotky zůstanou u vás"],
     stepsTitle: "Jak změnit datum fotky",
     steps: [
       "Vyberte fotky nebo je přetáhněte na stránku. Jednu nebo celé album.",

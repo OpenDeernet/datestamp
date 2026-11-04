@@ -240,7 +240,6 @@ export default {
       "Modifica la data di scatto nei dati EXIF delle tue foto, così la galleria le ordina nel posto giusto. Una foto o un album intero, senza perdere qualità.",
     h1: "Modificare la data di una foto",
     subtitle: "Correggi la data di scatto salvata nella foto, così Google Foto, iCloud e il computer la mostrano nel posto giusto. L'immagine resta com'è.",
-    facts: ["Gratis", "Senza perdere qualità", "Le foto restano tue"],
     stepsTitle: "Come modificare la data di una foto",
     steps: [
       "Scegli le foto o trascinale sulla pagina. Una o un album intero.",

@@ -240,7 +240,6 @@ export default {
       "Ubah tanggal pengambilan foto di data EXIF agar galeri mengurutkannya dengan benar. Satu foto atau satu album, tanpa menurunkan kualitas.",
     h1: "Ubah tanggal foto",
     subtitle: "Perbaiki tanggal pengambilan yang tersimpan di foto, agar Google Foto, iCloud, dan komputer menampilkannya di tempat yang benar. Gambarnya tetap sama.",
-    facts: ["Gratis", "Kualitas tetap", "Foto tetap di perangkat Anda"],
     stepsTitle: "Cara mengubah tanggal foto",
     steps: [
       "Pilih foto atau seret ke halaman. Satu foto atau satu album.",

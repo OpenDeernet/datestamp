@@ -243,7 +243,6 @@ export default {
       "Change the date a photo was taken in its EXIF data, so your gallery sorts it right. One photo or a whole album, no quality loss, nothing uploaded.",
     h1: "Change the date of a photo",
     subtitle: "Fix the date taken that is saved in the photo, so Google Photos, iCloud and your computer show it in the right place. The picture itself stays as it was.",
-    facts: ["Free", "No quality loss", "Photos stay with you"],
     stepsTitle: "How to change the date of a photo",
     steps: [
       "Choose the photos, or drag them onto the page. One or a whole album.",

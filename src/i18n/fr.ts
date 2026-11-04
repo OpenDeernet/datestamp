@@ -240,7 +240,6 @@ export default {
       "Modifiez la date de prise de vue dans les données EXIF de vos photos, pour que votre galerie les classe bien. Une photo ou un album, sans perte de qualité.",
     h1: "Modifier la date d'une photo",
     subtitle: "Corrigez la date de prise de vue enregistrée dans la photo, pour que Google Photos, iCloud et votre ordinateur l'affichent au bon endroit. L'image ne change pas.",
-    facts: ["Gratuit", "Sans perte de qualité", "Vos photos restent chez vous"],
     stepsTitle: "Comment modifier la date d'une photo",
     steps: [
       "Choisissez les photos ou faites-les glisser sur la page. Une seule ou tout un album.",

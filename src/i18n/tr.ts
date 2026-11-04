@@ -240,7 +240,6 @@ export default {
       "Fotoğrafın çekim tarihini EXIF verisinde değiştirin, galeri onu doğru yere koysun. Tek fotoğraf ya da bütün albüm, kalite kaybı olmadan.",
     h1: "Fotoğraf tarihini değiştirme",
     subtitle: "Fotoğrafa kayıtlı çekim tarihini düzeltin; Google Fotoğraflar, iCloud ve bilgisayarınız onu doğru yerde göstersin. Görüntünün kendisi değişmez.",
-    facts: ["Ücretsiz", "Kalite kaybı yok", "Fotoğraflar sizde kalır"],
     stepsTitle: "Bir fotoğrafın tarihi nasıl değiştirilir",
     steps: [
       "Fotoğrafları seçin ya da sayfaya sürükleyin. Tek fotoğraf ya da bütün bir albüm.",

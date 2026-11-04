@@ -240,7 +240,6 @@ export default {
       "Ändere das Aufnahmedatum in den EXIF-Daten deiner Fotos, damit die Galerie sie richtig sortiert. Ein Foto oder ein ganzes Album, ohne Qualitätsverlust.",
     h1: "Aufnahmedatum von Fotos ändern",
     subtitle: "Korrigiere das im Foto gespeicherte Aufnahmedatum, damit Google Fotos, iCloud und dein Computer es an der richtigen Stelle zeigen. Das Bild selbst bleibt, wie es ist.",
-    facts: ["Kostenlos", "Ohne Qualitätsverlust", "Fotos bleiben bei dir"],
     stepsTitle: "So änderst du das Datum eines Fotos",
     steps: [
       "Wähle die Fotos aus oder zieh sie auf die Seite. Eins oder ein ganzes Album.",
