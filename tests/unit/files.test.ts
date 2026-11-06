@@ -40,3 +40,8 @@ describe("stampedFileName", () => {
     expect(stampedFileName("holiday.photo.png")).toBe("holiday.photo-date.jpg")
   })
 })
+
+  it("numbers an extensionless name without looping", () => {
+    const taken = new Set(["export", "export-2"])
+    expect(uniqueName((name) => taken.has(name), "export")).toBe("export-3")
+  })

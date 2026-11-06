@@ -18,6 +18,10 @@ export function droppedPhotos(transfer: DataTransfer): File[] {
 // in the chosen folder, must not be overwritten: IMG_0001-date-2.jpg.
 export function uniqueName(taken: (name: string) => boolean, name: string) {
   let candidate = name
-  for (let n = 2; taken(candidate); n++) candidate = name.replace(/(\.[^.]+)$/, `-${n}$1`)
+  for (let n = 2; taken(candidate); n++) {
+    // A name without an extension (macOS Photos sometimes drops one) would
+    // otherwise keep the same candidate forever and hang the save.
+    candidate = /(\.[^.]+)$/.test(name) ? name.replace(/(\.[^.]+)$/, `-${n}$1`) : `${name}-${n}`
+  }
   return candidate
 }
